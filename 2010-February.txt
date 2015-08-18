@@ -1,0 +1,122 @@
+From ansantos at fe.up.pt  Mon Feb 15 13:10:02 2010
+From: ansantos at fe.up.pt (Ant? Santos)
+Date: Mon, 15 Feb 2010 12:10:02 +0000
+Subject: [fbsplash-users] boot splash with KMS enabled (Intel drivers 2.10.0,
+ kernel 2.6.32-3)
+Message-ID: <20100215121002.18307gb3ogf0hw8w@webmail.fe.up.pt>
+
+Hi,
+
+I'm having some troubles trying to set up the boot splash image with  
+the latest Intel drivers with KMS enabled. I disabled the support for  
+the different framebuffer devices and the i915 module is built into  
+the kernel image. The boot splash image doesn't show at all, despite  
+the resolution being set correctly. It just shows a small blinking  
+cursor on the top left corner of the screen and it stays there until X  
+starts up. Another thing is that now I always get an "Undefined video  
+mode" error in the boot loader. Is it possible to get rid of this error?
+
+Thanks,
+
+Ant?nio Santos
+
+
+
+From michalj at gmail.com  Tue Feb 16 23:38:10 2010
+From: michalj at gmail.com (Michal Januszewski)
+Date: Tue, 16 Feb 2010 23:38:10 +0100
+Subject: [fbsplash-users] boot splash with KMS enabled (Intel drivers
+	2.10.0, kernel 2.6.32-3)
+In-Reply-To: <20100215121002.18307gb3ogf0hw8w@webmail.fe.up.pt>
+References: <20100215121002.18307gb3ogf0hw8w@webmail.fe.up.pt>
+Message-ID: <5d9b736f1002161438x547278a4t7ebade89268f774e@mail.gmail.com>
+
+On Mon, Feb 15, 2010 at 13:10, Ant? Santos <ansantos at fe.up.pt> wrote:
+
+Hi,
+
+> I'm having some troubles trying to set up the boot splash image with
+> the latest Intel drivers with KMS enabled. I disabled the support for
+> the different framebuffer devices and the i915 module is built into
+> the kernel image. The boot splash image doesn't show at all, despite
+> the resolution being set correctly. It just shows a small blinking
+> cursor on the top left corner of the screen and it stays there until X
+> starts up. Another thing is that now I always get an "Undefined video
+> mode" error in the boot loader. Is it possible to get rid of this error?
+
+What kernel command line arguments are you using? (see /proc/cmdline)
+Does splash_manager -c demo work for you if you start it from tty1
+after the system has finished booting?
+
+Best regards,
+-- 
+Michal Januszewski
+http://people.gentoo.org/spock
+
+
+From ansantos at fe.up.pt  Wed Feb 17 11:38:24 2010
+From: ansantos at fe.up.pt (=?utf-8?b?QW50825pbw==?= Santos)
+Date: Wed, 17 Feb 2010 10:38:24 +0000
+Subject: [fbsplash-users] boot splash with KMS enabled (Intel drivers
+ 2.10.0, kernel 2.6.32-3)
+In-Reply-To: <5d9b736f1002161438x547278a4t7ebade89268f774e@mail.gmail.com>
+References: <20100215121002.18307gb3ogf0hw8w@webmail.fe.up.pt>
+	<5d9b736f1002161438x547278a4t7ebade89268f774e@mail.gmail.com>
+Message-ID: <20100217103824.13972u76hvxozfvk@webmail.fe.up.pt>
+
+
+>
+>> I'm having some troubles trying to set up the boot splash image with
+>> the latest Intel drivers with KMS enabled. I disabled the support for
+>> the different framebuffer devices and the i915 module is built into
+>> the kernel image. The boot splash image doesn't show at all, despite
+>> the resolution being set correctly. It just shows a small blinking
+>> cursor on the top left corner of the screen and it stays there until X
+>> starts up. Another thing is that now I always get an "Undefined video
+>> mode" error in the boot loader. Is it possible to get rid of this error?
+>
+> What kernel command line arguments are you using? (see /proc/cmdline)
+> Does splash_manager -c demo work for you if you start it from tty1
+> after the system has finished booting?
+>
+
+Well, before moving on to using KMS with the latest Intel drivers, I  
+used vesa fb and I didn't put anything special in the kernel command  
+line (I'm using extlinux as boot loader):
+
+APPEND ro root=/dev/sda1
+
+Now, I tried appending "splash", "video=inteldrmfb", "console=tty1",  
+etc, and nothing works.
+
+In dmesg I have:
+
+Feb 17 10:25:56 classSTB user.info kernel: [drm] Initialized drm 1.1.0  
+20060810
+Feb 17 10:25:56 classSTB user.info kernel: i915 0000:00:02.0: PCI INT  
+A -> GSI 16 (level, low) -> IRQ 16
+Feb 17 10:25:56 classSTB user.debug kernel: i915 0000:00:02.0: setting  
+latency timer to 64
+Feb 17 10:25:56 classSTB user.info kernel: [drm] set up 7M of stolen space
+Feb 17 10:25:56 classSTB user.info kernel: [drm] initialized overlay support
+Feb 17 10:25:56 classSTB user.info kernel: [drm] TV-10: set mode NTSC 480i 0
+Feb 17 10:25:56 classSTB user.info kernel: [drm] DAC-6: set mode 1440x900 28
+Feb 17 10:25:56 classSTB user.warn kernel: Console: switching to  
+colour frame buffer device 180x56
+Feb 17 10:25:56 classSTB user.info kernel: fb0: inteldrmfb frame buffer device
+Feb 17 10:25:56 classSTB user.info kernel: registered panic notifier
+Feb 17 10:25:56 classSTB user.info kernel: [drm] Initialized i915  
+1.6.0 20080730 for 0000:00:02.0 on minor 0
+
+It seems it is loading the inteldrmfb framebuffer ok.
+
+Regarding splash_manager, unfortunately I'm not able to use any of the  
+scripts provided by splashutils, since I'm running this in a box with  
+busybox which doesn't provide bash (only ash).
+
+Thanks,
+
+Ant?nio Santos
+
+
+

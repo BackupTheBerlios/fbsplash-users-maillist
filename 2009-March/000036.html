@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] custom initrd splash
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20custom%20initrd%20splash&In-Reply-To=%3C1237320740.11229.140.camel%40genx.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000035.html">
+   <LINK REL="Next"  HREF="000037.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] custom initrd splash</H1>
+    <B>John Stile</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20custom%20initrd%20splash&In-Reply-To=%3C1237320740.11229.140.camel%40genx.localdomain%3E"
+       TITLE="[fbsplash-users] custom initrd splash">john at stilen.com
+       </A><BR>
+    <I>Tue Mar 17 21:12:20 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000035.html">[fbsplash-users] fbsplash with uswsups on debian
+</A></li>
+        <LI>Next message: <A HREF="000037.html">[fbsplash-users] custom initrd splash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#36">[ date ]</a>
+              <a href="thread.html#36">[ thread ]</a>
+              <a href="subject.html#36">[ subject ]</a>
+              <a href="author.html#36">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am creating an installer CD that uses splashutils-1.5.4.2 to make
+things look nice.
+
+The system boots with custom initrd/linuxrc I created, by 
+mounting resources, launch splash, and then launch a curses menu.
+
+I would like to start the system in silent splash mode early in the
+boot, and  switch to verbose just before launching the curses install
+menu.
+
+I am having difficulty finding the right command to switch between
+verbose and silent and back.
+
+Any help much appreciated!
+--------------------
+The GRUB menu.lst:
+--------------------
+hiddenmenu
+default 0
+timeout 0
+serial --unit=1 --speed=9600 --word=8 --parity=no --stop=1
+terminal serial
+title Installer
+root (cd)
+kernel (cd)/boot/kernel-genkernel-x86-2.6.27-gentoo-r8 ramdisk_size=33000 root=/dev/ram0 rw init=/linuxrc cdroot CONSOLE=/dev/tty1 console=ttyS1,9600 video=i810fb:vram:4,xres:1024,yres:768,bpp:24,hsync1:30,hsync2:81,vsync1:56,vsync2:76,accel splash=silent,fadein,kdgraphics,theme:mysplash
+initrd (cd)/boot/initrd
+
+--------------------
+The linuxrc:
+--------------------
+#!/bin/sh
+Debug=1 # don't start fb here, do it from install script
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+### handle console messages
+CONSOLE=/dev/console
+exec &gt;${CONSOLE} &lt;${CONSOLE} 2&gt;&amp;1
+### Initial mount
+mount -t proc none /proc  &amp;&gt; /dev/null
+mount -t sysfs /sys /sys &gt;/dev/null 2&gt;&amp;1
+echo '0' &gt; /proc/sys/kernel/printk
+CMDLINE=`cat /proc/cmdline`
+### Start Splash
+. /sbin/splash-functions.sh
+splash_setup
+fbcondecor_supported
+fbcondecor_helper 
+fbcondecor_set_theme simsplash
+### Mount everything else
+mknod /dev/cdrom b 3 0
+mount /dev/cdrom /cdrom
+mount -t squashfs -o loop /cdrom/livecd.squashfs /new_ro
+mount -t tmpfs -o size=160m none /new_rw
+mount -t unionfs -o nodev,dirs=/new_rw=rw:/new_ro=ro /unionfs /new
+### Prepare to pivot root into full environment
+mount -o bind /dev  /new/dev
+mount -o bind /proc /new/proc
+cat &gt; /new/etc/fstab &lt;&lt;'FSTAB'
+/unionfs /	   unionfs defaults	   0 0
+devpts   /dev/pts  devpts  rw,gid=5,mode=620,noauto  0 0
+none     /dev/shm  tmpfs   defaults	   0 0
+none     /proc     proc    defaults,noauto 0 0
+none     /sys	   sysfs   defaults,noauto 0 0
+FSTAB
+cd /new
+pivot_root . oldroot
+. /sbin/splash-functions.sh
+### discover/make device files
+/bin/busybox mdev -s
+/etc/init.d/coldplug start
+### Launch installer
+cat &gt; /tmp/login &lt;&lt;'EOF'
+#!/bin/bash
+exec /bin/login -f root
+EOF
+chmod 777 /tmp/login
+agetty -n 38400 tty1 linux  -l /tmp/login
+### END linuxrc
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000035.html">[fbsplash-users] fbsplash with uswsups on debian
+</A></li>
+	<LI>Next message: <A HREF="000037.html">[fbsplash-users] custom initrd splash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#36">[ date ]</a>
+              <a href="thread.html#36">[ thread ]</a>
+              <a href="subject.html#36">[ subject ]</a>
+              <a href="author.html#36">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] Progress bar stuck
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20Progress%20bar%20stuck&In-Reply-To=%3CAANLkTikM_hORgSQwPMzRpsTgiRTOAfK2%3Ddp38mkWHaci%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000086.html">
+   <LINK REL="Next"  HREF="000087.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] Progress bar stuck</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20Progress%20bar%20stuck&In-Reply-To=%3CAANLkTikM_hORgSQwPMzRpsTgiRTOAfK2%3Ddp38mkWHaci%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] Progress bar stuck">michalj at gmail.com
+       </A><BR>
+    <I>Mon Dec 13 23:03:36 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000086.html">[fbsplash-users] Progress bar stuck
+</A></li>
+        <LI>Next message: <A HREF="000087.html">[fbsplash-users] Progress bar stuck
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#85">[ date ]</a>
+              <a href="thread.html#85">[ thread ]</a>
+              <a href="subject.html#85">[ subject ]</a>
+              <a href="author.html#85">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Yes, please do.  It shouldn't break anything and might actually fix
+some of the problems you are experiencing.  The fbsplash subsystem is
+designed around the assumption that it &quot;knows&quot; which initscript starts
+X.
+
+Michal
+
+On Mon, Dec 13, 2010 at 23:00, C J &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">ccs_dba at hotmail.com</A>&gt; wrote:
+&gt;<i> No I have not done this...&#160; X is starting, should I still do this?&#160; I am
+</I>&gt;<i> currently starting X with an initscript at the end of default (just before
+</I>&gt;<i> local).&#160; My initscripts are pretty standard, I haven't altered the sysvinit
+</I>&gt;<i> package or baselayout (1).
+</I>&gt;<i>
+</I>&gt;<i> -CJ
+</I>&gt;<i>
+</I>&gt;&gt;<i> Date: Mon, 13 Dec 2010 20:44:59 +0100
+</I>&gt;&gt;<i> Subject: Re: [fbsplash-users] Progress bar stuck
+</I>&gt;&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">michalj at gmail.com</A>
+</I>&gt;&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">ccs_dba at hotmail.com</A>
+</I>&gt;&gt;<i> CC: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">fbsplash-users at lists.berlios.de</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Hi,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Tue, Dec 7, 2010 at 01:12, C J &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">ccs_dba at hotmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i> &gt; I am using a standard gentoo install as a base to extract files from to
+</I>&gt;&gt;<i> &gt; create a custom small Linux distro.&#160; I think I am copying just about
+</I>&gt;&gt;<i> &gt; everything from the baselayout, sysvinit, important libraries, and
+</I>&gt;&gt;<i> &gt; splashutils packages (no man pages or pkg detail files)...&#160; The startup
+</I>&gt;&gt;<i> &gt; splash, with progress bar, appears to work ok, although I don't see it
+</I>&gt;&gt;<i> &gt; get
+</I>&gt;&gt;<i> &gt; to 100% before it goes to verbose mode..&#160; However, when shutting down or
+</I>&gt;&gt;<i> &gt; rebooting, the splash screen (with progress bar) displays the startup
+</I>&gt;&gt;<i> &gt; progress bar at 95% and does not change.&#160; The last step in the init
+</I>&gt;&gt;<i> &gt; startup
+</I>&gt;&gt;<i> &gt; process is to launch X via startx for a default user.&#160; If I comment this
+</I>&gt;&gt;<i> &gt; line I see the startup and shutdown progress bar work properly, but if I
+</I>&gt;&gt;<i> &gt; allow to go directly to X then the progress bar doesn't work..
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Are you launching this using a custom-made initscript? If this is a
+</I>&gt;&gt;<i> custom initscript, have you set the SPLASH_XSERVICE variable in
+</I>&gt;&gt;<i> /etc/conf.d/splash?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Best regards,
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Michal Januszewski
+</I>&gt;&gt;<i> <A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+Michal Januszewski
+<A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000086.html">[fbsplash-users] Progress bar stuck
+</A></li>
+	<LI>Next message: <A HREF="000087.html">[fbsplash-users] Progress bar stuck
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#85">[ date ]</a>
+              <a href="thread.html#85">[ thread ]</a>
+              <a href="subject.html#85">[ subject ]</a>
+              <a href="author.html#85">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,1260 @@
+From stian_moltubakk at hotmail.com  Sat Aug  1 06:32:35 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Sat, 1 Aug 2009 06:32:35 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <4A7349DC.5020400@free.fr>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<4A7349DC.5020400@free.fr>
+Message-ID: <BAY141-W6EA48A2F89C79153DCD9B9D110@phx.gbl>
+
+
+http://www.youtube.com/watch?v=4qXRiZ5F9bc
+
+ 
+
+You can see on this youtube video how the splash is working.
+
+Sometimes it's bether to see with your own two eyes that have it explained.
+
+The bleed trough hapends on all 3 themes I have tryed so I gues it's my setup or my hardware.
+
+What dos uswsusp actualy do?
+ 
+> Date: Fri, 31 Jul 2009 21:45:32 +0200
+> From: jeandamiendurand at free.fr
+> To: stian_moltubakk at hotmail.com
+> CC: fbsplash-users at lists.berlios.de
+> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> 
+> Hi,
+> 
+> stian moltubakk a ?crit :
+> > Hi there.
+> >
+> > I got fbsplash running on debian, but not quite as smoth as I would like.
+> > After booting from grub I get a few kernel mesages befour the 
+> > framebuffer is enabled so some kernel mesages are shown.
+> A very few messages, so do I - but does the progress bar start near the 
+> beginning or jumps suddenly to something e.g. 20% ?
+> 
+> > During boot some flashing ocour.
+> 
+> This has do to with the *console* debian packages: it redefines the 
+> fonts on every tty - on the fbsplash wiki there is a solution with one 
+> of the console package (don't remember its name), and on sid this has 
+> been superseeded by another package, for which I did not had time to 
+> investigate yet, and that makes the flashing back again - anyway this 
+> has to do with tty font config.
+> > There seam also to be some bleed trough on the splash image.
+> > Is there anything I can do to improve this?
+> Which theme are you using ?
+> > uswsusp?
+> See the archives of this list - I built an fbsplash-aware uswsusp some 
+> time ago - dunno if the current uswsusp in debian lenny official repos 
+> is now fbsplash-aware
+> 
+> Cheers, JD.
+> 
+
+_________________________________________________________________
+More than messages?check out the rest of the Windows Live?.
+http://www.microsoft.com/windows/windowslive/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090801/5c706c67/attachment.html>
+
+From michalj at gmail.com  Sat Aug  1 08:08:57 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Sat, 1 Aug 2009 08:08:57 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <BAY141-W6EA48A2F89C79153DCD9B9D110@phx.gbl>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<4A7349DC.5020400@free.fr>
+	<BAY141-W6EA48A2F89C79153DCD9B9D110@phx.gbl>
+Message-ID: <5d9b736f0907312308i57e68501rc25f23e3b8de13df@mail.gmail.com>
+
+On Sat, Aug 1, 2009 at 06:32, stian
+moltubakk<stian_moltubakk at hotmail.com> wrote:
+
+> http://www.youtube.com/watch?v=4qXRiZ5F9bc
+>
+> You can see on this?youtube video how the splash is working.
+> Sometimes it's bether to see with your own two eyes that have it explained.
+> The bleed trough hapends on all 3 themes I have tryed so I gues it's my
+> setup or my hardware.
+
+What kernel command line splash parameters are you using?
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From stian_moltubakk at hotmail.com  Sun Aug  2 05:55:57 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Sun, 2 Aug 2009 05:55:57 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <5d9b736f0908011232g13180ee4x3fba63048498936d@mail.gmail.com>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<4A7349DC.5020400@free.fr> <BAY141-W6EA48A2F89C79153DCD9B9D110@phx.gbl>
+	<5d9b736f0907312308i57e68501rc25f23e3b8de13df@mail.gmail.com>
+	<BAY141-W2702933A09632A57F876E49D110@phx.gbl> 
+	<5d9b736f0908011232g13180ee4x3fba63048498936d@mail.gmail.com>
+Message-ID: <BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+
+
+changing from  CONSOLE=/dev/tty1 into CONSOLE=tty1, tty0,  did just give me a error mesage. The splash came up for abour 0,5 sec and then it was gone and instead I was told my console setting vas not correct(try CONSOLE=tty1 or CONSOLE=/dev/tty1 instead)
+Booting with splash=silent,theme:monster,kdgraphics did not have any effect that I could see. Should I leave it in the kernel line?
+
+
+> Date: Sat, 1 Aug 2009 21:32:09 +0200
+> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> From: michalj at gmail.com
+> To: stian_moltubakk at hotmail.com
+> CC: fbsplash-users at lists.berlios.de
+> 
+> On Sat, Aug 1, 2009 at 17:39, stian
+> moltubakk<stian_moltubakk at hotmail.com> wrote:
+> 
+> > I asume you mean the line in grub. /boot/vmlinuz-2.6.30 root=/dev/sda3 ro
+> > vga=792 splash=silent,theme:monster quiet CONSOLE=/dev/tty1
+> > Would use uvesafb be bether than vga?
+> 
+> No, that should have no impact on how the splash behaves.
+> 
+> > I tryed it, but the module won't load and I did not find the module on my
+> > system where it was suposed to be.
+> > The flashing is gone, was a config file that neaded editing.
+> > The bleedtrough is still there :(
+> 
+> Try using console=tty1 instead of CONSOLE=/dev/tty1, and if that
+> doesn't help, use splash=silent,theme:monster,kdgraphics.  Let us know
+> whether this changes anything.
+> 
+> Best regards,
+> -- 
+> Michal Januszewski, Gentoo Linux Developer
+> http://people.gentoo.org/spock
+
+_________________________________________________________________
+Show them the way! Add maps and directions to your party invites. 
+http://www.microsoft.com/windows/windowslive/products/events.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090802/1e3f4108/attachment.html>
+
+From michalj at gmail.com  Sat Aug  1 21:32:09 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Sat, 1 Aug 2009 21:32:09 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <BAY141-W2702933A09632A57F876E49D110@phx.gbl>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<4A7349DC.5020400@free.fr>
+	<BAY141-W6EA48A2F89C79153DCD9B9D110@phx.gbl>
+	<5d9b736f0907312308i57e68501rc25f23e3b8de13df@mail.gmail.com>
+	<BAY141-W2702933A09632A57F876E49D110@phx.gbl>
+Message-ID: <5d9b736f0908011232g13180ee4x3fba63048498936d@mail.gmail.com>
+
+On Sat, Aug 1, 2009 at 17:39, stian
+moltubakk<stian_moltubakk at hotmail.com> wrote:
+
+> I asume you mean the line in grub. /boot/vmlinuz-2.6.30 root=/dev/sda3 ro
+> vga=792 splash=silent,theme:monster quiet CONSOLE=/dev/tty1
+> Would use uvesafb be bether than vga?
+
+No, that should have no impact on how the splash behaves.
+
+> I tryed it, but the module won't load and I did not find the module on my
+> system where it was suposed to be.
+> The flashing is gone, was a config file that neaded editing.
+> The bleedtrough is still there :(
+
+Try using console=tty1 instead of CONSOLE=/dev/tty1, and if that
+doesn't help, use splash=silent,theme:monster,kdgraphics.  Let us know
+whether this changes anything.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From jeandamiendurand at free.fr  Mon Aug  3 10:55:49 2009
+From: jeandamiendurand at free.fr (Jean-Damien Durand)
+Date: Mon, 03 Aug 2009 10:55:49 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <BAY141-W6EA48A2F89C79153DCD9B9D110@phx.gbl>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<4A7349DC.5020400@free.fr>
+	<BAY141-W6EA48A2F89C79153DCD9B9D110@phx.gbl>
+Message-ID: <4A76A615.3020601@free.fr>
+
+The few "read-only file system" lines come from a tiny bug in the 
+splashutils package: all "echo", "touch", etc... should be protected 
+with a ">&/dev/null", this is missing on few lines.
+But the fact that the other messages come up is new to me.
+Perhaps would you mind to try with the sid fbsplash kernel that I 
+maintain - I do not have this problem: 
+http://jeandamiendurand.free.fr/serendipity/index.php?/archives/47-linux-2.6.30-on-debian-with-tuxonice-and-fbcondecor.html
+This kernel is compiled with (almost) everything - I guess it will run 
+ok on your system.
+Cheers, JD.
+
+stian moltubakk a ?crit :
+> http://www.youtube.com/watch?v=4qXRiZ5F9bc
+>  
+> You can see on this youtube video how the splash is working.
+> Sometimes it's bether to see with your own two eyes that have it 
+> explained.
+> The bleed trough hapends on all 3 themes I have tryed so I gues it's 
+> my setup or my hardware.
+> What dos uswsusp actualy do?
+>  
+> > Date: Fri, 31 Jul 2009 21:45:32 +0200
+> > From: jeandamiendurand at free.fr
+> > To: stian_moltubakk at hotmail.com
+> > CC: fbsplash-users at lists.berlios.de
+> > Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> >
+> > Hi,
+> >
+> > stian moltubakk a ?crit :
+> > > Hi there.
+> > >
+> > > I got fbsplash running on debian, but not quite as smoth as I 
+> would like.
+> > > After booting from grub I get a few kernel mesages befour the
+> > > framebuffer is enabled so some kernel mesages are shown.
+> > A very few messages, so do I - but does the progress bar start near the
+> > beginning or jumps suddenly to something e.g. 20% ?
+> >
+> > > During boot some flashing ocour.
+> >
+> > This has do to with the *console* debian packages: it redefines the
+> > fonts on every tty - on the fbsplash wiki there is a solution with one
+> > of the console package (don't remember its name), and on sid this has
+> > been superseeded by another package, for which I did not had time to
+> > investigate yet, and that makes the flashing back again - anyway this
+> > has to do with tty font config.
+> > > There seam also to be some bleed trough on the splash image.
+> > > Is there anything I can do to improve this?
+> > Which theme are you using ?
+> > > uswsusp?
+> > See the archives of this list - I built an fbsplash-aware uswsusp some
+> > time ago - dunno if the current uswsusp in debian lenny official repos
+> > is now fbsplash-aware
+> >
+> > Cheers, JD.
+> >
+>
+> ------------------------------------------------------------------------
+> check out the rest of the Windows Live?. More than mail?Windows Live? 
+> goes way beyond your inbox. More than messages 
+> <http://www.microsoft.com/windows/windowslive/>
+
+
+
+From michalj at gmail.com  Tue Aug  4 03:53:54 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Tue, 4 Aug 2009 03:53:54 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<4A7349DC.5020400@free.fr>
+	<BAY141-W6EA48A2F89C79153DCD9B9D110@phx.gbl>
+	<5d9b736f0907312308i57e68501rc25f23e3b8de13df@mail.gmail.com>
+	<BAY141-W2702933A09632A57F876E49D110@phx.gbl>
+	<5d9b736f0908011232g13180ee4x3fba63048498936d@mail.gmail.com>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+Message-ID: <5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+
+On Sun, Aug 2, 2009 at 05:55, stian
+moltubakk<stian_moltubakk at hotmail.com> wrote:
+
+JD,
+
+This seems a little surprising to me:
+
+> changing from ?CONSOLE=/dev/tty1 into CONSOLE=tty1, tty0, ?did just give me
+> a error mesage. The splash came up for abour 0,5 sec and then it was gone
+> and instead I was told my console setting vas not correct(try CONSOLE=tty1
+> or CONSOLE=/dev/tty1 instead)
+> Booting with?splash=silent,theme:monster,kdgraphics did not have any effect
+> that I could see. Should I leave it in the kernel line?
+
+Was there a reason why we disallowed console=ttyx in Debian?  Is the
+kdgraphics option not respected by the Debian splash scripts?
+Apparently it is not getting processed properly, or else it would be
+impossible for anything to display over the splash image.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From stian_moltubakk at hotmail.com  Tue Aug  4 04:01:03 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Tue, 4 Aug 2009 04:01:03 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<4A7349DC.5020400@free.fr> <BAY141-W6EA48A2F89C79153DCD9B9D110@phx.gbl>
+	<5d9b736f0907312308i57e68501rc25f23e3b8de13df@mail.gmail.com>
+	<BAY141-W2702933A09632A57F876E49D110@phx.gbl>
+	<5d9b736f0908011232g13180ee4x3fba63048498936d@mail.gmail.com>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl> 
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+Message-ID: <BAY141-W13481707727857A1CDAC239D0C0@phx.gbl>
+
+
+Seams like  the verbose mode work perfectly.
+Someone at youtube told me this."Go back to Graphics support and check support for framebuffer splash (Scroll down, it should be the last one)."
+
+I don't find that option, but he used 2.6.24 and I'm using 2.6.30 so it could be a change in the kernel.
+He told me he's config line is ro "vga=791 splash=verbose,theme:shodan CONSOLE=/dev/tty1"
+I'm going to ask if he ever used splash or only used the verbose mode since that seams ok.
+
+> Date: Tue, 4 Aug 2009 03:53:54 +0200
+> From: michalj at gmail.com
+> To: JeanDamienDurand at free.fr
+> CC: fbsplash-users at lists.berlios.de
+> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> 
+> On Sun, Aug 2, 2009 at 05:55, stian
+> moltubakk<stian_moltubakk at hotmail.com> wrote:
+
+> 
+> JD,
+> 
+> This seems a little surprising to me:
+> 
+> > changing from  CONSOLE=/dev/tty1 into CONSOLE=tty1, tty0,  did just give me
+> > a error mesage. The splash came up for abour 0,5 sec and then it was gone
+> > and instead I was told my console setting vas not correct(try CONSOLE=tty1
+> > or CONSOLE=/dev/tty1 instead)
+> > Booting with splash=silent,theme:monster,kdgraphics did not have any effect
+> > that I could see. Should I leave it in the kernel line?
+> 
+> Was there a reason why we disallowed console=ttyx in Debian?  Is the
+> kdgraphics option not respected by the Debian splash scripts?
+> Apparently it is not getting processed properly, or else it would be
+> impossible for anything to display over the splash image.
+> 
+> Best regards,
+> -- 
+> Michal Januszewski, Gentoo Linux Developer
+> http://people.gentoo.org/spock
+> _______________________________________________
+> fbsplash-users mailing list
+> fbsplash-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/fbsplash-users
+
+_________________________________________________________________
+Show them the way! Add maps and directions to your party invites. 
+http://www.microsoft.com/windows/windowslive/products/events.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090804/466f70bf/attachment.html>
+
+From JeanDamienDurand at free.fr  Tue Aug  4 08:14:38 2009
+From: JeanDamienDurand at free.fr (Jean-Damien Durand)
+Date: Tue, 4 Aug 2009 08:14:38 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+Message-ID: <200908040814.39296.JeanDamienDurand@free.fr>
+
+Michal
+
+Le mardi 04 ao?t 2009 03:53:54, Michal Januszewski a ?crit :
+> Was there a reason why we disallowed console=ttyx in Debian?  Is the
+> kdgraphics option not respected by the Debian splash scripts?
+> Apparently it is not getting processed properly, or else it would be
+> impossible for anything to display over the splash image.
+
+Debian part is "only" a wrapper to debian's rc.d specifics - I mean the real 
+work including the parsing is done by the gentoo's scripts.
+Although I never used kdgraphics.
+
+Cheers, JD.
+
+
+
+From michalj at gmail.com  Thu Aug  6 09:23:33 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Thu, 6 Aug 2009 09:23:33 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <200908040814.39296.JeanDamienDurand@free.fr>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr>
+Message-ID: <5d9b736f0908060023n78911a2bk4a523b1d1eda2995@mail.gmail.com>
+
+On Tue, Aug 4, 2009 at 08:14, Jean-Damien
+Durand<JeanDamienDurand at free.fr> wrote:
+
+>> Was there a reason why we disallowed console=ttyx in Debian? ?Is the
+>> kdgraphics option not respected by the Debian splash scripts?
+>> Apparently it is not getting processed properly, or else it would be
+>> impossible for anything to display over the splash image.
+>
+> Debian part is "only" a wrapper to debian's rc.d specifics - I mean the real
+> work including the parsing is done by the gentoo's scripts.
+> Although I never used kdgraphics.
+
+That has always been my understading as well.  I actually just checked
+and it is indeed using the splash-functions.sh coming from core/* in
+the repository.
+
+stian: are you sure you did everything correctly?  Note that it's
+console=tty1, not CONSOLE=tty1.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From stian_moltubakk at hotmail.com  Thu Aug  6 16:24:35 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Thu, 6 Aug 2009 16:24:35 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <5d9b736f0908060023n78911a2bk4a523b1d1eda2995@mail.gmail.com>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr> 
+	<5d9b736f0908060023n78911a2bk4a523b1d1eda2995@mail.gmail.com>
+Message-ID: <BAY141-W25103528ECBBD571C04EEB9D0A0@phx.gbl>
+
+
+
+
+> Date: Thu, 6 Aug 2009 09:23:33 +0200
+> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> From: michalj at gmail.com
+> To: JeanDamienDurand at free.fr
+> CC: fbsplash-users at lists.berlios.de; stian_moltubakk at hotmail.com
+> 
+> On Tue, Aug 4, 2009 at 08:14, Jean-Damien
+> Durand<JeanDamienDurand at free.fr> wrote:
+> 
+> >> Was there a reason why we disallowed console=ttyx in Debian?  Is the
+> >> kdgraphics option not respected by the Debian splash scripts?
+> >> Apparently it is not getting processed properly, or else it would be
+> >> impossible for anything to display over the splash image.
+> >
+> > Debian part is "only" a wrapper to debian's rc.d specifics - I mean the real
+> > work including the parsing is done by the gentoo's scripts.
+> > Although I never used kdgraphics.
+> 
+> That has always been my understading as well.  I actually just checked
+> and it is indeed using the splash-functions.sh coming from core/* in
+> the repository.
+> 
+> stian: are you sure you did everything correctly?  Note that it's
+> console=tty1, not CONSOLE=tty1.
+> 
+> Best regards,
+> -- 
+> Michal Januszewski, Gentoo Linux Developer
+> http://people.gentoo.org/spock
+
+
+I tryed both =tty1 and =tty1. both did not work.
+The howtos I have ben reading for debian also state /dev/ttyX
+
+I gues it's a problem only related to debian based distros and not a fbsplash problem.
+
+_________________________________________________________________
+With Windows Live, you can organize, edit, and share your photos.
+http://www.microsoft.com/middleeast/windows/windowslive/products/photo-gallery-edit.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090806/4a95717e/attachment.html>
+
+From zap at cobra.ru  Fri Aug  7 13:33:57 2009
+From: zap at cobra.ru (Andrew Zabolotny)
+Date: Fri, 7 Aug 2009 15:33:57 +0400
+Subject: [fbsplash-users] fbsplash hard lockups
+Message-ID: <20090807153357.6e126c06@czap.spectr.lan>
+
+Hello!
+
+I'm trying to use fbcondecor & fbsplash in a custom specialized linux
+environment here. Earlier we were using kernel 2.6.26 and it used to
+work okay. Now I'm trying to upgrade kernel to 2.6.30.4 and there are
+some serious problems.
+
+I'm applied the patch fbcondecor-0.9.6-2.6.29.2.patch and compiled the
+splashutils-lite-1.5.4.3.tar.bz2 tools. For debugging I'm using a small
+qemu linux image with a emulated serial console. Now at the start of
+initramfs I'm launching /bin/sh and have the opportunity to play with
+fbcon options. Here's one of the sequences that lead to a hard lockup:
+
+~ # fbsplashd.static -t main
+~ # splash_util -m s -c setmode # the screen switches to splash here
+~ # fbcondecor_ctl.static -t main -c setcfg
+~ # fbcondecor_ctl.static -t main -c setpic
+~ # fbcondecor_ctl.static -t main -c on # no visible changes, as
+expected
+~ # splash_util -m v -c setmode
+~ # 
+
+After last command the system locks up, but not instantly (note it
+even succeeded to display the next prompt), I don't get any kernel
+crashes but I can't enter anything in any console and I have to reset.
+
+If I rename /sbin/fbcondecor_helper to /sbin/fbcondecor_helper_ it
+switches to a black screen instead. After that if I run the helper
+manually:
+
+~ # /sbin/fbcondecor_helper_ 2 modechange 0 0 main
+
+the console gets the correct background. One thing to note here is that
+I linked the helper against glibc, not klibc (we have glibc anyway on
+initramfs, so there's little point in having yet another libc).
+
+What I can do to debug the problem further?
+
+-- 
+Greetings,
+   Andrew
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090807/8108bb7f/attachment.pgp>
+
+From michalj at gmail.com  Fri Aug  7 18:47:02 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Fri, 7 Aug 2009 18:47:02 +0200
+Subject: [fbsplash-users] fbsplash hard lockups
+In-Reply-To: <20090807153357.6e126c06@czap.spectr.lan>
+References: <20090807153357.6e126c06@czap.spectr.lan>
+Message-ID: <5d9b736f0908070947ia1a6ddq3c9e61cbf832b587@mail.gmail.com>
+
+On Fri, Aug 7, 2009 at 13:33, Andrew Zabolotny<zap at cobra.ru> wrote:
+
+Hi,
+
+> ~ # fbsplashd.static -t main
+> ~ # splash_util -m s -c setmode # the screen switches to splash here
+> ~ # fbcondecor_ctl.static -t main -c setcfg
+> ~ # fbcondecor_ctl.static -t main -c setpic
+> ~ # fbcondecor_ctl.static -t main -c on # no visible changes, as
+> expected
+> ~ # splash_util -m v -c setmode
+> ~ #
+>
+> After last command the system locks up, but not instantly (note it
+> even succeeded to display the next prompt), I don't get any kernel
+> crashes but I can't enter anything in any console and I have to reset.
+
+Is the virtual machine responsive on the network? (can you ping it,
+ssh to it?)  Knowing that would help us to determine whether this is a
+total system lockup, or just a breakdown of the console system.
+
+> the console gets the correct background. One thing to note here is that
+> I linked the helper against glibc, not klibc (we have glibc anyway on
+> initramfs, so there's little point in having yet another libc).
+>
+> What I can do to debug the problem further?
+
+I would suggest doing the following two things:
+
+- try the following patch:
+http://dev.gentoo.org/~spock/projects/fbcondecor//archive/fbcondecor-0.9.6-2.6.29.patch
+The one you are currently using has been created to follow some mutex
+changes in the fbdev subsystem.  I think they might have been reverted
+in one of the later versions, so using the older fbcondecor patch
+might helper
+
+- try it with klibc anyway.  This is the most tested configuration and
+if it works with klibc and doesn't with glibc, then at least we know
+this bug is related to the C library used.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From stian_moltubakk at hotmail.com  Sun Aug  9 04:35:23 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Sun, 9 Aug 2009 04:35:23 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <200908040814.39296.JeanDamienDurand@free.fr>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com> 
+	<200908040814.39296.JeanDamienDurand@free.fr>
+Message-ID: <BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl>
+
+
+I have given up, I acept that fbsplash is not intended to run on debian and the verbose mode is bether looking anyway.
+
+but I don't seam to be able to make verbose work. I get verbose when I push f2 and on shutdown, but I only get a black screen if I use verbose as default.
+Any reason for this or it's just something else I have to live with unless I want to switch distro?
+
+
+> From: JeanDamienDurand at free.fr
+> To: michalj at gmail.com
+> Date: Tue, 4 Aug 2009 08:14:38 +0200
+> CC: fbsplash-users at lists.berlios.de
+> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> 
+> Michal
+> 
+> Le mardi 04 ao?t 2009 03:53:54, Michal Januszewski a ?crit :
+> > Was there a reason why we disallowed console=ttyx in Debian?  Is the
+> > kdgraphics option not respected by the Debian splash scripts?
+> > Apparently it is not getting processed properly, or else it would be
+> > impossible for anything to display over the splash image.
+> 
+> Debian part is "only" a wrapper to debian's rc.d specifics - I mean the real 
+> work including the parsing is done by the gentoo's scripts.
+> Although I never used kdgraphics.
+> 
+> Cheers, JD.
+> 
+> _______________________________________________
+> fbsplash-users mailing list
+> fbsplash-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/fbsplash-users
+
+_________________________________________________________________
+Share your memories online with anyone you want.
+http://www.microsoft.com/middleeast/windows/windowslive/products/photos-share.aspx?tab=1
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090809/a995ef39/attachment.html>
+
+From michalj at gmail.com  Sun Aug  9 22:36:57 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Sun, 9 Aug 2009 22:36:57 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr>
+	<BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl>
+Message-ID: <5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+
+On Sun, Aug 9, 2009 at 04:35, stian
+moltubakk<stian_moltubakk at hotmail.com> wrote:
+> I have given up, I acept that fbsplash is not intended to run on debian and
+> the verbose mode is bether looking anyway.
+
+That's not really true.  I just did a clean Debian squeeze install in
+a kvm instance.  I followed all of the steps in the fbsplash wiki and
+I got the splash screen working flawlessly.  I haven't tried it with
+fbcondecor though, just the standard stock Debian kernel that came
+with the distro.
+
+> but I don't seam to be able to make verbose work. I get verbose when I push
+> f2 and on shutdown, but I only get a black screen if I use verbose as
+> default.
+> Any reason for this or it's just something else I have to live with unless I
+> want to switch distro?
+
+Do you get any fbcondecor-related messages in the kernel log (`dmesg`)?
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From stian_moltubakk at hotmail.com  Mon Aug 10 05:13:33 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Mon, 10 Aug 2009 05:13:33 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr>
+	<BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl> 
+	<5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+Message-ID: <BAY141-W11EFBB675078AE3AB5F7519D060@phx.gbl>
+
+
+silent
+vesafb: framebuffer at 0xf0000000, mapped to 0xffffc20010980000, using 6144k, total 16384k                          
+vesafb: mode is 1024x768x32, linelength=4096, pages=4                                                               
+vesafb: scrolling: redraw                                                                                           
+vesafb: Truecolor: size=0:8:8:8, shift=0:16:8:0                                                                     
+Console: switching to colour frame buffer device 128x48                                                             
+fb0: VESA VGA frame buffer device                                   
+
+fbcondecor: console 0 using theme 'shodan'                                                                          
+fbcondecor: switched decor state to 'on' on console 0                                                               
+fbcondecor: console 1 using theme 'shodan'                                                                          
+fbcondecor: switched decor state to 'on' on console 1                                                               
+fbcondecor: console 2 using theme 'shodan'                                                                          
+fbcondecor: switched decor state to 'on' on console 2                                                               
+fbcondecor: console 3 using theme 'shodan'                                                                          
+fbcondecor: switched decor state to 'on' on console 3                                                               
+fbcondecor: console 4 using theme 'shodan'                                                                          
+fbcondecor: switched decor state to 'on' on console 4                                                               
+fbcondecor: console 5 using theme 'shodan'                                                                          
+fbcondecor: switched decor state to 'on' on console 5 
+
+fbcondecor: console 0 using theme 'shodan'                                                                                           
+fbcondecor: switched decor state to 'on' on console 0    
+
+fbcondecor: switched decor state to 'off' on console 1                                                                               
+fbcondecor: console 1 using theme 'shodan'                                                                                           
+fbcondecor: switched decor state to 'on' on console 1                                                                                
+fbcondecor: switched decor state to 'off' on console 2                                                                               
+fbcondecor: console 2 using theme 'shodan'                                                                                           
+fbcondecor: switched decor state to 'on' on console 2                                                                                
+fbcondecor: switched decor state to 'off' on console 3                                                                               
+fbcondecor: console 3 using theme 'shodan'                                                                                           
+fbcondecor: switched decor state to 'on' on console 3                                                                                
+fbcondecor: switched decor state to 'off' on console 4                                                                               
+fbcondecor: console 4 using theme 'shodan'                                                                                           
+fbcondecor: switched decor state to 'on' on console 4                                                                                
+fbcondecor: switched decor state to 'off' on console 5                                                                               
+fbcondecor: console 5 using theme 'shodan'                                                                                           
+fbcondecor: switched decor state to 'on' on console 5                                                                                
+lp0: using parport0 (interrupt-driven).                                                                                              
+lp0: console ready                                                                                                                   
+ppdev: user-space parallel port driver                                                                                               
+fbcondecor: switched decor state to 'off' on console 1                                                                               
+fbcondecor: console 1 using theme 'shodan'                                                                                           
+fbcondecor: switched decor state to 'on' on console 1       
+
+Verbose
+
+vesafb: framebuffer at 0xf0000000, mapped to 0xffffc20010980000, using 6144k, total 16384k                                                                                                                 
+vesafb: mode is 1024x768x32, linelength=4096, pages=4                                                                                                                                                      
+vesafb: scrolling: redraw                                                                                                                                                                                  
+vesafb: Truecolor: size=0:8:8:8, shift=0:16:8:0                                                                                                                                                            
+Console: switching to colour frame buffer device 128x48                                                                                                                                                    
+fb0: VESA VGA frame buffer device                          
+
+fbcondecor: console 1 using theme 'shodan'                                                                                                                                                                 
+fbcondecor: switched decor state to 'on' on console 1    
+
+
+Verbose don't really work. I only have console decorations in silent mode.
+Could I change this in some config file? Is there some way to force error so that splashutils allways display verbose? or invert it so it will go to silent on error?
+
+> Date: Sun, 9 Aug 2009 22:36:57 +0200
+> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> From: michalj at gmail.com
+> To: stian_moltubakk at hotmail.com
+> CC: jeandamiendurand at free.fr; fbsplash-users at lists.berlios.de
+> 
+> On Sun, Aug 9, 2009 at 04:35, stian
+> moltubakk<stian_moltubakk at hotmail.com> wrote:
+> > I have given up, I acept that fbsplash is not intended to run on debian and
+> > the verbose mode is bether looking anyway.
+> 
+> That's not really true.  I just did a clean Debian squeeze install in
+> a kvm instance.  I followed all of the steps in the fbsplash wiki and
+> I got the splash screen working flawlessly.  I haven't tried it with
+> fbcondecor though, just the standard stock Debian kernel that came
+> with the distro.
+> 
+> > but I don't seam to be able to make verbose work. I get verbose when I push
+> > f2 and on shutdown, but I only get a black screen if I use verbose as
+> > default.
+> > Any reason for this or it's just something else I have to live with unless I
+> > want to switch distro?
+> 
+> Do you get any fbcondecor-related messages in the kernel log (`dmesg`)?
+> 
+> Best regards,
+> -- 
+> Michal Januszewski, Gentoo Linux Developer
+> http://people.gentoo.org/spock
+
+_________________________________________________________________
+With Windows Live, you can organize, edit, and share your photos.
+http://www.microsoft.com/middleeast/windows/windowslive/products/photo-gallery-edit.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090810/7f150da0/attachment.html>
+
+From zap at cobra.ru  Mon Aug 10 15:45:03 2009
+From: zap at cobra.ru (Andrew Zabolotny)
+Date: Mon, 10 Aug 2009 17:45:03 +0400
+Subject: [fbsplash-users] fbsplash hard lockups
+In-Reply-To: <5d9b736f0908070947ia1a6ddq3c9e61cbf832b587@mail.gmail.com>
+References: <20090807153357.6e126c06@czap.spectr.lan>
+	<5d9b736f0908070947ia1a6ddq3c9e61cbf832b587@mail.gmail.com>
+Message-ID: <20090810174503.16fcc9b7@czap.spectr.lan>
+
+? Fri, 7 Aug 2009 18:47:02 +0200
+Michal Januszewski <michalj at gmail.com> ?????:
+
+> Is the virtual machine responsive on the network? (can you ping it,
+> ssh to it?)  Knowing that would help us to determine whether this is a
+> total system lockup, or just a breakdown of the console system.
+I've enabled networking and entered via telnetd. After console lockup
+I'm still able to use the telnet console, and in top I can see these
+two processes:
+
+902     1 administ S    30840  49%   0% fbsplashd.static -t main 
+912   911 administ D     2276   4%   0% /sbin/fbcondecor_helper 2
+  modechange 0 0 main 
+
+Both are locked up, I can't even kill -9 them.
+
+> I would suggest doing the following two things:
+> 
+> - try the following patch:
+> http://dev.gentoo.org/~spock/projects/fbcondecor//archive/fbcondecor-0.9.6-2.6.29.patch
+> The one you are currently using has been created to follow some mutex
+> changes in the fbdev subsystem.  I think they might have been reverted
+> in one of the later versions, so using the older fbcondecor patch
+> might helper
+With this patch kernel locks up during bootup like this:
+
+[    0.282441] vesafb: framebuffer at 0xf0000000, mapped to 0xc4880000,
+using 1875k, total 4096k [    0.283601] vesafb: mode is 800x600x16,
+linelength=1600, pages=3 [    0.284397] vesafb: scrolling: redraw
+[    0.284892] vesafb: Truecolor: size=0:5:6:5, shift=0:11:5:0
+[    0.287418] Console: switching to colour frame buffer device 100x37
+
+This is the last line, after that I can't do anything with it, and
+network doesn't initialized that early.
+
+Then I took kernel 2.6.29.2 and applied patch 2.6.29.2 on it. Same
+problem - console locks up, only telnet session works.
+
+> - try it with klibc anyway.  This is the most tested configuration and
+> if it works with klibc and doesn't with glibc, then at least we know
+> this bug is related to the C library used.
+Indeed, compiling with klibc fixes the hang. Very strange, will inspect
+this further. Wouldn't want to have two libjpegs, two libpngs, two
+libfreetypes and two libc's in my small filesystem.
+
+-- 
+Greetings,
+   Andrew
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090810/1b77d29a/attachment.pgp>
+
+From stian_moltubakk at hotmail.com  Tue Aug 11 04:21:25 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Tue, 11 Aug 2009 04:21:25 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr>
+	<BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl> 
+	<5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+Message-ID: <BAY141-W299D795B41B2E84E2D8CA19D070@phx.gbl>
+
+
+I did not know, but it seams there is a difference between CONSOLE=tty1 and console=tty1
+CONSOLE=tty1 give me a error about that there is no valid console while console=tty1 give me the splash.
+
+It seams like the bleed trough disapared, but I don't know for shure since the boot hangs right after populating /dev
+For what reason could it hang? should I try a different console? 
+But I still don't understand why the system won't take the verbose comand.
+
+> Date: Sun, 9 Aug 2009 22:36:57 +0200
+> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> From: michalj at gmail.com
+> To: stian_moltubakk at hotmail.com
+> CC: jeandamiendurand at free.fr; fbsplash-users at lists.berlios.de
+> 
+> On Sun, Aug 9, 2009 at 04:35, stian
+> moltubakk<stian_moltubakk at hotmail.com> wrote:
+> > I have given up, I acept that fbsplash is not intended to run on debian and
+> > the verbose mode is bether looking anyway.
+> 
+> That's not really true.  I just did a clean Debian squeeze install in
+> a kvm instance.  I followed all of the steps in the fbsplash wiki and
+> I got the splash screen working flawlessly.  I haven't tried it with
+> fbcondecor though, just the standard stock Debian kernel that came
+> with the distro.
+> 
+> > but I don't seam to be able to make verbose work. I get verbose when I push
+> > f2 and on shutdown, but I only get a black screen if I use verbose as
+> > default.
+> > Any reason for this or it's just something else I have to live with unless I
+> > want to switch distro?
+> 
+> Do you get any fbcondecor-related messages in the kernel log (`dmesg`)?
+> 
+> Best regards,
+> -- 
+> Michal Januszewski, Gentoo Linux Developer
+> http://people.gentoo.org/spock
+
+_________________________________________________________________
+Show them the way! Add maps and directions to your party invites. 
+http://www.microsoft.com/windows/windowslive/products/events.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090811/49969ff7/attachment.html>
+
+From michalj at gmail.com  Tue Aug 11 04:26:04 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Tue, 11 Aug 2009 04:26:04 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <BAY141-W299D795B41B2E84E2D8CA19D070@phx.gbl>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr>
+	<BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl>
+	<5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+	<BAY141-W299D795B41B2E84E2D8CA19D070@phx.gbl>
+Message-ID: <5d9b736f0908101926s7f8598afkf5ea7624b22ece32@mail.gmail.com>
+
+On Tue, Aug 11, 2009 at 04:21, stian
+moltubakk<stian_moltubakk at hotmail.com> wrote:
+> I did not know, but it seams there is a difference between CONSOLE=tty1 and
+> console=tty1
+> CONSOLE=tty1 give me a error about that there is no valid console while
+> console=tty1 give me the splash.
+
+Yes, and I already pointed that out in one of my previous messages.
+Please be careful about spelling and casing of the options, they DO
+make a difference.
+
+> It seams like the bleed trough disapared, but I don't know for shure since
+> the boot hangs right after populating /dev
+> For what reason could it hang? should I try a different console?
+> But I still don't understand why the system won't take the verbose comand.
+
+Please remove the console=tty1 setting from the kernel command line
+temporarily so that you can boot without a splash screen and then post
+the whole contents of your /proc/cmdline here.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From stian_moltubakk at hotmail.com  Tue Aug 11 04:37:44 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Tue, 11 Aug 2009 04:37:44 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <5d9b736f0908101926s7f8598afkf5ea7624b22ece32@mail.gmail.com>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr>
+	<BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl>
+	<5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+	<BAY141-W299D795B41B2E84E2D8CA19D070@phx.gbl> 
+	<5d9b736f0908101926s7f8598afkf5ea7624b22ece32@mail.gmail.com>
+Message-ID: <BAY141-W880E724628EE5338C39629D070@phx.gbl>
+
+
+Removing the console option did remove the splashscreen, but I still got no console decorations
+root=/dev/sda3 ro quiet vga=792 splash resume=/dev/sda5
+
+I only use splash as option in the kernel line while theme and verbose/silent is set in /etc/splash/splash.
+
+> Date: Tue, 11 Aug 2009 04:26:04 +0200
+> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> From: michalj at gmail.com
+> To: stian_moltubakk at hotmail.com
+> CC: fbsplash-users at lists.berlios.de
+> 
+> On Tue, Aug 11, 2009 at 04:21, stian
+> moltubakk<stian_moltubakk at hotmail.com> wrote:
+> > I did not know, but it seams there is a difference between CONSOLE=tty1 and
+> > console=tty1
+> > CONSOLE=tty1 give me a error about that there is no valid console while
+> > console=tty1 give me the splash.
+> 
+> Yes, and I already pointed that out in one of my previous messages.
+> Please be careful about spelling and casing of the options, they DO
+> make a difference.
+> 
+> > It seams like the bleed trough disapared, but I don't know for shure since
+> > the boot hangs right after populating /dev
+> > For what reason could it hang? should I try a different console?
+> > But I still don't understand why the system won't take the verbose comand.
+> 
+> Please remove the console=tty1 setting from the kernel command line
+> temporarily so that you can boot without a splash screen and then post
+> the whole contents of your /proc/cmdline here.
+> 
+> Best regards,
+> -- 
+> Michal Januszewski, Gentoo Linux Developer
+> http://people.gentoo.org/spock
+
+_________________________________________________________________
+With Windows Live, you can organize, edit, and share your photos.
+http://www.microsoft.com/middleeast/windows/windowslive/products/photo-gallery-edit.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090811/9406994b/attachment.html>
+
+From michalj at gmail.com  Tue Aug 11 04:40:19 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Tue, 11 Aug 2009 04:40:19 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <BAY141-W880E724628EE5338C39629D070@phx.gbl>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr>
+	<BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl>
+	<5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+	<BAY141-W299D795B41B2E84E2D8CA19D070@phx.gbl>
+	<5d9b736f0908101926s7f8598afkf5ea7624b22ece32@mail.gmail.com>
+	<BAY141-W880E724628EE5338C39629D070@phx.gbl>
+Message-ID: <5d9b736f0908101940j1696548w46aee5d1861ecc9c@mail.gmail.com>
+
+On Tue, Aug 11, 2009 at 04:37, stian
+moltubakk<stian_moltubakk at hotmail.com> wrote:
+> Removing the console option did remove the splashscreen, but I still got no
+> console decorations
+> root=/dev/sda3 ro quiet vga=792 splash resume=/dev/sda5
+>
+> I only use splash as option in the kernel line while theme and
+> verbose/silent is set in /etc/splash/splash.
+
+Please try with splash=verbose,theme:<yourtheme> on the kernel command
+line instead.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From stian_moltubakk at hotmail.com  Tue Aug 11 05:16:59 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Tue, 11 Aug 2009 05:16:59 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <5d9b736f0908101940j1696548w46aee5d1861ecc9c@mail.gmail.com>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr>
+	<BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl>
+	<5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+	<BAY141-W299D795B41B2E84E2D8CA19D070@phx.gbl>
+	<5d9b736f0908101926s7f8598afkf5ea7624b22ece32@mail.gmail.com>
+	<BAY141-W880E724628EE5338C39629D070@phx.gbl> 
+	<5d9b736f0908101940j1696548w46aee5d1861ecc9c@mail.gmail.com>
+Message-ID: <BAY141-W153C335BA392296A7B890F9D070@phx.gbl>
+
+
+I tryed splash=silent,theme=mytheme and it worked without any other problem that the system hangs after populating /dev witch reguire alt+ctrl+del and hurry to press the f2 when the system reboot's and I will have a nice console decoration on startup without the system hanging.
+I tryed splash=verbose,theme=mytheme and I just get the black console.
+
+If you don't understand this I don't blame you, I don't understand it myself eather. If verbose works in silent mode it should also work in verbose mode. 
+I don't think I have misspeled verbose 100 times because I'm shure I edited my menu.lst 200times.
+Is it posible to invert the verbose on errors so it show verbose on no errors instead? 
+Thanks for all the help, I truly admire you guys.
+Stian
+
+> Date: Tue, 11 Aug 2009 04:40:19 +0200
+> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> From: michalj at gmail.com
+> To: stian_moltubakk at hotmail.com
+> CC: fbsplash-users at lists.berlios.de
+> 
+> On Tue, Aug 11, 2009 at 04:37, stian
+> moltubakk<stian_moltubakk at hotmail.com> wrote:
+> > Removing the console option did remove the splashscreen, but I still got no
+> > console decorations
+> > root=/dev/sda3 ro quiet vga=792 splash resume=/dev/sda5
+> >
+> > I only use splash as option in the kernel line while theme and
+> > verbose/silent is set in /etc/splash/splash.
+> 
+> Please try with splash=verbose,theme:<yourtheme> on the kernel command
+> line instead.
+> 
+> Best regards,
+> -- 
+> Michal Januszewski, Gentoo Linux Developer
+> http://people.gentoo.org/spock
+
+_________________________________________________________________
+Drag n? drop?Get easy photo sharing with Windows Live? Photos.
+
+http://www.microsoft.com/windows/windowslive/products/photos.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090811/9ff59b09/attachment.html>
+
+From lists at baums-on-web.de  Tue Aug 11 09:12:18 2009
+From: lists at baums-on-web.de (Heiko Baums)
+Date: Tue, 11 Aug 2009 09:12:18 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <BAY141-W153C335BA392296A7B890F9D070@phx.gbl>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr>
+	<BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl>
+	<5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+	<BAY141-W299D795B41B2E84E2D8CA19D070@phx.gbl>
+	<5d9b736f0908101926s7f8598afkf5ea7624b22ece32@mail.gmail.com>
+	<BAY141-W880E724628EE5338C39629D070@phx.gbl>
+	<5d9b736f0908101940j1696548w46aee5d1861ecc9c@mail.gmail.com>
+	<BAY141-W153C335BA392296A7B890F9D070@phx.gbl>
+Message-ID: <20090811091218.7d914d74@darkstar.galaxy.all>
+
+Am Tue, 11 Aug 2009 05:16:59 +0200
+schrieb stian moltubakk <stian_moltubakk at hotmail.com>:
+
+> I tryed splash=silent,theme=mytheme and it worked without any other
+> problem that the system hangs after populating /dev witch reguire
+> alt+ctrl+del and hurry to press the f2 when the system reboot's and I
+> will have a nice console decoration on startup without the system
+> hanging. I tryed splash=verbose,theme=mytheme and I just get the
+> black console.
+> 
+> If you don't understand this I don't blame you, I don't understand it
+> myself eather. If verbose works in silent mode it should also work in
+> verbose mode. I don't think I have misspeled verbose 100 times
+> because I'm shure I edited my menu.lst 200times. Is it posible to
+> invert the verbose on errors so it show verbose on no errors instead?
+> Thanks for all the help, I truly admire you guys. Stian
+
+If I read your e-mails correctly, you aren't using a kernel with the
+fbcondecor patch. So if you get the normal console output on your black
+console in verbose mode, then everything seems to work.
+
+To get a background image in verbose mode, you need a kernel with the
+fbcondecor patch. ;-)
+
+Heiko
+
+
+From stian_moltubakk at hotmail.com  Tue Aug 11 12:10:29 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Tue, 11 Aug 2009 12:10:29 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <20090811091218.7d914d74@darkstar.galaxy.all>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+	<BAY141-W8AB37CE5511E47AA77E649D0E0@phx.gbl>
+	<5d9b736f0908031853n76548ac8t2d9e2ac7b559dd9e@mail.gmail.com>
+	<200908040814.39296.JeanDamienDurand@free.fr>
+	<BAY141-W6BBC3320E3882860F1ECA9D090@phx.gbl>
+	<5d9b736f0908091336v3400b2c5wa4d17779f3fec33d@mail.gmail.com>
+	<BAY141-W299D795B41B2E84E2D8CA19D070@phx.gbl>
+	<5d9b736f0908101926s7f8598afkf5ea7624b22ece32@mail.gmail.com>
+	<BAY141-W880E724628EE5338C39629D070@phx.gbl>
+	<5d9b736f0908101940j1696548w46aee5d1861ecc9c@mail.gmail.com>
+	<BAY141-W153C335BA392296A7B890F9D070@phx.gbl> 
+	<20090811091218.7d914d74@darkstar.galaxy.all>
+Message-ID: <BAY141-W2621B900181D18681E82AA9D070@phx.gbl>
+
+
+
+
+> Date: Tue, 11 Aug 2009 09:12:18 +0200
+> From: lists at baums-on-web.de
+> To: fbsplash-users at lists.berlios.de
+> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+> 
+> Am Tue, 11 Aug 2009 05:16:59 +0200
+> schrieb stian moltubakk <stian_moltubakk at hotmail.com>:
+> 
+> > I tryed splash=silent,theme=mytheme and it worked without any other
+> > problem that the system hangs after populating /dev witch reguire
+> > alt+ctrl+del and hurry to press the f2 when the system reboot's and I
+> > will have a nice console decoration on startup without the system
+> > hanging. I tryed splash=verbose,theme=mytheme and I just get the
+> > black console.
+> > 
+> > If you don't understand this I don't blame you, I don't understand it
+> > myself eather. If verbose works in silent mode it should also work in
+> > verbose mode. I don't think I have misspeled verbose 100 times
+> > because I'm shure I edited my menu.lst 200times. Is it posible to
+> > invert the verbose on errors so it show verbose on no errors instead?
+> > Thanks for all the help, I truly admire you guys. Stian
+> 
+> If I read your e-mails correctly, you aren't using a kernel with the
+> fbcondecor patch. So if you get the normal console output on your black
+> console in verbose mode, then everything seems to work.
+> 
+> To get a background image in verbose mode, you need a kernel with the
+> fbcondecor patch. ;-)
+
+
+I have background image, but the system refuse to take the verose option.
+If I use silent I have the verbose/background picture when I press f2 or exit my desktop invironment by hitting ctrl+alt+f1
+
+Thanks anyway
+
+_________________________________________________________________
+Show them the way! Add maps and directions to your party invites. 
+http://www.microsoft.com/windows/windowslive/products/events.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090811/19af91b3/attachment.html>
+
+From michalj at gmail.com  Tue Aug 18 01:37:08 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Mon, 17 Aug 2009 16:37:08 -0700
+Subject: [fbsplash-users] fbsplash hard lockups
+In-Reply-To: <20090810174503.16fcc9b7@czap.spectr.lan>
+References: <20090807153357.6e126c06@czap.spectr.lan>
+	<5d9b736f0908070947ia1a6ddq3c9e61cbf832b587@mail.gmail.com>
+	<20090810174503.16fcc9b7@czap.spectr.lan>
+Message-ID: <5d9b736f0908171637h63e33e2ag348353da41f8fdc8@mail.gmail.com>
+
+2009/8/10 Andrew Zabolotny <zap at cobra.ru>:
+
+> I've enabled networking and entered via telnetd. After console lockup
+> I'm still able to use the telnet console, and in top I can see these
+> two processes:
+>
+> 902 ? ? 1 administ S ? ?30840 ?49% ? 0% fbsplashd.static -t main
+> 912 ? 911 administ D ? ? 2276 ? 4% ? 0% /sbin/fbcondecor_helper 2
+> ?modechange 0 0 main
+>
+> Both are locked up, I can't even kill -9 them.
+
+I released a new fbcondecor patch a few days ago.  It fixes a hang in
+the modechange event -- you might want to try it to see whether this
+changes anything.
+
+>> - try it with klibc anyway. ?This is the most tested configuration and
+>> if it works with klibc and doesn't with glibc, then at least we know
+>> this bug is related to the C library used.
+>
+> Indeed, compiling with klibc fixes the hang. Very strange, will inspect
+> this further. Wouldn't want to have two libjpegs, two libpngs, two
+> libfreetypes and two libc's in my small filesystem.
+
+Right.  Well, in that case the updated fbcondecor patch is probably
+irrelevant (but you might want to try it anyway..).  If you are able
+to a get a strace or some additional debugging info about the hanging
+fbcondecor_helper, that should be helpful.  For testing, you might
+want to try to activate fbcondecor after the system has finished
+booting instead of from the initramfs image.  That should give you
+more control over what's happening.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+

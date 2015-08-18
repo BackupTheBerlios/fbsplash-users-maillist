@@ -1,0 +1,181 @@
+From sjames at wmltd.co.uk  Sat Aug 16 14:12:28 2008
+From: sjames at wmltd.co.uk (Seb James)
+Date: Sat, 16 Aug 2008 13:12:28 +0100
+Subject: [fbsplash-users] fbcondecor required for early userspace?
+Message-ID: <20080816131228.pqt6rdmiow048cwg@www.wmltd.co.uk>
+
+Hi List,
+
+I note that the fbcondecor kernel patch is not required to display
+images on a framebuffer once the kernel has mounted the roofs and
+started the init system.
+
+Is the fbcondecor patch required for an early userspace splash image?
+I ask because in the docs (for release 1.5.4.1) it states that
+fbcondecor_helper is needed in the initramfs.
+
+Cheers,
+
+Seb James
+
+
+----------------------------------------------------------------
+This message was sent using IMP, the Internet Messaging Program.
+
+
+
+
+
+From michalj at gmail.com  Tue Aug 19 01:12:08 2008
+From: michalj at gmail.com (Michal Januszewski)
+Date: Tue, 19 Aug 2008 01:12:08 +0200
+Subject: [fbsplash-users] fbcondecor required for early userspace?
+In-Reply-To: <20080816131228.pqt6rdmiow048cwg@www.wmltd.co.uk>
+References: <20080816131228.pqt6rdmiow048cwg@www.wmltd.co.uk>
+Message-ID: <5d9b736f0808181612v4bb4a0f0vbf9bd56d717d1a0b@mail.gmail.com>
+
+On Sat, Aug 16, 2008 at 14:12, Seb James <sjames at wmltd.co.uk> wrote:
+
+Hi,
+
+> Is the fbcondecor patch required for an early userspace splash image?
+> I ask because in the docs (for release 1.5.4.1) it states that
+> fbcondecor_helper is needed in the initramfs.
+
+The short answer is: yes, if you want to see a splash screen at the early
+boot stage, then you need a kernel patched with fbcondecor.  The
+fbcondecor patch causes the kernel to make a call to the userspace
+fbcondecor_helper app right after the framebuffer is initialized, which
+makes it possible to display the splash image at a very early stage.
+
+However, if you're fine with displaying the image somewhat later, after
+the kernel has finished booting, but before the root filesystem is
+mounted -- i.e. when the userspace code from an initrd/initramfs is
+executed, then the fbcondecor patch is not needed.  You'd still
+probably want to include fbcondecor_helper in the initramfs and use
+it from there, as it's much smaller than the main fbsplash daemon
+binary and can be used to display a static splash image (which is
+usually enough at the early boot stage).
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From lurker at lavabit.com  Fri Aug 29 00:34:30 2008
+From: lurker at lavabit.com (lurker)
+Date: Fri, 29 Aug 2008 00:34:30 +0200
+Subject: [fbsplash-users] fbsplashd.static segfaults on hardened system
+Message-ID: <48B727F6.5060609@lavabit.com>
+
+Hi all,
+
+I'm having trouble with splashutils on one of my catalyst projects (x86
+arch). fbsplashd.static segfaults right after the splash image is shown
+on the screen, preventing the loaders to progress, pressing F2 for
+verbose mode etc. This is what dmesg says when running "splash_manager
+-c demo -t <any theme> -m s":
+
+	Aug 28 20:20:04 livecd fbsplashd.stati[22764]: segfault at 9 ip
+	0811ac2e sp 4ac7bc60 error 4 in
+	fbsplashd.static[8048000+186000]Aug 28 20:20:04 livecd grsec:
+	signal 11 sent to
+	/mnt/livecd/sbin/fbsplashd.static[fbsplashd.stati:22764]
+	uid/euid:0/0 gid/egid:0/0, parent /mnt/livecd/sbin/init[init:1]
+	uid/euid:0/0 gid/egid:0/0
+	Aug 28 20:20:04 livecd grsec: denied resource overstep by
+	requesting 4096 for RLIMIT_CORE against limit 0 for
+	/mnt/livecd/sbin/fbsplashd.static[fbsplashd.stati:22764]
+	uid/euid:0/0 gid/egid:0/0, parent /mnt/livecd/sbin/init[init:1]
+	uid/euid:0/0 gid/egid:0/0
+
+Now, this only happens on my hardened branch of the project. I'm using a
+hardened toolchain (gcc 3.4.6), PaX, grsec (no RBAC yet though) and all
+that, but other than that the only differences between the hardened and
+non-hardened branches are, essentially, the portage profiles
+(hardened/linux/x86/2008.0 vs. default/linux/x86/2008.0) and the CFLAGS:
+
+hardened:
+	-mtune=i486 -Os -pipe -fomit-frame-pointer -fforce-addr
+
+non-hardened:
+	-march=i686 -Os -pipe -fomit-frame-pointer
+
+This affects both splashutils 1.5.3.4 (currently stable in portage) and
+1.5.4.2 current latest release), using stock portage ebuilds. I've
+looked in the ebuilds, and seen that there is stuff for hardened (adding
+-fnostack-protector) so I assume splashutils generally should work on
+hardened systems.
+
+I've done some simple debugging and found what causes the segfault,
+namely this part:
+
+	if [[ -n "${t}" ]]; then
+		spl_comm "set event dev /dev/input/${t}"
+	fi
+
+in the function demo_theme_silent() of splash_manager. Commenting it out
+gets splash working. At the time of the crash, t is set to "event0", and
+doing a:
+
+	cat /dev/input/event0
+
+seems to indicate it is in fact the keyboard we're dealing with. I have
+no idea why fbsplashd.static segfaults when trying to do its thing with
+it though.
+
+Any thoughts on what could be wrong?
+
+Cheers!
+
+
+
+From spock at gentoo.org  Sat Aug 30 00:47:40 2008
+From: spock at gentoo.org (Michal Januszewski)
+Date: Sat, 30 Aug 2008 00:47:40 +0200
+Subject: [fbsplash-users] fbsplashd.static segfaults on hardened system
+In-Reply-To: <48B727F6.5060609@lavabit.com>
+References: <48B727F6.5060609@lavabit.com>
+Message-ID: <20080829224740.GA32030@spock.one.pl>
+
+On Fri, Aug 29, 2008 at 12:34:30AM +0200, lurker wrote:
+
+Hi,
+
+> I've done some simple debugging and found what causes the segfault,
+> namely this part:
+> 
+> 	if [[ -n "${t}" ]]; then
+> 		spl_comm "set event dev /dev/input/${t}"
+> 	fi
+> 
+> in the function demo_theme_silent() of splash_manager. Commenting it out
+> gets splash working. At the time of the crash, t is set to "event0", and
+> doing a:
+> 
+> 	cat /dev/input/event0
+> 
+> seems to indicate it is in fact the keyboard we're dealing with. I have
+> no idea why fbsplashd.static segfaults when trying to do its thing with
+> it though.
+> 
+> Any thoughts on what could be wrong?
+
+Could you please try the following two things:
+
+* Modify splash_manager to use the dynamically linked version of
+  fbsplashd and see whether this changes anything.
+
+* Start fbsplashd manually and do 
+  `echo set event dev /dev/input/event0 > /lib/splash/cache/.splash`
+  Does it cause the splash daemon to segfault?
+
+Best regards.
+-- 
+Michal Januszewski                                JID: michalj at gmail.com
+Gentoo Linux Developer                    http://people.gentoo.org/spock
+
+
+
+

@@ -1,0 +1,313 @@
+From muzius at gmail.com  Thu Mar 12 18:49:02 2009
+From: muzius at gmail.com (jasper)
+Date: Thu, 12 Mar 2009 18:49:02 +0100
+Subject: [fbsplash-users] fbsplash with uswsups on debian
+Message-ID: <b3f657660903121049u42ae454cw1c6e351f7ccac01d@mail.gmail.com>
+
+Hi there!
+
+I'm using fbsplash on debian sid in combination with uswsusp (because of
+that nice suspend to both, ram&disk feature). uswsusp has decent support for
+fbsplash, but it has to be activeted at compilation and the debian
+maintainers deceided to use splashy instead. I'll write to the
+uswsusp-mailinglist & ask for implementing the possibility to choose the
+splash-feature on runtime, but in the meantime - since you keep this nice
+little debian-repository, would you mind adding a uswsusp-package with
+fbsplash-support for users who don't feel comfortable compiling their
+packages themselves? Or maybe add the instructions to your wiki:
+
+uswsusp & fbsplash for debian:
+
+- check the apt-howto if you're not familiar with the debian way of
+installing packages from source
+http://www.debian.org/doc/manuals/apt-howto/ch-sourcehandling.en.html
+- get the uswsusp-source package 'apt-get source uswsusp' and (some of) the
+necessary dependencies 'apt-get build-dep uswsusp'
+- edit the 'debian/rules' file inside the downloaded sources: change
+'--enable-splashy' to '--disable-splashy' and add '--enable-fbsplash'
+- try compiling read the error-messages and download the remaining
+dependencies (apt-get build-dep wont fetch the fbsplash-related
+dependencies)
+- after compilation was fine, install the new package & pin it (otherwise
+it'll be overwritten on the next update)
+- edit '/etc/uswsusp.conf' and add 'splash=y'
+
+..sometimes I regret having left gentoo ;)
+anyway, thanks to all for your work on fbsplash!
+jasper
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090312/7049d43d/attachment.html>
+
+From JeanDamienDurand at free.fr  Sat Mar 14 09:58:57 2009
+From: JeanDamienDurand at free.fr (Jean-Damien Durand)
+Date: Sat, 14 Mar 2009 09:58:57 +0100
+Subject: [fbsplash-users] fbsplash with uswsups on debian
+In-Reply-To: <b3f657660903121049u42ae454cw1c6e351f7ccac01d@mail.gmail.com>
+References: <b3f657660903121049u42ae454cw1c6e351f7ccac01d@mail.gmail.com>
+Message-ID: <200903140958.59403.JeanDamienDurand@free.fr>
+
+Hello,
+
+I'll give it a try with packaging it and tell you.
+
+Cheers, JD.
+
+On Thursday 12 March 2009 18:49:02 jasper wrote:
+> since you keep this nice
+> little debian-repository, would you mind adding a uswsusp-package with
+> fbsplash-support for users who don't feel comfortable compiling their
+> packages themselves? Or maybe add the instructions to your wiki:
+
+
+From JeanDamienDurand at free.fr  Sat Mar 14 19:17:57 2009
+From: JeanDamienDurand at free.fr (Jean-Damien Durand)
+Date: Sat, 14 Mar 2009 19:17:57 +0100
+Subject: [fbsplash-users] fbsplash with uswsups on debian
+In-Reply-To: <200903140958.59403.JeanDamienDurand@free.fr>
+References: <b3f657660903121049u42ae454cw1c6e351f7ccac01d@mail.gmail.com>
+	<200903140958.59403.JeanDamienDurand@free.fr>
+Message-ID: <200903141917.59561.JeanDamienDurand@free.fr>
+
+Done for i386, though untested. Can you please test ? I can and will do the 
+amd64 version, but cannot do the power-pc version -;
+
+Repository:
+deb ftp://ftp.berlios.de/pub/fbsplash/debian/uswsusp sid contrib
+deb-src ftp://ftp.berlios.de/pub/fbsplash/debian/uswsusp sid contrib
+
+The version is:
+apt-get install uswsusp=0.8-1.1+fbsplash
+
+Thanks, Cheers, Jean-Damien.
+
+On Saturday 14 March 2009 09:58:57 Jean-Damien Durand wrote:
+> Hello,
+>
+> I'll give it a try with packaging it and tell you.
+>
+> Cheers, JD.
+>
+> On Thursday 12 March 2009 18:49:02 jasper wrote:
+> > since you keep this nice
+> > little debian-repository, would you mind adding a uswsusp-package with
+> > fbsplash-support for users who don't feel comfortable compiling their
+> > packages themselves? Or maybe add the instructions to your wiki:
+>
+> _______________________________________________
+> fbsplash-users mailing list
+> fbsplash-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/fbsplash-users
+
+
+
+
+From muzius at gmail.com  Tue Mar 17 20:38:09 2009
+From: muzius at gmail.com (jasper)
+Date: Tue, 17 Mar 2009 19:38:09 +0000
+Subject: [fbsplash-users] fbsplash with uswsups on debian
+In-Reply-To: <200903141917.59561.JeanDamienDurand@free.fr>
+References: <b3f657660903121049u42ae454cw1c6e351f7ccac01d@mail.gmail.com>
+	<200903140958.59403.JeanDamienDurand@free.fr>
+	<200903141917.59561.JeanDamienDurand@free.fr>
+Message-ID: <b3f657660903171238w6e4b30dfp63ef2ace7e084e26@mail.gmail.com>
+
+tested & works! I'll let you know, if I get an answer from the uswsusp-devs
+about including the option to choose the splash at runtime.
+
+thanks a lot,
+jasper
+
+On Sat, Mar 14, 2009 at 6:17 PM, Jean-Damien Durand <
+JeanDamienDurand at free.fr> wrote:
+
+> Done for i386, though untested. Can you please test ? I can and will do the
+> amd64 version, but cannot do the power-pc version -;
+>
+> Repository:
+> deb ftp://ftp.berlios.de/pub/fbsplash/debian/uswsusp sid contrib
+> deb-src ftp://ftp.berlios.de/pub/fbsplash/debian/uswsusp sid contrib
+>
+> The version is:
+> apt-get install uswsusp=0.8-1.1+fbsplash
+>
+> Thanks, Cheers, Jean-Damien.
+>
+> On Saturday 14 March 2009 09:58:57 Jean-Damien Durand wrote:
+> > Hello,
+> >
+> > I'll give it a try with packaging it and tell you.
+> >
+> > Cheers, JD.
+> >
+> > On Thursday 12 March 2009 18:49:02 jasper wrote:
+> > > since you keep this nice
+> > > little debian-repository, would you mind adding a uswsusp-package with
+> > > fbsplash-support for users who don't feel comfortable compiling their
+> > > packages themselves? Or maybe add the instructions to your wiki:
+> >
+> > _______________________________________________
+> > fbsplash-users mailing list
+> > fbsplash-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/fbsplash-users
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090317/0777f444/attachment.html>
+
+From john at stilen.com  Tue Mar 17 21:12:20 2009
+From: john at stilen.com (John Stile)
+Date: Tue, 17 Mar 2009 13:12:20 -0700
+Subject: [fbsplash-users] custom initrd splash
+Message-ID: <1237320740.11229.140.camel@genx.localdomain>
+
+I am creating an installer CD that uses splashutils-1.5.4.2 to make
+things look nice.
+
+The system boots with custom initrd/linuxrc I created, by 
+mounting resources, launch splash, and then launch a curses menu.
+
+I would like to start the system in silent splash mode early in the
+boot, and  switch to verbose just before launching the curses install
+menu.
+
+I am having difficulty finding the right command to switch between
+verbose and silent and back.
+
+Any help much appreciated!
+--------------------
+The GRUB menu.lst:
+--------------------
+hiddenmenu
+default 0
+timeout 0
+serial --unit=1 --speed=9600 --word=8 --parity=no --stop=1
+terminal serial
+title Installer
+root (cd)
+kernel (cd)/boot/kernel-genkernel-x86-2.6.27-gentoo-r8 ramdisk_size=33000 root=/dev/ram0 rw init=/linuxrc cdroot CONSOLE=/dev/tty1 console=ttyS1,9600 video=i810fb:vram:4,xres:1024,yres:768,bpp:24,hsync1:30,hsync2:81,vsync1:56,vsync2:76,accel splash=silent,fadein,kdgraphics,theme:mysplash
+initrd (cd)/boot/initrd
+
+--------------------
+The linuxrc:
+--------------------
+#!/bin/sh
+Debug=1 # don't start fb here, do it from install script
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+### handle console messages
+CONSOLE=/dev/console
+exec >${CONSOLE} <${CONSOLE} 2>&1
+### Initial mount
+mount -t proc none /proc  &> /dev/null
+mount -t sysfs /sys /sys >/dev/null 2>&1
+echo '0' > /proc/sys/kernel/printk
+CMDLINE=`cat /proc/cmdline`
+### Start Splash
+. /sbin/splash-functions.sh
+splash_setup
+fbcondecor_supported
+fbcondecor_helper 
+fbcondecor_set_theme simsplash
+### Mount everything else
+mknod /dev/cdrom b 3 0
+mount /dev/cdrom /cdrom
+mount -t squashfs -o loop /cdrom/livecd.squashfs /new_ro
+mount -t tmpfs -o size=160m none /new_rw
+mount -t unionfs -o nodev,dirs=/new_rw=rw:/new_ro=ro /unionfs /new
+### Prepare to pivot root into full environment
+mount -o bind /dev  /new/dev
+mount -o bind /proc /new/proc
+cat > /new/etc/fstab <<'FSTAB'
+/unionfs /	   unionfs defaults	   0 0
+devpts   /dev/pts  devpts  rw,gid=5,mode=620,noauto  0 0
+none     /dev/shm  tmpfs   defaults	   0 0
+none     /proc     proc    defaults,noauto 0 0
+none     /sys	   sysfs   defaults,noauto 0 0
+FSTAB
+cd /new
+pivot_root . oldroot
+. /sbin/splash-functions.sh
+### discover/make device files
+/bin/busybox mdev -s
+/etc/init.d/coldplug start
+### Launch installer
+cat > /tmp/login <<'EOF'
+#!/bin/bash
+exec /bin/login -f root
+EOF
+chmod 777 /tmp/login
+agetty -n 38400 tty1 linux  -l /tmp/login
+### END linuxrc
+
+
+
+From michalj at gmail.com  Mon Mar 23 20:59:10 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Mon, 23 Mar 2009 20:59:10 +0100
+Subject: [fbsplash-users] custom initrd splash
+In-Reply-To: <1237320740.11229.140.camel@genx.localdomain>
+References: <1237320740.11229.140.camel@genx.localdomain>
+Message-ID: <5d9b736f0903231259s12a9692cob20f04282b42eea5@mail.gmail.com>
+
+On Tue, Mar 17, 2009 at 21:12, John Stile <john at stilen.com> wrote:
+
+> I would like to start the system in silent splash mode early in the
+> boot, and ?switch to verbose just before launching the curses install
+> menu.
+>
+> I am having difficulty finding the right command to switch between
+> verbose and silent and back.
+
+If you have the splash daemon running in the background (which
+is generally the case after you have finished booting off an
+initrd and are running from the rootfs), you can use the
+splash_silent() and splash_verbose() functions from
+/sbin/splash-functions.sh.
+
+If you do not have a splash daemon running, the process is slightly
+more complicated.  You will start in silent mode, so there is no
+need to activate the silent splash screen manually from the script.
+Fbcondecor should then also be automatically activated on the
+first tty.  If that doesn't work or if you want to to use a different
+theme on the 1st tty, you can also run:
+
+if fbcondecor_supported ; then
+   fbcondecor_set_theme simsplash 1
+fi
+
+Then, if you want to switch to verbose mode, you can just
+execute `chvt 1`.  If you want to switch to the silent mode
+afterwards, run `fbcondecor_helper 2 repaint`.
+
+You might also want to have a look at gentoo/initrd.splash
+(in the fbsplash git repo) for some sample fbsplash/fbcondecor
+code that is designed to be run from an initrd.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From freecitymod at free.fr  Fri Mar 13 20:26:12 2009
+From: freecitymod at free.fr (Freecity)
+Date: Fri, 13 Mar 2009 19:26:12 -0000
+Subject: [fbsplash-users] fbsplash with uswsups on debian
+In-Reply-To: <b3f657660903121049u42ae454cw1c6e351f7ccac01d@mail.gmail.com>
+References: <b3f657660903121049u42ae454cw1c6e351f7ccac01d@mail.gmail.com>
+Message-ID: <200903132026.05622.freecitymod@free.fr>
+
+Hello,
+
+I'll give it a try with packaging it and tell you.
+
+Cheers, JD.
+
+On Thursday 12 March 2009 18:49:02 jasper wrote:
+> would you mind adding a uswsusp-package with
+> fbsplash-support for users who don't feel comfortable compiling their
+> packages themselves? Or maybe add the instructions to your wiki:
+
+

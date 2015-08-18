@@ -1,0 +1,27 @@
+From spock at gentoo.org  Sun Apr 20 11:09:31 2008
+From: spock at gentoo.org (Michal Januszewski)
+Date: Sun, 20 Apr 2008 11:09:31 +0200
+Subject: [fbsplash-users] splashutils-1.5.4.1 released
+Message-ID: <20080420090931.GA8291@spock.one.pl>
+
+Hi everyone,
+
+Just a quick note to let you know that splashutils-1.5.4.1 has just been
+released.  Due to a surprisingly low number of bug reports for the 1.5.4
+version of splashutils, 1.5.4.1 only contains two simple fixes.  Excerpt
+from the ChangeLog:
+
+20 Apr 2008 * <spock at gentoo.org> * splashutils-1.5.4.1
+- Use a monotonic clock for animation timing calculations (this is
+  fixes the problem of animations freezing when the system clock is
+  updated).
+- Compile the bundled libraries with -O2 instead of -Os (fixes a
+  segfault in freetype when compiled with GCC 4.3.0).
+
+Best regards.
+-- 
+Michal Januszewski                                JID: michalj at gmail.com
+Gentoo Linux Developer                    http://people.gentoo.org/spock
+
+
+

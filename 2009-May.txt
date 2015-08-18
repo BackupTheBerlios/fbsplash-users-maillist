@@ -1,0 +1,109 @@
+From michalj at gmail.com  Tue May  5 12:32:29 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Tue, 5 May 2009 12:32:29 +0200
+Subject: [fbsplash-users] fbsplash built on T2 Linux, but no splash
+In-Reply-To: <de7991c50904291948h64c175d4kb3356b0b6be0f733@mail.gmail.com>
+References: <de7991c50904291948h64c175d4kb3356b0b6be0f733@mail.gmail.com>
+Message-ID: <5d9b736f0905050332l3550e2eah76f18aed5a41a3de@mail.gmail.com>
+
+On Thu, Apr 30, 2009 at 04:48, Kassi Bell <ebmail00 at gmail.com> wrote:
+
+Hi,
+
+> I built fbsplash on my T2 linux, I followed the LFS guide on the fbsplash
+> website to install it, I updated my grub conf, now, the problem is that
+> there's no boot splash, just a black screen with some random colors, and
+> after that, the boot process starts, with the fbsplash logo at the top left,
+> the resolution changed fine (1024*768), I'm running Linux on a virtual
+
+Could you please provide a screenshot of the screen of the random colors
+and the output of `fbset -i`?
+
+> machine in VMware. Why there's no splash screen??I have the emergence theme
+> installed though, and I generated the initrd as indicated on the
+> documentation:
+> splash_geninitramfs -g /boot/initrd-fbsplash -r 1024x768 -v emergence
+> And here's the fbsplash grub entry:
+> title fbsplash
+> kernel (hd0,0)/boot/vmlinuz_2.6.29-dist root=/dev/sda1 vga=791
+> splash=verbose,fadein,theme:emergence quiet CONSOLE=tty1
+
+Which version of the fbcondecor patch are you using?
+
+Are you able to activate fbcondecor after boot using fbcondecor_ctl?
+
+> I have also another question, how can I change the default fbsplash logo
+> that appears in the top left of the screen?
+
+You might want to have a look at the fblogo app (e.g.
+http://packages.debian.org/etch/fblogo).
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From alopez at fotonicalaser.com  Fri May  8 13:55:39 2009
+From: alopez at fotonicalaser.com (=?ISO-8859-1?Q?Antonio_L=F3pez?=)
+Date: Fri, 8 May 2009 13:55:39 +0200
+Subject: [fbsplash-users] start-from-initrd and start-from-kernel
+Message-ID: <d7b1fc230905080455t1acbd2b5uaee5903ef47a0226@mail.gmail.com>
+
+Hi all,
+
+I?m using fbsplash in my system, starting from rc.
+
+I would like to start splash as soon as possible to avoid showing messages
+to my customers. I've been reading here:
+
+http://fbsplash.berlios.de/wiki/doku.php?id=docs:internals
+
+But start-from-initrd and start-from-kernel are not documented. Is there a
+place where I can find how to enable start-from-initrd or, even better,
+start-from-kernel?
+
+Could you tell me how to do it or how to find the information to do it?
+
+Thanks in advance
+Antonio
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090508/b891c61d/attachment.html>
+
+From michalj at gmail.com  Sat May  9 10:35:36 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Sat, 9 May 2009 10:35:36 +0200
+Subject: [fbsplash-users] start-from-initrd and start-from-kernel
+In-Reply-To: <d7b1fc230905080455t1acbd2b5uaee5903ef47a0226@mail.gmail.com>
+References: <d7b1fc230905080455t1acbd2b5uaee5903ef47a0226@mail.gmail.com>
+Message-ID: <5d9b736f0905090135m1c817f32n29d2a3306382ebfe@mail.gmail.com>
+
+On Fri, May 8, 2009 at 13:55, Antonio L?pez <alopez at fotonicalaser.com> wrote:
+
+Hi,
+
+> But start-from-initrd and start-from-kernel are not documented. Is there a
+> place where I can find how to enable start-from-initrd or, even better,
+> start-from-kernel?
+>
+> Could you tell me how to do it or how to find the information to do it?
+
+You will probably want to use what is referred to as 'start-from-kernel'
+in the document you cited.  You will need to patch your kernel with
+the fbcondecor patch, use an initramfs generated with the
+splash_geninitramfs script and provide the correct splash settings
+on the kernel command line (e.g. splash=silent,fadein,theme:foobar
+quiet console=tty1).
+
+More details about this can be found in docs/early_bootup in the
+splashutils tarball.  The distro-specific documentation on the
+fbsplash website could also prove to be helpful
+(http://fbsplash.berlios.de/wiki/doku.php?id=docs:distros).
+
+Hope that helps,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+

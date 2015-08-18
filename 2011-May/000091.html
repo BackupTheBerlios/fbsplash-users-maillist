@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] How can I get fbsplash to work on my embedded device
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2011-May/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20How%20can%20I%20get%20fbsplash%20to%20work%20on%20my%20embedded%0A%20device&In-Reply-To=%3C20110513192847.4f284c2f%40cs-srv-ws171175.domain.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000090.html">
+   <LINK REL="Next"  HREF="000093.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] How can I get fbsplash to work on my embedded device</H1>
+    <B>Grigory Batalov</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20How%20can%20I%20get%20fbsplash%20to%20work%20on%20my%20embedded%0A%20device&In-Reply-To=%3C20110513192847.4f284c2f%40cs-srv-ws171175.domain.local%3E"
+       TITLE="[fbsplash-users] How can I get fbsplash to work on my embedded device">gbatalov at crystals.ru
+       </A><BR>
+    <I>Fri May 13 17:28:47 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000090.html">[fbsplash-users] How can I get fbsplash to work on my embedded	device
+</A></li>
+        <LI>Next message: <A HREF="000093.html">[fbsplash-users] What is the command to exit the fbsplash	daemon?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#91">[ date ]</a>
+              <a href="thread.html#91">[ thread ]</a>
+              <a href="subject.html#91">[ subject ]</a>
+              <a href="author.html#91">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 13 May 2011 10:59:01 -0400
+Stephen Saputo &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">s.c.saputo at gmail.com</A>&gt; wrote:
+
+&gt;<i> I am working on a project to get our company logo to display on the screen
+</I>&gt;<i> during boot-up before our application starts up.  Our platform is an
+</I>&gt;<i> embedded Medical device running a custom configured version of Linux called
+</I>&gt;<i> X-Linux using the kernel 2.6.38.2.  It has a 128 MB DOM as well.  Our
+</I>&gt;<i> development platform is running Ubuntu 10.04 on a Virtual Box that is run on
+</I>&gt;<i> Windows XP.
+</I>&gt;<i> 
+</I>&gt;<i> I have compiled splashutils-1.5.4.3 on our Ubuntu platform and have copied
+</I>&gt;<i> some of the utilities to the right locations in the device&#8217;s filesystem as
+</I>&gt;<i> well as created a theme.  I have also updated our bootloader (syslinux)
+</I>&gt;<i> configuration file to append the proper kernel parameters needed for
+</I>&gt;<i> fbsplash (e.g. splash=silent, theme:THEME,etc).  I am able to start the
+</I>&gt;<i> fbslash daemon from our /etc/init.d/rcS script and want to stop the daemon
+</I>&gt;<i> right before our application starts up.  It seems like the daemon is using
+</I>&gt;<i> 98% of the CPU cycles when it is running.  How can this be?
+</I>&gt;<i> 
+</I>&gt;<i> What is the command to stop the daemon from running?  Also, I&#8217;m not getting
+</I>&gt;<i> our logo to be displayed either&#8212;just a black screen.  What needs to be
+</I>&gt;<i> called in the initscript(s) to make this happen?
+</I>
+I use these commands in the init script:
+
+PIPE=/lib/splash/cache/.splash
+
+# calculate the PROGRESS
+
+echo &quot;progress $PROGRESS&quot; &gt; &quot;$PIPE&quot;
+echo &quot;repaint&quot; &gt; &quot;$PIPE&quot;
+echo &quot;set mode silent&quot; &gt; &quot;$PIPE&quot;
+
+Off course you should have correct theme config with silent picture set.
+On my systems it's 
+silentpic=/etc/splash/default/images/silent-640x480.png
+and boot video mode set to 640x480 16 bit.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000090.html">[fbsplash-users] How can I get fbsplash to work on my embedded	device
+</A></li>
+	<LI>Next message: <A HREF="000093.html">[fbsplash-users] What is the command to exit the fbsplash	daemon?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#91">[ date ]</a>
+              <a href="thread.html#91">[ thread ]</a>
+              <a href="subject.html#91">[ subject ]</a>
+              <a href="author.html#91">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

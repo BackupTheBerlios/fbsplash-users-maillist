@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] fbsplashd.static segfaults on hardened system
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplashd.static%20segfaults%20on%20hardened%20system&In-Reply-To=%3C5d9b736f0809031454ncd327f6lb871c0f6ebd7211%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000008.html">
+   <LINK REL="Next"  HREF="000010.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] fbsplashd.static segfaults on hardened system</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplashd.static%20segfaults%20on%20hardened%20system&In-Reply-To=%3C5d9b736f0809031454ncd327f6lb871c0f6ebd7211%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] fbsplashd.static segfaults on hardened system">michalj at gmail.com
+       </A><BR>
+    <I>Wed Sep  3 23:54:08 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000008.html">[fbsplash-users] fbsplashd.static segfaults on hardened system
+</A></li>
+        <LI>Next message: <A HREF="000010.html">[fbsplash-users] debian powerpc packages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#9">[ date ]</a>
+              <a href="thread.html#9">[ thread ]</a>
+              <a href="subject.html#9">[ subject ]</a>
+              <a href="author.html#9">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+Could you please keep fbsplash-users CC-ed?  I think what we discuss
+here could prove useful to other people in the future.
+
+&gt;<i> Sure. However, since gdb has problems with PIE symbols, PIE has to be
+</I>&gt;<i> disabled, so the situation will be different...
+</I>
+Well, if it starts to work after a setting from CFLAGS/LDFLAGS has been
+changed, then that would provide us some useful info as well.
+
+&gt;<i> Any way, since you're involved in the ebuild of splashutils, do you have
+</I>&gt;<i> any suggestions on how I should modify it to:
+</I>&gt;<i>
+</I>&gt;<i> * remove my system wide -fomit-frame-pointer CFLAG
+</I>&gt;<i> * add -g to CFLAGs
+</I>&gt;<i> * add -nopie to LDFLAGS
+</I>
+How about simply running:
+
+FEATURES=&quot;nostrip&quot; CFLAGS=&quot;-g&quot; LDFLAGS=&quot;-nopie&quot; emerge splashutils?
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+<A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000008.html">[fbsplash-users] fbsplashd.static segfaults on hardened system
+</A></li>
+	<LI>Next message: <A HREF="000010.html">[fbsplash-users] debian powerpc packages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#9">[ date ]</a>
+              <a href="thread.html#9">[ thread ]</a>
+              <a href="subject.html#9">[ subject ]</a>
+              <a href="author.html#9">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

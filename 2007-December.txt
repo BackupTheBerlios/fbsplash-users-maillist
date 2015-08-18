@@ -1,0 +1,113 @@
+From spock at gentoo.org  Sun Dec 16 20:31:00 2007
+From: spock at gentoo.org (Michal Januszewski)
+Date: Sun, 16 Dec 2007 20:31:00 +0100
+Subject: [fbsplash-users] splashutils 1.5.3
+In-Reply-To: <f06e5f680712120403v6836ddb0n8fcd2ec4a5561fef@mail.gmail.com>
+References: <f06e5f680712050400y2a54fa15h554d2fc5465ac30c@mail.gmail.com>
+	<5d9b736f0712050421o6c391252t4b3371e3da56b701@mail.gmail.com>
+	<f06e5f680712070552t1fe2236cw5e9b66782607a1aa@mail.gmail.com>
+	<20071210153153.GA2492@spock.one.pl>
+	<f06e5f680712110311g46509210ha8fae338ba9a9a0d@mail.gmail.com>
+	<20071211171320.GD29439@spock.one.pl>
+	<f06e5f680712120403v6836ddb0n8fcd2ec4a5561fef@mail.gmail.com>
+Message-ID: <20071216193100.GA4272@spock.one.pl>
+
+On Wed, Dec 12, 2007 at 01:03:13PM +0100, Giuseppe Condorelli wrote:
+
+Hi,
+
+About the patch..
+
+It looks good, but:
+
+1) it should be made against Makefile.am, as this is the basic file
+   from which Makefile{,.in} is generated;
+
+2) shouldn't something similar be done for libjpeg, zlib and libpng?
+
+> > By single screen, do you mean that you only have a single tty?
+> I've only one phisical screen (a CRT TV) where alternatively are displayed
+> both silent and verbose splash. My question was because (although I set
+> splash=silent in command line) the console decoration image I've set is
+> however displayed covering the silent image.
+> I use the term "covering" because for a very short time (less then one
+> second) it is displayed and then overwritten from decoration image.
+
+Weird.. 
+
+Could you please try to upgrade to 1.5.3.2?  I fixed some bugs related
+to painting the text objects -- perhaps it will also fix some of the
+issues you're seeing on your system.
+ 
+> > If no, which tty are you using for the silent splash?
+> I've not modifyed the code (at least for this goal...), so my silent tty is
+> the 16th one.
+
+Are you enabling fbcondecor for tty16?  What are your RC_TTY_NUMBER
+FBCONDECOR_TTYS settings?
+
+Best regards.
+-- 
+Michal Januszewski                              JID: spock at im.gentoo.org
+Gentoo Linux Developer                    http://people.gentoo.org/spock
+
+
+
+From spock at gentoo.org  Mon Dec 17 17:07:54 2007
+From: spock at gentoo.org (Michal Januszewski)
+Date: Mon, 17 Dec 2007 17:07:54 +0100
+Subject: [fbsplash-users] splashutils 1.5.3
+In-Reply-To: <f06e5f680712170116m4dbc34dp53a92c8024df66d5@mail.gmail.com>
+References: <f06e5f680712050400y2a54fa15h554d2fc5465ac30c@mail.gmail.com>
+	<5d9b736f0712050421o6c391252t4b3371e3da56b701@mail.gmail.com>
+	<f06e5f680712070552t1fe2236cw5e9b66782607a1aa@mail.gmail.com>
+	<20071210153153.GA2492@spock.one.pl>
+	<f06e5f680712110311g46509210ha8fae338ba9a9a0d@mail.gmail.com>
+	<20071211171320.GD29439@spock.one.pl>
+	<f06e5f680712120403v6836ddb0n8fcd2ec4a5561fef@mail.gmail.com>
+	<20071216193100.GA4272@spock.one.pl>
+	<f06e5f680712170116m4dbc34dp53a92c8024df66d5@mail.gmail.com>
+Message-ID: <20071217160754.GA7206@spock.one.pl>
+
+On Mon, Dec 17, 2007 at 10:16:13AM +0100, Giuseppe Condorelli wrote:
+
+Hi,
+
+> Because Makefile.in isn't regenerated at build time, which is the gain
+> modifying Makefile.am? At last, Makefile is created starting from the .in
+> file.
+
+Makefile.am is the only thing that is actually tracked in the fbsplash
+git repo.  Makefile.in, configure, etc are all regenerated at packaging
+time.  If you patch Makefile.in, not only will it not be tracked, it
+will also over overwritten next time Makefile.in is rebuilt.
+ 
+> > 2) shouldn't something similar be done for libjpeg, zlib and libpng?
+> Done, new patch is attached.
+
+Great, thanks :)
+ 
+> > Could you please try to upgrade to 1.5.3.2?
+> Is it available on site? I found 1.5.3.1 but 1.5.3.2.
+
+Have you checked fbsplash.berlios.de?  This is when the new releases are
+put now :)  In any case, my website is fully synchronized now so you can
+download it from whichever place suits you best.
+
+> > Are you enabling fbcondecor for tty16?  What are your RC_TTY_NUMBER
+> > FBCONDECOR_TTYS settings?
+> Where can I found these two defines? They aren't nor into package nor into
+> kernel.
+
+These are shell variables, defined in /etc/conf.d/fbcondecor and
+/etc/conf.d/rc on Gentoo systems.  If you are activating fbcondecor in a
+different way, how are you doing it?  For which ttys is fbconcecor
+enabled?
+
+Best regards.
+-- 
+Michal Januszewski                              JID: spock at im.gentoo.org
+Gentoo Linux Developer                    http://people.gentoo.org/spock
+
+
+

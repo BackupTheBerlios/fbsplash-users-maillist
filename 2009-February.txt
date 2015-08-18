@@ -1,0 +1,513 @@
+From michalj at gmail.com  Tue Feb 17 20:28:32 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Tue, 17 Feb 2009 20:28:32 +0100
+Subject: [fbsplash-users] Fwd: splash
+In-Reply-To: <499AF8F3.3020501@gmail.com>
+References: <499AF8F3.3020501@gmail.com>
+Message-ID: <5d9b736f0902171128i3081343fxeeab8e225d785574@mail.gmail.com>
+
+[+fbsplash-users]
+
+---------- Forwarded message ----------
+From: Pent0z <pentoz at gmail.com>
+Date: Tue, Feb 17, 2009 at 18:50
+Subject: splash
+To: spock at gentoo.org
+
+hi spock,
+
+i'm using a debian lenny 2.6.26 kernel with your patch
+and splashutils 1.5.4.2
+
+it is all ok, but when the system boots (silent), it doesn't go
+automatically to verbose after boots (i remember that with gentoo it
+does it automatically)
+i have to hit alt+f1 to enter in verbose mode (and to log-in)
+
+can you help me? what i have to modify to go automatically to verbose
+after boots? is there a command to do it? in that case i can put it in
+rc.local
+
+many thanks
+
+
+From jeandamiendurand at free.fr  Tue Feb 17 22:00:29 2009
+From: jeandamiendurand at free.fr (Jean-Damien Durand)
+Date: Tue, 17 Feb 2009 22:00:29 +0100
+Subject: [fbsplash-users] Fwd: splash
+In-Reply-To: <5d9b736f0902171128i3081343fxeeab8e225d785574@mail.gmail.com>
+References: <499AF8F3.3020501@gmail.com>
+	<5d9b736f0902171128i3081343fxeeab8e225d785574@mail.gmail.com>
+Message-ID: <499B256D.4090004@free.fr>
+
+Michal Januszewski a ?crit :
+> [+fbsplash-users]
+> 
+> ---------- Forwarded message ----------
+> From: Pent0z <pentoz at gmail.com>
+> Date: Tue, Feb 17, 2009 at 18:50
+> Subject: splash
+> To: spock at gentoo.org
+> 
+> hi spock,
+> 
+> i'm using a debian lenny 2.6.26 kernel with your patch
+> and splashutils 1.5.4.2
+> 
+> it is all ok, but when the system boots (silent), it doesn't go
+> automatically to verbose after boots (i remember that with gentoo it
+> does it automatically)
+> i have to hit alt+f1 to enter in verbose mode (and to log-in)
+> 
+> can you help me? what i have to modify to go automatically to verbose
+> after boots? is there a command to do it? in that case i can put it in
+> rc.local
+> 
+> many thanks
+
+[repost sorry if you get it for the 2nd time]
+
+Hello,
+
+What is your corresponding grub line, and is there something relevant 
+about splash and/or fbcondecor in your /var/log/[syslog,messages] ?
+
+Thanks, Cheers, Jean-Damien.
+
+
+From michalj at gmail.com  Tue Feb 17 22:30:27 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Tue, 17 Feb 2009 22:30:27 +0100
+Subject: [fbsplash-users] Fwd: splash
+In-Reply-To: <499B262D.5040509@gmail.com>
+References: <499AF8F3.3020501@gmail.com>
+	<5d9b736f0902171128i3081343fxeeab8e225d785574@mail.gmail.com>
+	<499B24E2.6000801@free.fr> <499B262D.5040509@gmail.com>
+Message-ID: <5d9b736f0902171330y383e86c8mca089219fc674c47@mail.gmail.com>
+
+[+fbsplash-users]
+
+Please keep the mailing list CC-ed on any future replies.
+
+On Tue, Feb 17, 2009 at 22:03, Pent0z <pentoz at gmail.com> wrote:
+> i've added vga=791 splash=silent,fadein,theme:kopspa quiet console=tty1
+> using vesafb (i think)
+>
+> tried also with CONSOLE=/dev/tty1, no changes
+>
+> the theme does this:
+>
+> fadein at boot (it is embedded in initramfs)
+> silent
+> fadeout at boot complete but not switching to verbose until i press alt+f1
+>
+> i see in startup scripts some
+> rm can't rm /lib/splash/cache (i don't remember exactly and i haven't the
+> machine right now)
+> if needs, i'll post the relevant logs tomorrow
+>
+> Jean-Damien Durand wrote:
+>>
+>> Michal Januszewski a ?crit :
+>>>
+>>> [+fbsplash-users]
+>>>
+>>> ---------- Forwarded message ----------
+>>> From: Pent0z <pentoz at gmail.com>
+>>> Date: Tue, Feb 17, 2009 at 18:50
+>>> Subject: splash
+>>> To: spock at gentoo.org
+>>>
+>>> hi spock,
+>>>
+>>> i'm using a debian lenny 2.6.26 kernel with your patch
+>>> and splashutils 1.5.4.2
+>>>
+>>> it is all ok, but when the system boots (silent), it doesn't go
+>>> automatically to verbose after boots (i remember that with gentoo it
+>>> does it automatically)
+>>> i have to hit alt+f1 to enter in verbose mode (and to log-in)
+>>>
+>>> can you help me? what i have to modify to go automatically to verbose
+>>> after boots? is there a command to do it? in that case i can put it in
+>>> rc.local
+>>>
+>>> many thanks
+>>
+>> Hello,
+>>
+>> What is your grub line for this kernel, and is there something relevant to
+>> splash and/or fbcondecor in /var/log/[syslog,messages] ?
+>>
+>> Thanks, Cheers, Jean-Damien.
+>
+>
+
+
+
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From jeandamiendurand at free.fr  Wed Feb 18 06:27:48 2009
+From: jeandamiendurand at free.fr (Jean-Damien Durand)
+Date: Wed, 18 Feb 2009 06:27:48 +0100
+Subject: [fbsplash-users] Fwd: splash
+In-Reply-To: <499B262D.5040509@gmail.com>
+References: <499AF8F3.3020501@gmail.com>
+	<5d9b736f0902171128i3081343fxeeab8e225d785574@mail.gmail.com>
+	<499B24E2.6000801@free.fr> <499B262D.5040509@gmail.com>
+Message-ID: <499B9C54.4070303@free.fr>
+
+This is a difference of gentoo v.s. the other distribs, on Gentoo there 
+are service-related events.
+On Debian, there is no more splash action but the ones their systemv rc 
+supports, i.e. progress() or stop() (yes, nothing else).
+
+That's why the automatic between verbose and silent is not working: this 
+is a triggered on an event that is not propagated to splash.
+
+You can send a wishlist to the author of sysv-rc about service-related 
+events -;
+
+The 'rm /lib/splash/cache' error message is a known thing that you do 
+not have to worry about - this is harmless - will be fixed OOTD.
+
+Thanks, Cheers, JD.
+
+Pent0z a ?crit :
+> i've added vga=791 splash=silent,fadein,theme:kopspa quiet console=tty1
+> using vesafb (i think)
+> 
+> tried also with CONSOLE=/dev/tty1, no changes
+> 
+> the theme does this:
+> 
+> fadein at boot (it is embedded in initramfs)
+> silent
+> fadeout at boot complete but not switching to verbose until i press alt+f1
+> 
+> i see in startup scripts some
+> rm can't rm /lib/splash/cache (i don't remember exactly and i haven't 
+> the machine right now)
+> if needs, i'll post the relevant logs tomorrow
+> 
+> Jean-Damien Durand wrote:
+>> Michal Januszewski a ?crit :
+>>> [+fbsplash-users]
+>>>
+>>> ---------- Forwarded message ----------
+>>> From: Pent0z <pentoz at gmail.com>
+>>> Date: Tue, Feb 17, 2009 at 18:50
+>>> Subject: splash
+>>> To: spock at gentoo.org
+>>>
+>>> hi spock,
+>>>
+>>> i'm using a debian lenny 2.6.26 kernel with your patch
+>>> and splashutils 1.5.4.2
+>>>
+>>> it is all ok, but when the system boots (silent), it doesn't go
+>>> automatically to verbose after boots (i remember that with gentoo it
+>>> does it automatically)
+>>> i have to hit alt+f1 to enter in verbose mode (and to log-in)
+>>>
+>>> can you help me? what i have to modify to go automatically to verbose
+>>> after boots? is there a command to do it? in that case i can put it in
+>>> rc.local
+>>>
+>>> many thanks
+>>
+>> Hello,
+>>
+>> What is your grub line for this kernel, and is there something 
+>> relevant to splash and/or fbcondecor in /var/log/[syslog,messages] ?
+>>
+>> Thanks, Cheers, Jean-Damien.
+> 
+
+
+
+From pentoz at gmail.com  Wed Feb 18 18:04:41 2009
+From: pentoz at gmail.com (Pent0z)
+Date: Wed, 18 Feb 2009 18:04:41 +0100
+Subject: [fbsplash-users] Fwd: splash
+In-Reply-To: <499B9C54.4070303@free.fr>
+References: <499AF8F3.3020501@gmail.com>
+	<5d9b736f0902171128i3081343fxeeab8e225d785574@mail.gmail.com>
+	<499B24E2.6000801@free.fr> <499B262D.5040509@gmail.com>
+	<499B9C54.4070303@free.fr>
+Message-ID: <499C3FA9.8000707@gmail.com>
+
+how can i trigger that event manually? there is a command?
+thanks
+
+Jean-Damien Durand wrote:
+> This is a difference of gentoo v.s. the other distribs, on Gentoo 
+> there are service-related events.
+> On Debian, there is no more splash action but the ones their systemv 
+> rc supports, i.e. progress() or stop() (yes, nothing else).
+>
+> That's why the automatic between verbose and silent is not working: 
+> this is a triggered on an event that is not propagated to splash.
+>
+> You can send a wishlist to the author of sysv-rc about service-related 
+> events -;
+>
+> The 'rm /lib/splash/cache' error message is a known thing that you do 
+> not have to worry about - this is harmless - will be fixed OOTD.
+>
+> Thanks, Cheers, JD.
+>
+> Pent0z a ?crit :
+>> i've added vga=791 splash=silent,fadein,theme:kopspa quiet console=tty1
+>> using vesafb (i think)
+>>
+>> tried also with CONSOLE=/dev/tty1, no changes
+>>
+>> the theme does this:
+>>
+>> fadein at boot (it is embedded in initramfs)
+>> silent
+>> fadeout at boot complete but not switching to verbose until i press 
+>> alt+f1
+>>
+>> i see in startup scripts some
+>> rm can't rm /lib/splash/cache (i don't remember exactly and i haven't 
+>> the machine right now)
+>> if needs, i'll post the relevant logs tomorrow
+>>
+>> Jean-Damien Durand wrote:
+>>> Michal Januszewski a ?crit :
+>>>> [+fbsplash-users]
+>>>>
+>>>> ---------- Forwarded message ----------
+>>>> From: Pent0z <pentoz at gmail.com>
+>>>> Date: Tue, Feb 17, 2009 at 18:50
+>>>> Subject: splash
+>>>> To: spock at gentoo.org
+>>>>
+>>>> hi spock,
+>>>>
+>>>> i'm using a debian lenny 2.6.26 kernel with your patch
+>>>> and splashutils 1.5.4.2
+>>>>
+>>>> it is all ok, but when the system boots (silent), it doesn't go
+>>>> automatically to verbose after boots (i remember that with gentoo it
+>>>> does it automatically)
+>>>> i have to hit alt+f1 to enter in verbose mode (and to log-in)
+>>>>
+>>>> can you help me? what i have to modify to go automatically to verbose
+>>>> after boots? is there a command to do it? in that case i can put it in
+>>>> rc.local
+>>>>
+>>>> many thanks
+>>>
+>>> Hello,
+>>>
+>>> What is your grub line for this kernel, and is there something 
+>>> relevant to splash and/or fbcondecor in /var/log/[syslog,messages] ?
+>>>
+>>> Thanks, Cheers, Jean-Damien.
+>>
+>
+
+
+
+From michalj at gmail.com  Wed Feb 18 19:48:50 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Wed, 18 Feb 2009 19:48:50 +0100
+Subject: [fbsplash-users] Fwd: splash
+In-Reply-To: <499B9C54.4070303@free.fr>
+References: <499AF8F3.3020501@gmail.com>
+	<5d9b736f0902171128i3081343fxeeab8e225d785574@mail.gmail.com>
+	<499B24E2.6000801@free.fr> <499B262D.5040509@gmail.com>
+	<499B9C54.4070303@free.fr>
+Message-ID: <5d9b736f0902181048v2fcf9120h70f78f54c77e082b@mail.gmail.com>
+
+On Wed, Feb 18, 2009 at 06:27, Jean-Damien Durand
+<jeandamiendurand at free.fr> wrote:
+
+> That's why the automatic between verbose and silent is not working: this
+> is a triggered on an event that is not propagated to splash.
+
+Do you know how this problem is solved in usplash/splashy,
+which are perhaps more "native" to Debian than fbsplash?
+
+If there really is no way to know when the boot process is
+actually complete, maybe we could make use of the autoverbose
+functionality in fbsplash.  From gentoo/splash.conf (in git):
+
+# If set to a positive value, fbsplash will automatically switch to verbose
+# mode if there is no activity for the specified number of seconds.
+SPLASH_AUTOVERBOSE="0"
+
+I could imagine that on Debian systems we could set it to
+a non-zero value, preventing fbsplash from staying at the
+silent screen forever.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From paczesiowa at dw.pl  Fri Feb 27 21:11:08 2009
+From: paczesiowa at dw.pl (Bartek =?utf-8?q?=C4=86wik=C5=82owski?=)
+Date: Fri, 27 Feb 2009 21:11:08 +0100
+Subject: [fbsplash-users] switching to silent splash from init script
+Message-ID: <200902272111.08554.paczesiowa@dw.pl>
+
+Hi,
+
+Here's my question/problem:
+I have encrypted root partition and I use custom initscript (attached)
+to decrypt it during boot. However, after decryption I don't know,
+how to display splash screen again. I tried chvt 2 and 16, but it results
+in switch to black console, shortly followed by switch back to first console,
+where I can see boot messages, until something from gentoo's init kicks in
+and I get splash screen back. So, how do I switch to silent splash from 
+initramfs?
+
+Best regards,
+Bartek Cwiklowski
+
+
+-------------- next part --------------
+#!/bin/busybox ash
+
+/bin/busybox mount proc -t proc /proc
+/bin/busybox --install -s
+mount sysfs -t sysfs /sys
+mdev -s
+mkdir /new_root
+
+loadkeys pl3
+clear
+chvt 1
+
+false
+until [ $? = 0 ]; do
+    clear
+    echo -n "password: "
+    read -s PASSWORD
+    echo $PASSWORD | cryptsetup luksOpen /dev/sda3 root > /dev/null 2> /dev/null
+done
+
+chvt 2
+
+echo $PASSWORD | cryptsetup luksOpen /dev/sda2 swap  > /dev/null 2> /dev/null
+
+echo go > /sys/power/tuxonice/do_resume
+
+mount /dev/mapper/root /new_root -o barrier=0
+
+umount /sys/
+exec switch_root -c /dev/console /new_root /sbin/init
+
+From michalj at gmail.com  Sat Feb 28 11:27:13 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Sat, 28 Feb 2009 11:27:13 +0100
+Subject: [fbsplash-users] switching to silent splash from init script
+In-Reply-To: <200902272111.08554.paczesiowa@dw.pl>
+References: <200902272111.08554.paczesiowa@dw.pl>
+Message-ID: <5d9b736f0902280227u3ae80452y667a529c33a51044@mail.gmail.com>
+
+On Fri, Feb 27, 2009 at 21:11, Bartek ?wik?owski <paczesiowa at dw.pl> wrote:
+
+Hi,
+
+> [..]
+> how to display splash screen again. I tried chvt 2 and 16, but it results
+> in switch to black console, shortly followed by switch back to first console,
+> where I can see boot messages, until something from gentoo's init kicks in
+> and I get splash screen back. So, how do I switch to silent splash from
+> initramfs?
+
+You need to directly call fbcondecor_helper from your initscript:
+
+/sbin/fbcondecor_helper 2 repaint
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From paczesiowa at dw.pl  Sat Feb 28 15:24:31 2009
+From: paczesiowa at dw.pl (Bartek =?utf-8?q?=C4=86wik=C5=82owski?=)
+Date: Sat, 28 Feb 2009 15:24:31 +0100
+Subject: [fbsplash-users] switching to silent splash from init script
+In-Reply-To: <5d9b736f0902280227u3ae80452y667a529c33a51044@mail.gmail.com>
+References: <200902272111.08554.paczesiowa@dw.pl>
+	<5d9b736f0902280227u3ae80452y667a529c33a51044@mail.gmail.com>
+Message-ID: <200902281524.31568.paczesiowa@dw.pl>
+
+> You need to directly call fbcondecor_helper from your initscript:
+>
+> /sbin/fbcondecor_helper 2 repaint
+
+Ok, that worked, thanks. 
+
+The only weird thing is, that trying to resume (echo go > 
+/sys/power/tuxonice/do_resume), which returns immediately if there is no 
+hibernation image available, switches again to first console. There is some way 
+to explicitly check for images existence (can't remember it now), but in case 
+if it is a bug, I'm reporting it.
+
+Best regards,
+Bartek ?wik?owski
+
+
+From michalj at gmail.com  Sat Feb 28 14:32:48 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Sat, 28 Feb 2009 14:32:48 +0100
+Subject: [fbsplash-users] switching to silent splash from init script
+In-Reply-To: <200902281524.31568.paczesiowa@dw.pl>
+References: <200902272111.08554.paczesiowa@dw.pl>
+	<5d9b736f0902280227u3ae80452y667a529c33a51044@mail.gmail.com>
+	<200902281524.31568.paczesiowa@dw.pl>
+Message-ID: <5d9b736f0902280532h572c8ef0pb08289e5fba54372@mail.gmail.com>
+
+On Sat, Feb 28, 2009 at 15:24, Bartek ?wik?owski <paczesiowa at dw.pl> wrote:
+
+> The only weird thing is, that trying to resume (echo go >
+> /sys/power/tuxonice/do_resume), which returns immediately if there is no
+> hibernation image available, switches again to first console. There is some way
+
+Does it also happen when fbcondecor is inactive?  If it does, then
+it's more likely a tuxonice problem.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From paczesiowa at dw.pl  Sat Feb 28 16:42:41 2009
+From: paczesiowa at dw.pl (Bartek =?utf-8?q?=C4=86wik=C5=82owski?=)
+Date: Sat, 28 Feb 2009 16:42:41 +0100
+Subject: [fbsplash-users] switching to silent splash from init script
+In-Reply-To: <5d9b736f0902280532h572c8ef0pb08289e5fba54372@mail.gmail.com>
+References: <200902272111.08554.paczesiowa@dw.pl>
+	<200902281524.31568.paczesiowa@dw.pl>
+	<5d9b736f0902280532h572c8ef0pb08289e5fba54372@mail.gmail.com>
+Message-ID: <200902281642.41463.paczesiowa@dw.pl>
+
+> > The only weird thing is, that trying to resume (echo go >
+> > /sys/power/tuxonice/do_resume), which returns immediately if there is no
+> > hibernation image available, switches again to first console. 
+>
+> Does it also happen when fbcondecor is inactive?  If it does, then
+> it's more likely a tuxonice problem.
+
+Yes, when splash isn't enabled on kernel cmdline (but tuxonice is) it also 
+switches. I'll report it to the toi devs, if I can't work around it.
+
+Thanks for your help.
+
+Best regards,
+Bartek ?wik?owski
+
+

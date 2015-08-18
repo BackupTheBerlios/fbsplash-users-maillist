@@ -1,0 +1,827 @@
+From s.c.saputo at gmail.com  Fri May 13 16:59:01 2011
+From: s.c.saputo at gmail.com (Stephen Saputo)
+Date: Fri, 13 May 2011 10:59:01 -0400
+Subject: [fbsplash-users] How can I get fbsplash to work on my embedded
+	device
+Message-ID: <BANLkTimCyssOZS26Bug_rTA6U=m=eaGm6g@mail.gmail.com>
+
+Hello,
+
+
+
+I am working on a project to get our company logo to display on the screen
+during boot-up before our application starts up.  Our platform is an
+embedded Medical device running a custom configured version of Linux called
+X-Linux using the kernel 2.6.38.2.  It has a 128 MB DOM as well.  Our
+development platform is running Ubuntu 10.04 on a Virtual Box that is run on
+Windows XP.
+
+
+
+I have compiled splashutils-1.5.4.3 on our Ubuntu platform and have copied
+some of the utilities to the right locations in the device?s filesystem as
+well as created a theme.  I have also updated our bootloader (syslinux)
+configuration file to append the proper kernel parameters needed for
+fbsplash (e.g. splash=silent, theme:THEME,etc).  I am able to start the
+fbslash daemon from our /etc/init.d/rcS script and want to stop the daemon
+right before our application starts up.  It seems like the daemon is using
+98% of the CPU cycles when it is running.  How can this be?
+
+
+
+What is the command to stop the daemon from running?  Also, I?m not getting
+our logo to be displayed either?just a black screen.  What needs to be
+called in the initscript(s) to make this happen?
+
+
+
+Thank you for your time.
+
+-- 
+Stephen Saputo
+Software Engineer
+Somanetics Corporation
+office: 248-244-1958 (Eastern time zone)
+cell: 586-838-0452
+main: 248-244-1400
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110513/8635d4a6/attachment.html>
+
+From gbatalov at crystals.ru  Fri May 13 17:28:47 2011
+From: gbatalov at crystals.ru (Grigory Batalov)
+Date: Fri, 13 May 2011 19:28:47 +0400
+Subject: [fbsplash-users] How can I get fbsplash to work on my embedded
+ device
+In-Reply-To: <BANLkTimCyssOZS26Bug_rTA6U=m=eaGm6g@mail.gmail.com>
+References: <BANLkTimCyssOZS26Bug_rTA6U=m=eaGm6g@mail.gmail.com>
+Message-ID: <20110513192847.4f284c2f@cs-srv-ws171175.domain.local>
+
+On Fri, 13 May 2011 10:59:01 -0400
+Stephen Saputo <s.c.saputo at gmail.com> wrote:
+
+> I am working on a project to get our company logo to display on the screen
+> during boot-up before our application starts up.  Our platform is an
+> embedded Medical device running a custom configured version of Linux called
+> X-Linux using the kernel 2.6.38.2.  It has a 128 MB DOM as well.  Our
+> development platform is running Ubuntu 10.04 on a Virtual Box that is run on
+> Windows XP.
+> 
+> I have compiled splashutils-1.5.4.3 on our Ubuntu platform and have copied
+> some of the utilities to the right locations in the device?s filesystem as
+> well as created a theme.  I have also updated our bootloader (syslinux)
+> configuration file to append the proper kernel parameters needed for
+> fbsplash (e.g. splash=silent, theme:THEME,etc).  I am able to start the
+> fbslash daemon from our /etc/init.d/rcS script and want to stop the daemon
+> right before our application starts up.  It seems like the daemon is using
+> 98% of the CPU cycles when it is running.  How can this be?
+> 
+> What is the command to stop the daemon from running?  Also, I?m not getting
+> our logo to be displayed either?just a black screen.  What needs to be
+> called in the initscript(s) to make this happen?
+
+I use these commands in the init script:
+
+PIPE=/lib/splash/cache/.splash
+
+# calculate the PROGRESS
+
+echo "progress $PROGRESS" > "$PIPE"
+echo "repaint" > "$PIPE"
+echo "set mode silent" > "$PIPE"
+
+Off course you should have correct theme config with silent picture set.
+On my systems it's 
+silentpic=/etc/splash/default/images/silent-640x480.png
+and boot video mode set to 640x480 16 bit.
+
+
+From ssaputo at somanetics.com  Fri May 13 16:39:12 2011
+From: ssaputo at somanetics.com (Steve Saputo)
+Date: Fri, 13 May 2011 10:39:12 -0400
+Subject: [fbsplash-users] How can I get fbsplash to work on my embedded
+	device
+Message-ID: <3C994065816E2244A1939B249B35E8AD01725AD0@mail.somaneticscorp.local>
+
+Hello,
+
+ 
+
+I am working on a project to get our company logo to display on the
+screen during boot-up before our application starts up.  Our platform is
+an embedded Medical device running a custom configured version of Linux
+called X-Linux using the kernel 2.6.38.2.  It has a 128 MB DOM as well.
+Our development platform is running Ubuntu 10.04 on a Virtual Box that
+is run on Windows XP.
+
+ 
+
+I have compiled splashutils-1.5.4.3 on our Ubuntu platform and have
+copied some of the utilities to the right locations in the device's
+filesystem as well as created a theme.  I have also updated our
+bootloader (syslinux) configuration file to append the proper kernel
+parameters needed for fbsplash (e.g. splash=silent, theme:THEME,etc).  I
+am able to start the fbslash daemon from our /etc/init.d/rcS script and
+want to stop the daemon right before our application starts up.  It
+seems like the daemon is using 98% of the CPU cycles when it is running.
+How can this be?
+
+ 
+
+What is the command to stop the daemon from running?  Also, I'm not
+getting our logo to be displayed either-just a black screen.  What needs
+to be called in the initscript(s) to make this happen?
+
+ 
+
+Thank you for your time.
+
+ 
+
+----
+
+Stephen Saputo
+
+Software Engineer
+
+Somanetics Corporation
+
+2600 Troy Center Drive
+
+Troy, MI 48084
+
+desk: 248-244-1958
+
+cell: 586-838-0452
+
+main: 248-244-1400
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110513/5407fd41/attachment.html>
+
+From s.c.saputo at gmail.com  Mon May 16 15:03:18 2011
+From: s.c.saputo at gmail.com (Stephen Saputo)
+Date: Mon, 16 May 2011 09:03:18 -0400
+Subject: [fbsplash-users] What is the command to exit the fbsplash
+	daemon?
+Message-ID: <BANLkTikMWDvhPuMNj9K888J2HWGf4M0d-A@mail.gmail.com>
+
+Hello,
+
+What is the command to stop/exit the fbsplash daemon?
+
+Thanks! :)
+
+
+On Sat, May 14, 2011 at 6:00 AM, <fbsplash-users-request at lists.berlios.de>wrote:
+
+> Send fbsplash-users mailing list submissions to
+>        fbsplash-users at lists.berlios.de
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+>        https://lists.berlios.de/mailman/listinfo/fbsplash-users
+> or, via email, send a message with subject or body 'help' to
+>        fbsplash-users-request at lists.berlios.de
+>
+> You can reach the person managing the list at
+>        fbsplash-users-owner at lists.berlios.de
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of fbsplash-users digest..."
+>
+>
+> Today's Topics:
+>
+>   1. How can I get fbsplash to work on my embedded     device
+>      (Stephen Saputo)
+>   2. Re: How can I get fbsplash to work on my embedded device
+>      (Grigory Batalov)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Fri, 13 May 2011 10:59:01 -0400
+> From: Stephen Saputo <s.c.saputo at gmail.com>
+> To: fbsplash-users at lists.berlios.de
+> Subject: [fbsplash-users] How can I get fbsplash to work on my
+>        embedded        device
+> Message-ID: <BANLkTimCyssOZS26Bug_rTA6U=m=eaGm6g at mail.gmail.com>
+> Content-Type: text/plain; charset="windows-1252"
+>
+> Hello,
+>
+>
+>
+> I am working on a project to get our company logo to display on the screen
+> during boot-up before our application starts up.  Our platform is an
+> embedded Medical device running a custom configured version of Linux called
+> X-Linux using the kernel 2.6.38.2.  It has a 128 MB DOM as well.  Our
+> development platform is running Ubuntu 10.04 on a Virtual Box that is run
+> on
+> Windows XP.
+>
+>
+>
+> I have compiled splashutils-1.5.4.3 on our Ubuntu platform and have copied
+> some of the utilities to the right locations in the device?s filesystem as
+> well as created a theme.  I have also updated our bootloader (syslinux)
+> configuration file to append the proper kernel parameters needed for
+> fbsplash (e.g. splash=silent, theme:THEME,etc).  I am able to start the
+> fbslash daemon from our /etc/init.d/rcS script and want to stop the daemon
+> right before our application starts up.  It seems like the daemon is using
+> 98% of the CPU cycles when it is running.  How can this be?
+>
+>
+>
+> What is the command to stop the daemon from running?  Also, I?m not getting
+> our logo to be displayed either?just a black screen.  What needs to be
+> called in the initscript(s) to make this happen?
+>
+>
+>
+> Thank you for your time.
+>
+> --
+> Stephen Saputo
+> Software Engineer
+> Somanetics Corporation
+> office: 248-244-1958 (Eastern time zone)
+> cell: 586-838-0452
+> main: 248-244-1400
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110513/8635d4a6/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Fri, 13 May 2011 19:28:47 +0400
+> From: Grigory Batalov <gbatalov at crystals.ru>
+> To: fbsplash-users at lists.berlios.de
+> Subject: Re: [fbsplash-users] How can I get fbsplash to work on my
+>        embedded device
+> Message-ID: <20110513192847.4f284c2f at cs-srv-ws171175.domain.local>
+> Content-Type: text/plain; charset=windows-1252
+>
+> On Fri, 13 May 2011 10:59:01 -0400
+> Stephen Saputo <s.c.saputo at gmail.com> wrote:
+>
+> > I am working on a project to get our company logo to display on the
+> screen
+> > during boot-up before our application starts up.  Our platform is an
+> > embedded Medical device running a custom configured version of Linux
+> called
+> > X-Linux using the kernel 2.6.38.2.  It has a 128 MB DOM as well.  Our
+> > development platform is running Ubuntu 10.04 on a Virtual Box that is run
+> on
+> > Windows XP.
+> >
+> > I have compiled splashutils-1.5.4.3 on our Ubuntu platform and have
+> copied
+> > some of the utilities to the right locations in the device?s filesystem
+> as
+> > well as created a theme.  I have also updated our bootloader (syslinux)
+> > configuration file to append the proper kernel parameters needed for
+> > fbsplash (e.g. splash=silent, theme:THEME,etc).  I am able to start the
+> > fbslash daemon from our /etc/init.d/rcS script and want to stop the
+> daemon
+> > right before our application starts up.  It seems like the daemon is
+> using
+> > 98% of the CPU cycles when it is running.  How can this be?
+> >
+> > What is the command to stop the daemon from running?  Also, I?m not
+> getting
+> > our logo to be displayed either?just a black screen.  What needs to be
+> > called in the initscript(s) to make this happen?
+>
+> I use these commands in the init script:
+>
+> PIPE=/lib/splash/cache/.splash
+>
+> # calculate the PROGRESS
+>
+> echo "progress $PROGRESS" > "$PIPE"
+> echo "repaint" > "$PIPE"
+> echo "set mode silent" > "$PIPE"
+>
+> Off course you should have correct theme config with silent picture set.
+> On my systems it's
+> silentpic=/etc/splash/default/images/silent-640x480.png
+> and boot video mode set to 640x480 16 bit.
+>
+>
+> ------------------------------
+>
+> _______________________________________________
+> fbsplash-users mailing list
+> fbsplash-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/fbsplash-users
+>
+>
+> End of fbsplash-users Digest, Vol 20, Issue 1
+> *********************************************
+>
+
+
+
+-- 
+Stephen Saputo
+Software Engineer
+Somanetics Corporation
+office: 248-244-1958 (Eastern time zone)
+cell: 586-838-0452
+main: 248-244-1400
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110516/ae058f49/attachment.html>
+
+From gbatalov at crystals.ru  Mon May 16 17:30:44 2011
+From: gbatalov at crystals.ru (Grigory Batalov)
+Date: Mon, 16 May 2011 19:30:44 +0400
+Subject: [fbsplash-users] What is the command to exit the fbsplash
+ daemon?
+In-Reply-To: <BANLkTikMWDvhPuMNj9K888J2HWGf4M0d-A@mail.gmail.com>
+References: <BANLkTikMWDvhPuMNj9K888J2HWGf4M0d-A@mail.gmail.com>
+Message-ID: <20110516193044.5d46144e@cs-srv-ws171175.domain.local>
+
+On Mon, 16 May 2011 09:03:18 -0400
+Stephen Saputo <s.c.saputo at gmail.com> wrote:
+
+> What is the command to stop/exit the fbsplash daemon?
+
+/usr/local/sbin/fbsplashd -t default -p 10000 -q --type=bootup
+--pidfile="$PIDFILE"
+
+To stop the daemon just send it "exit" command:
+
+PIPE=/lib/splash/cache/.splash
+echo "exit" > "$PIPE"
+
+> > > What is the command to stop the daemon from running?  Also, I?m not
+> > getting
+> > > our logo to be displayed either?just a black screen.  What needs to be
+> > > called in the initscript(s) to make this happen?
+> >
+> > I use these commands in the init script:
+> >
+> > PIPE=/lib/splash/cache/.splash
+> >
+> > # calculate the PROGRESS
+> >
+> > echo "progress $PROGRESS" > "$PIPE"
+> > echo "repaint" > "$PIPE"
+> > echo "set mode silent" > "$PIPE"
+> >
+> > Off course you should have correct theme config with silent picture set.
+> > On my systems it's
+> > silentpic=/etc/splash/default/images/silent-640x480.png
+> > and boot video mode set to 640x480 16 bit.
+
+
+From s.c.saputo at gmail.com  Wed May 18 14:41:18 2011
+From: s.c.saputo at gmail.com (Stephen Saputo)
+Date: Wed, 18 May 2011 08:41:18 -0400
+Subject: [fbsplash-users] How to get image to display on the screen?
+Message-ID: <BANLkTimdXN-6WOLuVZNfoGkFvLs_VsgtXQ@mail.gmail.com>
+
+Hello,
+
+I was just wondering what needs to happen in order for a theme to be
+displayed on the screen?  Also, can fbsplash work on embedded devices?
+
+Thanks!
+
+On Tue, May 17, 2011 at 6:00 AM, <fbsplash-users-request at lists.berlios.de>wrote:
+
+> Send fbsplash-users mailing list submissions to
+>        fbsplash-users at lists.berlios.de
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+>        https://lists.berlios.de/mailman/listinfo/fbsplash-users
+> or, via email, send a message with subject or body 'help' to
+>        fbsplash-users-request at lists.berlios.de
+>
+> You can reach the person managing the list at
+>        fbsplash-users-owner at lists.berlios.de
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of fbsplash-users digest..."
+>
+>
+> Today's Topics:
+>
+>   1. Re: What is the command to exit the fbsplash      daemon?
+>      (Stephen Saputo)
+>   2. Re: What is the command to exit the fbsplash daemon?
+>      (Grigory Batalov)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Mon, 16 May 2011 09:03:18 -0400
+> From: Stephen Saputo <s.c.saputo at gmail.com>
+> To: fbsplash-users at lists.berlios.de
+> Subject: Re: [fbsplash-users] What is the command to exit the fbsplash
+>        daemon?
+> Message-ID: <BANLkTikMWDvhPuMNj9K888J2HWGf4M0d-A at mail.gmail.com>
+> Content-Type: text/plain; charset="iso-8859-1"
+>
+> Hello,
+>
+> What is the command to stop/exit the fbsplash daemon?
+>
+> Thanks! :)
+>
+>
+> On Sat, May 14, 2011 at 6:00 AM, <fbsplash-users-request at lists.berlios.de
+> >wrote:
+>
+> > Send fbsplash-users mailing list submissions to
+> >        fbsplash-users at lists.berlios.de
+> >
+> > To subscribe or unsubscribe via the World Wide Web, visit
+> >        https://lists.berlios.de/mailman/listinfo/fbsplash-users
+> > or, via email, send a message with subject or body 'help' to
+> >        fbsplash-users-request at lists.berlios.de
+> >
+> > You can reach the person managing the list at
+> >        fbsplash-users-owner at lists.berlios.de
+> >
+> > When replying, please edit your Subject line so it is more specific
+> > than "Re: Contents of fbsplash-users digest..."
+> >
+> >
+> > Today's Topics:
+> >
+> >   1. How can I get fbsplash to work on my embedded     device
+> >      (Stephen Saputo)
+> >   2. Re: How can I get fbsplash to work on my embedded device
+> >      (Grigory Batalov)
+> >
+> >
+> > ----------------------------------------------------------------------
+> >
+> > Message: 1
+> > Date: Fri, 13 May 2011 10:59:01 -0400
+> > From: Stephen Saputo <s.c.saputo at gmail.com>
+> > To: fbsplash-users at lists.berlios.de
+> > Subject: [fbsplash-users] How can I get fbsplash to work on my
+> >        embedded        device
+> > Message-ID: <BANLkTimCyssOZS26Bug_rTA6U=m=eaGm6g at mail.gmail.com>
+> > Content-Type: text/plain; charset="windows-1252"
+> >
+> > Hello,
+> >
+> >
+> >
+> > I am working on a project to get our company logo to display on the
+> screen
+> > during boot-up before our application starts up.  Our platform is an
+> > embedded Medical device running a custom configured version of Linux
+> called
+> > X-Linux using the kernel 2.6.38.2.  It has a 128 MB DOM as well.  Our
+> > development platform is running Ubuntu 10.04 on a Virtual Box that is run
+> > on
+> > Windows XP.
+> >
+> >
+> >
+> > I have compiled splashutils-1.5.4.3 on our Ubuntu platform and have
+> copied
+> > some of the utilities to the right locations in the device?s filesystem
+> as
+> > well as created a theme.  I have also updated our bootloader (syslinux)
+> > configuration file to append the proper kernel parameters needed for
+> > fbsplash (e.g. splash=silent, theme:THEME,etc).  I am able to start the
+> > fbslash daemon from our /etc/init.d/rcS script and want to stop the
+> daemon
+> > right before our application starts up.  It seems like the daemon is
+> using
+> > 98% of the CPU cycles when it is running.  How can this be?
+> >
+> >
+> >
+> > What is the command to stop the daemon from running?  Also, I?m not
+> getting
+> > our logo to be displayed either?just a black screen.  What needs to be
+> > called in the initscript(s) to make this happen?
+> >
+> >
+> >
+> > Thank you for your time.
+> >
+> > --
+> > Stephen Saputo
+> > Software Engineer
+> > Somanetics Corporation
+> > office: 248-244-1958 (Eastern time zone)
+> > cell: 586-838-0452
+> > main: 248-244-1400
+> > -------------- next part --------------
+> > An HTML attachment was scrubbed...
+> > URL: <
+> >
+> https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110513/8635d4a6/attachment-0001.html
+> > >
+> >
+> > ------------------------------
+> >
+> > Message: 2
+> > Date: Fri, 13 May 2011 19:28:47 +0400
+> > From: Grigory Batalov <gbatalov at crystals.ru>
+> > To: fbsplash-users at lists.berlios.de
+> > Subject: Re: [fbsplash-users] How can I get fbsplash to work on my
+> >        embedded device
+> > Message-ID: <20110513192847.4f284c2f at cs-srv-ws171175.domain.local>
+> > Content-Type: text/plain; charset=windows-1252
+> >
+> > On Fri, 13 May 2011 10:59:01 -0400
+> > Stephen Saputo <s.c.saputo at gmail.com> wrote:
+> >
+> > > I am working on a project to get our company logo to display on the
+> > screen
+> > > during boot-up before our application starts up.  Our platform is an
+> > > embedded Medical device running a custom configured version of Linux
+> > called
+> > > X-Linux using the kernel 2.6.38.2.  It has a 128 MB DOM as well.  Our
+> > > development platform is running Ubuntu 10.04 on a Virtual Box that is
+> run
+> > on
+> > > Windows XP.
+> > >
+> > > I have compiled splashutils-1.5.4.3 on our Ubuntu platform and have
+> > copied
+> > > some of the utilities to the right locations in the device?s filesystem
+> > as
+> > > well as created a theme.  I have also updated our bootloader (syslinux)
+> > > configuration file to append the proper kernel parameters needed for
+> > > fbsplash (e.g. splash=silent, theme:THEME,etc).  I am able to start the
+> > > fbslash daemon from our /etc/init.d/rcS script and want to stop the
+> > daemon
+> > > right before our application starts up.  It seems like the daemon is
+> > using
+> > > 98% of the CPU cycles when it is running.  How can this be?
+> > >
+> > > What is the command to stop the daemon from running?  Also, I?m not
+> > getting
+> > > our logo to be displayed either?just a black screen.  What needs to be
+> > > called in the initscript(s) to make this happen?
+> >
+> > I use these commands in the init script:
+> >
+> > PIPE=/lib/splash/cache/.splash
+> >
+> > # calculate the PROGRESS
+> >
+> > echo "progress $PROGRESS" > "$PIPE"
+> > echo "repaint" > "$PIPE"
+> > echo "set mode silent" > "$PIPE"
+> >
+> > Off course you should have correct theme config with silent picture set.
+> > On my systems it's
+> > silentpic=/etc/splash/default/images/silent-640x480.png
+> > and boot video mode set to 640x480 16 bit.
+> >
+> >
+> > ------------------------------
+> >
+> > _______________________________________________
+> > fbsplash-users mailing list
+> > fbsplash-users at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/fbsplash-users
+> >
+> >
+> > End of fbsplash-users Digest, Vol 20, Issue 1
+> > *********************************************
+> >
+>
+>
+>
+> --
+> Stephen Saputo
+> Software Engineer
+> Somanetics Corporation
+> office: 248-244-1958 (Eastern time zone)
+> cell: 586-838-0452
+> main: 248-244-1400
+> -------------- next part --------------
+> An HTML attachment was scrubbed...
+> URL: <
+> https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110516/ae058f49/attachment-0001.html
+> >
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Mon, 16 May 2011 19:30:44 +0400
+> From: Grigory Batalov <gbatalov at crystals.ru>
+> To: fbsplash-users at lists.berlios.de
+> Subject: Re: [fbsplash-users] What is the command to exit the fbsplash
+>        daemon?
+> Message-ID: <20110516193044.5d46144e at cs-srv-ws171175.domain.local>
+> Content-Type: text/plain; charset=US-ASCII
+>
+> On Mon, 16 May 2011 09:03:18 -0400
+> Stephen Saputo <s.c.saputo at gmail.com> wrote:
+>
+> > What is the command to stop/exit the fbsplash daemon?
+>
+> /usr/local/sbin/fbsplashd -t default -p 10000 -q --type=bootup
+> --pidfile="$PIDFILE"
+>
+> To stop the daemon just send it "exit" command:
+>
+> PIPE=/lib/splash/cache/.splash
+> echo "exit" > "$PIPE"
+>
+> > > > What is the command to stop the daemon from running?  Also, I?m not
+> > > getting
+> > > > our logo to be displayed either?just a black screen.  What needs to
+> be
+> > > > called in the initscript(s) to make this happen?
+> > >
+> > > I use these commands in the init script:
+> > >
+> > > PIPE=/lib/splash/cache/.splash
+> > >
+> > > # calculate the PROGRESS
+> > >
+> > > echo "progress $PROGRESS" > "$PIPE"
+> > > echo "repaint" > "$PIPE"
+> > > echo "set mode silent" > "$PIPE"
+> > >
+> > > Off course you should have correct theme config with silent picture
+> set.
+> > > On my systems it's
+> > > silentpic=/etc/splash/default/images/silent-640x480.png
+> > > and boot video mode set to 640x480 16 bit.
+>
+>
+> ------------------------------
+>
+> _______________________________________________
+> fbsplash-users mailing list
+> fbsplash-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/fbsplash-users
+>
+>
+> End of fbsplash-users Digest, Vol 20, Issue 3
+> *********************************************
+>
+
+
+
+-- 
+Stephen Saputo
+Software Engineer
+Somanetics Corporation
+office: 248-244-1958 (Eastern time zone)
+cell: 586-838-0452
+main: 248-244-1400
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110518/80178a66/attachment.html>
+
+From gbatalov at crystals.ru  Fri May 20 08:29:39 2011
+From: gbatalov at crystals.ru (Grigory Batalov)
+Date: Fri, 20 May 2011 10:29:39 +0400
+Subject: [fbsplash-users] How to get image to display on the screen?
+In-Reply-To: <BANLkTimdXN-6WOLuVZNfoGkFvLs_VsgtXQ@mail.gmail.com>
+References: <BANLkTimdXN-6WOLuVZNfoGkFvLs_VsgtXQ@mail.gmail.com>
+Message-ID: <20110520102939.0e602e78@cs-srv-ws171175.domain.local>
+
+On Wed, 18 May 2011 08:41:18 -0400
+Stephen Saputo <s.c.saputo at gmail.com> wrote:
+
+> I was just wondering what needs to happen in order for a theme to be
+> displayed on the screen?
+
+BTW, have you patched the kernel?
+
+> Also, can fbsplash work on embedded devices?
+
+It works with a framebuffer that most embedded devices have, I guess.
+
+
+From s.c.saputo at gmail.com  Fri May 20 15:03:56 2011
+From: s.c.saputo at gmail.com (Stephen Saputo)
+Date: Fri, 20 May 2011 09:03:56 -0400
+Subject: [fbsplash-users] How to get image to display on the screen?
+Message-ID: <BANLkTi=Vb3cz1r7M=LdqUOBsBzeag_+9hw@mail.gmail.com>
+
+Hello,
+
+No, I have not patched the kernel.  What is the patch and where can I find
+it?  We're using the 2.6.29.6 kernel.
+
+
+On Fri, May 20, 2011 at 6:00 AM, <fbsplash-users-request at lists.berlios.de>wrote:
+
+> Send fbsplash-users mailing list submissions to
+>        fbsplash-users at lists.berlios.de
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+>        https://lists.berlios.de/mailman/listinfo/fbsplash-users
+> or, via email, send a message with subject or body 'help' to
+>        fbsplash-users-request at lists.berlios.de
+>
+> You can reach the person managing the list at
+>        fbsplash-users-owner at lists.berlios.de
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of fbsplash-users digest..."
+>
+>
+> Today's Topics:
+>
+>   1. Re: How to get image to display on the screen? (Grigory Batalov)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Fri, 20 May 2011 10:29:39 +0400
+> From: Grigory Batalov <gbatalov at crystals.ru>
+> To: fbsplash-users at lists.berlios.de
+> Subject: Re: [fbsplash-users] How to get image to display on the
+>        screen?
+> Message-ID: <20110520102939.0e602e78 at cs-srv-ws171175.domain.local>
+> Content-Type: text/plain; charset=US-ASCII
+>
+> On Wed, 18 May 2011 08:41:18 -0400
+> Stephen Saputo <s.c.saputo at gmail.com> wrote:
+>
+> > I was just wondering what needs to happen in order for a theme to be
+> > displayed on the screen?
+>
+> BTW, have you patched the kernel?
+>
+> > Also, can fbsplash work on embedded devices?
+>
+> It works with a framebuffer that most embedded devices have, I guess.
+>
+>
+> ------------------------------
+>
+> _______________________________________________
+> fbsplash-users mailing list
+> fbsplash-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/fbsplash-users
+>
+>
+> End of fbsplash-users Digest, Vol 20, Issue 5
+> *********************************************
+>
+
+
+
+-- 
+Stephen Saputo
+Software Engineer
+Somanetics Corporation
+office: 248-244-1958 (Eastern time zone)
+cell: 586-838-0452
+main: 248-244-1400
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110520/a82ba5b6/attachment.html>
+
+From gbatalov at crystals.ru  Fri May 20 16:19:04 2011
+From: gbatalov at crystals.ru (Grigory Batalov)
+Date: Fri, 20 May 2011 18:19:04 +0400
+Subject: [fbsplash-users] How to get image to display on the screen?
+In-Reply-To: <BANLkTi=Vb3cz1r7M=LdqUOBsBzeag_+9hw@mail.gmail.com>
+References: <BANLkTi=Vb3cz1r7M=LdqUOBsBzeag_+9hw@mail.gmail.com>
+Message-ID: <20110520181904.203acdf4@cs-srv-ws171175.domain.local>
+
+On Fri, 20 May 2011 09:03:56 -0400
+Stephen Saputo <s.c.saputo at gmail.com> wrote:
+
+> No, I have not patched the kernel.  What is the patch and where can I find
+> it?  We're using the 2.6.29.6 kernel.
+
+http://dev.gentoo.org/~spock/projects/fbcondecor/
+
+Actually, I'm not sure if you have to apply the patch,
+but I've never tried fbsplash without it.
+
+It aims to show the splash as early as possible - just after
+the kernel has started.
+
+> > > I was just wondering what needs to happen in order for a theme to be
+> > > displayed on the screen?
+> >
+> > BTW, have you patched the kernel?
+> >
+> > > Also, can fbsplash work on embedded devices?
+> >
+> > It works with a framebuffer that most embedded devices have, I guess.
+
+

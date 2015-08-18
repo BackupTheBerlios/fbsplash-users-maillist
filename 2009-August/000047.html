@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] Fbsplash on debian lenny
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20Fbsplash%20on%20debian%20lenny&In-Reply-To=%3CBAY141-W8AB37CE5511E47AA77E649D0E0%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000048.html">
+   <LINK REL="Next"  HREF="000050.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] Fbsplash on debian lenny</H1>
+    <B>stian moltubakk</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20Fbsplash%20on%20debian%20lenny&In-Reply-To=%3CBAY141-W8AB37CE5511E47AA77E649D0E0%40phx.gbl%3E"
+       TITLE="[fbsplash-users] Fbsplash on debian lenny">stian_moltubakk at hotmail.com
+       </A><BR>
+    <I>Sun Aug  2 05:55:57 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000048.html">[fbsplash-users] Fbsplash on debian lenny
+</A></li>
+        <LI>Next message: <A HREF="000050.html">[fbsplash-users] Fbsplash on debian lenny
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#47">[ date ]</a>
+              <a href="thread.html#47">[ thread ]</a>
+              <a href="subject.html#47">[ subject ]</a>
+              <a href="author.html#47">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+changing from  CONSOLE=/dev/tty1 into CONSOLE=tty1, tty0,  did just give me a error mesage. The splash came up for abour 0,5 sec and then it was gone and instead I was told my console setting vas not correct(try CONSOLE=tty1 or CONSOLE=/dev/tty1 instead)
+Booting with splash=silent,theme:monster,kdgraphics did not have any effect that I could see. Should I leave it in the kernel line?
+
+
+&gt;<i> Date: Sat, 1 Aug 2009 21:32:09 +0200
+</I>&gt;<i> Subject: Re: [fbsplash-users] Fbsplash on debian lenny
+</I>&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">michalj at gmail.com</A>
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">stian_moltubakk at hotmail.com</A>
+</I>&gt;<i> CC: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">fbsplash-users at lists.berlios.de</A>
+</I>&gt;<i> 
+</I>&gt;<i> On Sat, Aug 1, 2009 at 17:39, stian
+</I>&gt;<i> moltubakk&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">stian_moltubakk at hotmail.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; I asume you mean the line in grub. /boot/vmlinuz-2.6.30 root=/dev/sda3 ro
+</I>&gt;<i> &gt; vga=792 splash=silent,theme:monster quiet CONSOLE=/dev/tty1
+</I>&gt;<i> &gt; Would use uvesafb be bether than vga?
+</I>&gt;<i> 
+</I>&gt;<i> No, that should have no impact on how the splash behaves.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; I tryed it, but the module won't load and I did not find the module on my
+</I>&gt;<i> &gt; system where it was suposed to be.
+</I>&gt;<i> &gt; The flashing is gone, was a config file that neaded editing.
+</I>&gt;<i> &gt; The bleedtrough is still there :(
+</I>&gt;<i> 
+</I>&gt;<i> Try using console=tty1 instead of CONSOLE=/dev/tty1, and if that
+</I>&gt;<i> doesn't help, use splash=silent,theme:monster,kdgraphics.  Let us know
+</I>&gt;<i> whether this changes anything.
+</I>&gt;<i> 
+</I>&gt;<i> Best regards,
+</I>&gt;<i> -- 
+</I>&gt;<i> Michal Januszewski, Gentoo Linux Developer
+</I>&gt;<i> <A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+</I>
+_________________________________________________________________
+Show them the way! Add maps and directions to your party invites. 
+<A HREF="http://www.microsoft.com/windows/windowslive/products/events.aspx">http://www.microsoft.com/windows/windowslive/products/events.aspx</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090802/1e3f4108/attachment.html">https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090802/1e3f4108/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000048.html">[fbsplash-users] Fbsplash on debian lenny
+</A></li>
+	<LI>Next message: <A HREF="000050.html">[fbsplash-users] Fbsplash on debian lenny
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#47">[ date ]</a>
+              <a href="thread.html#47">[ thread ]</a>
+              <a href="subject.html#47">[ subject ]</a>
+              <a href="author.html#47">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

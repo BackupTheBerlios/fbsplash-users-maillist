@@ -1,0 +1,227 @@
+From michalj at gmail.com  Wed Sep  3 13:51:39 2008
+From: michalj at gmail.com (Michal Januszewski)
+Date: Wed, 3 Sep 2008 13:51:39 +0200
+Subject: [fbsplash-users] fbsplashd.static segfaults on hardened system
+In-Reply-To: <48BBCD55.4080203@lavabit.com>
+References: <48B727F6.5060609@lavabit.com>
+	<20080829224740.GA32030@spock.one.pl> <48BBCD55.4080203@lavabit.com>
+Message-ID: <5d9b736f0809030451i1fbbe21ctcacc26ec6d3ae90c@mail.gmail.com>
+
+Hi,
+
+On Mon, Sep 1, 2008 at 13:09, lurker <lurker at lavabit.com> wrote:
+
+> I tried both and it simply seems like it's the statically linked version
+> that segfaults during "set event dev". The dynamically linked version
+> works perfectly.
+>
+> Using the dynamically linked version will do for all my purposes (I
+> start splash after the filsystem has been mounted), but if you want to
+> dig in this further I'm happy to supply you with more details. It should
+> be noted, though, that I have quite limited debugging facilities on that
+> system (no debugging symbols, no gdb, although I could temporarily add
+> these if necessary, I guess).
+
+I doubt we'll need debugging symbols from anything outside of
+splashutils, so that will most likely not be an issue.  I think it would
+be very helpful if you could compile splashutils with the debugging
+symbols and run it under gdb to get a backtrace.
+
+Also, please see whether you by any chance have the /usr/lib/nptl directory
+on that system.  If you do, just get back to me without doing the gdb stuff,
+as this might be a regression, which I know how to fix :)
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From michalj at gmail.com  Wed Sep  3 23:54:08 2008
+From: michalj at gmail.com (Michal Januszewski)
+Date: Wed, 3 Sep 2008 23:54:08 +0200
+Subject: [fbsplash-users] fbsplashd.static segfaults on hardened system
+In-Reply-To: <48BEAFA8.8040208@lavabit.com>
+References: <48B727F6.5060609@lavabit.com>
+	<20080829224740.GA32030@spock.one.pl> <48BBCD55.4080203@lavabit.com>
+	<5d9b736f0809030451i1fbbe21ctcacc26ec6d3ae90c@mail.gmail.com>
+	<48BEAFA8.8040208@lavabit.com>
+Message-ID: <5d9b736f0809031454ncd327f6lb871c0f6ebd7211@mail.gmail.com>
+
+Hi,
+
+Could you please keep fbsplash-users CC-ed?  I think what we discuss
+here could prove useful to other people in the future.
+
+> Sure. However, since gdb has problems with PIE symbols, PIE has to be
+> disabled, so the situation will be different...
+
+Well, if it starts to work after a setting from CFLAGS/LDFLAGS has been
+changed, then that would provide us some useful info as well.
+
+> Any way, since you're involved in the ebuild of splashutils, do you have
+> any suggestions on how I should modify it to:
+>
+> * remove my system wide -fomit-frame-pointer CFLAG
+> * add -g to CFLAGs
+> * add -nopie to LDFLAGS
+
+How about simply running:
+
+FEATURES="nostrip" CFLAGS="-g" LDFLAGS="-nopie" emerge splashutils?
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From JeanDamienDurand at free.fr  Fri Sep 26 06:51:22 2008
+From: JeanDamienDurand at free.fr (Jean-Damien Durand)
+Date: Fri, 26 Sep 2008 06:51:22 +0200
+Subject: [fbsplash-users] debian powerpc packages
+Message-ID: <200809260651.22743.JeanDamienDurand@free.fr>
+
+Please note that powerpc debian packages has been uploaded to berlios.
+
+More info at:
+http://fbsplash.berlios.de/wiki/doku.php?id=docs:distros:debian
+
+Big thanks to ekl <eklektist at gmail.com> for providing these packages.
+
+Cheers, JD.
+
+
+From mark.bl at gmail.com  Mon Sep 29 20:56:51 2008
+From: mark.bl at gmail.com (Mark Bloch)
+Date: Mon, 29 Sep 2008 21:56:51 +0300
+Subject: [fbsplash-users] I keep getting: fbcon_decor error.
+Message-ID: <933fbf3c0809291156p3730f219oc22bc09e3b96e677@mail.gmail.com>
+
+I think I've done everything that's needed.
+CONFIG_FB_UVESA=y
+CONFIG_CONNECTOR=y
+CONFIG_INITRAMFS_SOURCE="/usr/share/v86d/initramfs"
+CONFIG_FRAMEBUFFER_CONSOLE=y
+
+*cat .config | grep FRAMEBUFFER_CONSOLE
+CONFIG_FRAMEBUFFER_CONSOLE=y
+# CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY is not set
+# CONFIG_FRAMEBUFFER_CONSOLE_ROTATION is not set
+
+is it right?
+
+/etc/init.d/fbcondecor status
+ * Caching service dependencies ...                                       [
+ok ]
+ * status:  started
+
+and I've added to grub.conf:
+ video=uvesafb:1024x768-16,mtrr:3,ywrap
+splash=verbose,fadein,theme:emergence quiet CONSOLE=/dev/tty1
+
+but I still can't get any splash image.
+when I do: splash_manager --theme=gentoo --cmd=set --tty=2
+I've getting:
+"
+ Failed to open the fbcon_decor control device.
+Failed to open the fbcon_decor control device.
+"
+
+can anyone help me?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20080929/6d52c676/attachment.html>
+
+From michalj at gmail.com  Mon Sep 29 21:00:51 2008
+From: michalj at gmail.com (Michal Januszewski)
+Date: Mon, 29 Sep 2008 21:00:51 +0200
+Subject: [fbsplash-users] I keep getting: fbcon_decor error.
+In-Reply-To: <933fbf3c0809291156p3730f219oc22bc09e3b96e677@mail.gmail.com>
+References: <933fbf3c0809291156p3730f219oc22bc09e3b96e677@mail.gmail.com>
+Message-ID: <5d9b736f0809291200y502c571bn36ceeeabc1918273@mail.gmail.com>
+
+On Mon, Sep 29, 2008 at 20:56, Mark Bloch <mark.bl at gmail.com> wrote:
+
+> I think I've done everything that's needed.
+> CONFIG_FB_UVESA=y
+> CONFIG_CONNECTOR=y
+> CONFIG_INITRAMFS_SOURCE="/usr/share/v86d/initramfs"
+> CONFIG_FRAMEBUFFER_CONSOLE=y
+>
+> *cat .config | grep FRAMEBUFFER_CONSOLE
+> CONFIG_FRAMEBUFFER_CONSOLE=y
+> # CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY is not set
+> # CONFIG_FRAMEBUFFER_CONSOLE_ROTATION is not set
+
+The settings are correct, but do you have framebuffer
+console decorations enabled as well?
+(that's CONFIG_FB_CON_DECOR)
+
+> I've getting:
+> "
+>  Failed to open the fbcon_decor control device.
+> Failed to open the fbcon_decor control device.
+> "
+
+Looks like you're missing /dev/fbcon_decor.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From mark.bl at gmail.com  Mon Sep 29 21:39:57 2008
+From: mark.bl at gmail.com (Mark Bloch)
+Date: Mon, 29 Sep 2008 22:39:57 +0300
+Subject: [fbsplash-users] I keep getting: fbcon_decor error.
+In-Reply-To: <5d9b736f0809291200y502c571bn36ceeeabc1918273@mail.gmail.com>
+References: <933fbf3c0809291156p3730f219oc22bc09e3b96e677@mail.gmail.com>
+	<5d9b736f0809291200y502c571bn36ceeeabc1918273@mail.gmail.com>
+Message-ID: <933fbf3c0809291239r525b505ap95aefafed676f73@mail.gmail.com>
+
+Thx, that did the trick.
+
+Don't believe I forgot it :\
+
+On Mon, Sep 29, 2008 at 10:00 PM, Michal Januszewski <michalj at gmail.com>wrote:
+
+> On Mon, Sep 29, 2008 at 20:56, Mark Bloch <mark.bl at gmail.com> wrote:
+>
+> > I think I've done everything that's needed.
+> > CONFIG_FB_UVESA=y
+> > CONFIG_CONNECTOR=y
+> > CONFIG_INITRAMFS_SOURCE="/usr/share/v86d/initramfs"
+> > CONFIG_FRAMEBUFFER_CONSOLE=y
+> >
+> > *cat .config | grep FRAMEBUFFER_CONSOLE
+> > CONFIG_FRAMEBUFFER_CONSOLE=y
+> > # CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY is not set
+> > # CONFIG_FRAMEBUFFER_CONSOLE_ROTATION is not set
+>
+> The settings are correct, but do you have framebuffer
+> console decorations enabled as well?
+> (that's CONFIG_FB_CON_DECOR)
+>
+> > I've getting:
+> > "
+> >  Failed to open the fbcon_decor control device.
+> > Failed to open the fbcon_decor control device.
+> > "
+>
+> Looks like you're missing /dev/fbcon_decor.
+>
+> Best regards,
+> --
+> Michal Januszewski, Gentoo Linux Developer
+> http://people.gentoo.org/spock
+> _______________________________________________
+> fbsplash-users mailing list
+> fbsplash-users at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/fbsplash-users
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20080929/ebf87a65/attachment.html>
+

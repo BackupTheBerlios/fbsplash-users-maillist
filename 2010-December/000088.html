@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] Progress bar stuck
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2010-December/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20Progress%20bar%20stuck&In-Reply-To=%3CAANLkTikOhsX7BtKjkmwhjFDrGmfcDCZeHa3Qv0zsz1QC%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000087.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] Progress bar stuck</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20Progress%20bar%20stuck&In-Reply-To=%3CAANLkTikOhsX7BtKjkmwhjFDrGmfcDCZeHa3Qv0zsz1QC%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] Progress bar stuck">michalj at gmail.com
+       </A><BR>
+    <I>Wed Dec 15 01:13:57 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000087.html">[fbsplash-users] Progress bar stuck
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#88">[ date ]</a>
+              <a href="thread.html#88">[ thread ]</a>
+              <a href="subject.html#88">[ subject ]</a>
+              <a href="author.html#88">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>You can use the 'msglog' option of the 'text' directive in the config
+file to display a simple message log containing names of the
+initscripts being stated, for example:
+
+  &lt;textbox&gt;
+     text silent dejavu.ttf 12 100 100 #ffffff &quot;System messages:&quot;
+     text silent courier.ttf 10 100 120 #eeeeee msglog
+  &lt;/textbox&gt;
+
+You can find the full documentation in docs/theme_format in the
+splashutils tarball.  Please note that if you decide to place the text
+msglog directive inside a textbox, you might need to press F3 to
+actually see it during boot.
+
+Michal
+
+On Tue, Dec 14, 2010 at 13:57, C J &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">ccs_dba at hotmail.com</A>&gt; wrote:
+
+&gt;<i> During my debugging I noticed that the list of services to start
+</I>&gt;<i> (/lib/splash/cache/svcs_start) was different that the progress shown after
+</I>&gt;<i> boot had completed and X had started (/lib/splash/cache/progress).&#160; I found
+</I>&gt;<i> that in my local (/etc/conf.d/local.start) script the last item was
+</I>&gt;<i> returning a bad status.&#160; I fixed this and things started working.&#160; I also
+</I>&gt;<i> added the SPLASH_XSERVICE variable to /etc/conf.d/splash, but I didn't see
+</I>&gt;<i> any difference after it started to work.
+</I>&gt;<i>
+</I>&gt;<i> Another question however, is there a variable I can use to show what is
+</I>&gt;<i> currently in progress during startup?&#160; I am currently displaying the boot
+</I>&gt;<i> percentage (Booting the system $progress%) but would like to show the script
+</I>&gt;<i> that is current also.
+</I>&gt;<i>
+</I>&gt;<i> Thanks for the help,
+</I>&gt;<i>
+</I>&gt;<i> -CJ
+</I>&gt;<i>
+</I>&gt;&gt;<i> Date: Mon, 13 Dec 2010 23:03:36 +0100
+</I>&gt;&gt;<i> Subject: Re: [fbsplash-users] Progress bar stuck
+</I>&gt;&gt;<i> From: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">michalj at gmail.com</A>
+</I>&gt;&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">ccs_dba at hotmail.com</A>
+</I>&gt;&gt;<i> CC: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">fbsplash-users at lists.berlios.de</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Yes, please do. It shouldn't break anything and might actually fix
+</I>&gt;&gt;<i> some of the problems you are experiencing. The fbsplash subsystem is
+</I>&gt;&gt;<i> designed around the assumption that it &quot;knows&quot; which initscript starts
+</I>&gt;&gt;<i> X.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Michal
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Mon, Dec 13, 2010 at 23:00, C J &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">ccs_dba at hotmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i> &gt; No I have not done this...&#160; X is starting, should I still do this?&#160; I am
+</I>&gt;&gt;<i> &gt; currently starting X with an initscript at the end of default (just
+</I>&gt;&gt;<i> &gt; before
+</I>&gt;&gt;<i> &gt; local).&#160; My initscripts are pretty standard, I haven't altered the
+</I>&gt;&gt;<i> &gt; sysvinit
+</I>&gt;&gt;<i> &gt; package or baselayout (1).
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; -CJ
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;&gt; Date: Mon, 13 Dec 2010 20:44:59 +0100
+</I>&gt;&gt;<i> &gt;&gt; Subject: Re: [fbsplash-users] Progress bar stuck
+</I>&gt;&gt;<i> &gt;&gt; From: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">michalj at gmail.com</A>
+</I>&gt;&gt;<i> &gt;&gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">ccs_dba at hotmail.com</A>
+</I>&gt;&gt;<i> &gt;&gt; CC: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">fbsplash-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;<i> &gt;&gt; Hi,
+</I>&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;<i> &gt;&gt; On Tue, Dec 7, 2010 at 01:12, C J &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">ccs_dba at hotmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i> &gt;&gt; &gt; I am using a standard gentoo install as a base to extract files from
+</I>&gt;&gt;<i> &gt;&gt; &gt; to
+</I>&gt;&gt;<i> &gt;&gt; &gt; create a custom small Linux distro.&#160; I think I am copying just about
+</I>&gt;&gt;<i> &gt;&gt; &gt; everything from the baselayout, sysvinit, important libraries, and
+</I>&gt;&gt;<i> &gt;&gt; &gt; splashutils packages (no man pages or pkg detail files)...&#160; The
+</I>&gt;&gt;<i> &gt;&gt; &gt; startup
+</I>&gt;&gt;<i> &gt;&gt; &gt; splash, with progress bar, appears to work ok, although I don't see
+</I>&gt;&gt;<i> &gt;&gt; &gt; it
+</I>&gt;&gt;<i> &gt;&gt; &gt; get
+</I>&gt;&gt;<i> &gt;&gt; &gt; to 100% before it goes to verbose mode..&#160; However, when shutting down
+</I>&gt;&gt;<i> &gt;&gt; &gt; or
+</I>&gt;&gt;<i> &gt;&gt; &gt; rebooting, the splash screen (with progress bar) displays the startup
+</I>&gt;&gt;<i> &gt;&gt; &gt; progress bar at 95% and does not change.&#160; The last step in the init
+</I>&gt;&gt;<i> &gt;&gt; &gt; startup
+</I>&gt;&gt;<i> &gt;&gt; &gt; process is to launch X via startx for a default user.&#160; If I comment
+</I>&gt;&gt;<i> &gt;&gt; &gt; this
+</I>&gt;&gt;<i> &gt;&gt; &gt; line I see the startup and shutdown progress bar work properly, but
+</I>&gt;&gt;<i> &gt;&gt; &gt; if I
+</I>&gt;&gt;<i> &gt;&gt; &gt; allow to go directly to X then the progress bar doesn't work..
+</I>&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;<i> &gt;&gt; Are you launching this using a custom-made initscript? If this is a
+</I>&gt;&gt;<i> &gt;&gt; custom initscript, have you set the SPLASH_XSERVICE variable in
+</I>&gt;&gt;<i> &gt;&gt; /etc/conf.d/splash?
+</I>&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;<i> &gt;&gt; Best regards,
+</I>&gt;&gt;<i> &gt;&gt; --
+</I>&gt;&gt;<i> &gt;&gt; Michal Januszewski
+</I>&gt;&gt;<i> &gt;&gt; <A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Michal Januszewski
+</I>&gt;&gt;<i> <A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+Michal Januszewski
+<A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000087.html">[fbsplash-users] Progress bar stuck
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#88">[ date ]</a>
+              <a href="thread.html#88">[ thread ]</a>
+              <a href="subject.html#88">[ subject ]</a>
+              <a href="author.html#88">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

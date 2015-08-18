@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] custom initrd splash
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20custom%20initrd%20splash&In-Reply-To=%3C5d9b736f0903231259s12a9692cob20f04282b42eea5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000036.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] custom initrd splash</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20custom%20initrd%20splash&In-Reply-To=%3C5d9b736f0903231259s12a9692cob20f04282b42eea5%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] custom initrd splash">michalj at gmail.com
+       </A><BR>
+    <I>Mon Mar 23 20:59:10 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000036.html">[fbsplash-users] custom initrd splash
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#37">[ date ]</a>
+              <a href="thread.html#37">[ thread ]</a>
+              <a href="subject.html#37">[ subject ]</a>
+              <a href="author.html#37">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Mar 17, 2009 at 21:12, John Stile &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">john at stilen.com</A>&gt; wrote:
+
+&gt;<i> I would like to start the system in silent splash mode early in the
+</I>&gt;<i> boot, and &#160;switch to verbose just before launching the curses install
+</I>&gt;<i> menu.
+</I>&gt;<i>
+</I>&gt;<i> I am having difficulty finding the right command to switch between
+</I>&gt;<i> verbose and silent and back.
+</I>
+If you have the splash daemon running in the background (which
+is generally the case after you have finished booting off an
+initrd and are running from the rootfs), you can use the
+splash_silent() and splash_verbose() functions from
+/sbin/splash-functions.sh.
+
+If you do not have a splash daemon running, the process is slightly
+more complicated.  You will start in silent mode, so there is no
+need to activate the silent splash screen manually from the script.
+Fbcondecor should then also be automatically activated on the
+first tty.  If that doesn't work or if you want to to use a different
+theme on the 1st tty, you can also run:
+
+if fbcondecor_supported ; then
+   fbcondecor_set_theme simsplash 1
+fi
+
+Then, if you want to switch to verbose mode, you can just
+execute `chvt 1`.  If you want to switch to the silent mode
+afterwards, run `fbcondecor_helper 2 repaint`.
+
+You might also want to have a look at gentoo/initrd.splash
+(in the fbsplash git repo) for some sample fbsplash/fbcondecor
+code that is designed to be run from an initrd.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+<A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000036.html">[fbsplash-users] custom initrd splash
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#37">[ date ]</a>
+              <a href="thread.html#37">[ thread ]</a>
+              <a href="subject.html#37">[ subject ]</a>
+              <a href="author.html#37">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

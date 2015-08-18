@@ -1,0 +1,49 @@
+From bindasbeast at gmail.com  Mon Jul 11 18:36:40 2011
+From: bindasbeast at gmail.com (DarkKnight BrightWarrior)
+Date: Mon, 11 Jul 2011 22:06:40 +0530
+Subject: [fbsplash-users] fbsplash is not working with static redeon module
+Message-ID: <CAKKQ_KdajQZkevhGFQ1j7c89CZg+eVHjH887Qyx4ckeR=BQFuQ@mail.gmail.com>
+
+Hi!
+
+I am using fbslash to display spash screen while booting.
+I am using kernel 2.6.35. I can display splash screen and progress
+animation.
+For some reasons recently I rebuild the kernel changing radeon driver from
+module to builtin.
+>From then fbsplash is not working, no display of splash screen or progress
+bar.
+
+What could be the problem? Do we need to have radeon driver as module only?
+
+
+thanks
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110711/4cb8c533/attachment.html>
+
+From bindasbeast at gmail.com  Mon Jul 18 13:28:49 2011
+From: bindasbeast at gmail.com (DarkKnight BrightWarrior)
+Date: Mon, 18 Jul 2011 16:58:49 +0530
+Subject: [fbsplash-users] fblsplash increasing bootup time
+Message-ID: <CAKKQ_Kdpn7mzQaS3cWJdM7wfVag8PoK9Jp_CRnvqzadmCL4o-g@mail.gmail.com>
+
+Hello,
+I am using fbsplashd from my init like following
+fbsplashd --theme=default --pidfile=//lib/splash/cache/daemon.pid
+--type=bootup > /dev/null 2>&1
+echo "set tty silent tty1" > //lib/splash/cache/.splash
+echo "set mode silent" > //lib/splash/cache/.splash
+echo "paint" > //lib/splash/cache/.splash
+echo "set autoverbose 0" > //lib/splash/cache/.splash
+/sbin/fbcondecor_ctl.static -c on 2>/dev/null
+fbsplash is working fine but it causes bootup time to be increased by 2
+seconds is there anything i am missing or doing wrong ?
+
+
+thanks
+praveen
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110718/12693601/attachment.html>
+

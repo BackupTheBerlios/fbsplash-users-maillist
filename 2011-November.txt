@@ -1,0 +1,16 @@
+From michalj at gmail.com  Tue Nov 15 02:11:59 2011
+From: michalj at gmail.com (Michal Januszewski)
+Date: Tue, 15 Nov 2011 02:11:59 +0100
+Subject: [fbsplash-users] Mailing list migration
+Message-ID: <CAMU5vjgCsTQFoyhKSGXc2kFo3Q9WNLCFCaSCXKHXz4=Ki+39cA@mail.gmail.com>
+
+Hi all,
+
+Due to the Berlios turndown which is scheduled for the end of the
+year, we are migrating this list to Google Groups.  You can subscribe
+at http://groups.google.com/group/fbsplash-users
+Thanks,--
+Michal Januszewski
+http://people.gentoo.org/spock
+
+

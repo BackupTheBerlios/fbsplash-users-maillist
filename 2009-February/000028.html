@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] switching to silent splash from init script
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20switching%20to%20silent%20splash%20from%20init%20script&In-Reply-To=%3C5d9b736f0902280227u3ae80452y667a529c33a51044%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000027.html">
+   <LINK REL="Next"  HREF="000029.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] switching to silent splash from init script</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20switching%20to%20silent%20splash%20from%20init%20script&In-Reply-To=%3C5d9b736f0902280227u3ae80452y667a529c33a51044%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] switching to silent splash from init script">michalj at gmail.com
+       </A><BR>
+    <I>Sat Feb 28 11:27:13 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000027.html">[fbsplash-users] switching to silent splash from init script
+</A></li>
+        <LI>Next message: <A HREF="000029.html">[fbsplash-users] switching to silent splash from init script
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#28">[ date ]</a>
+              <a href="thread.html#28">[ thread ]</a>
+              <a href="subject.html#28">[ subject ]</a>
+              <a href="author.html#28">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Feb 27, 2009 at 21:11, Bartek &#262;wik&#322;owski &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">paczesiowa at dw.pl</A>&gt; wrote:
+
+Hi,
+
+&gt;<i> [..]
+</I>&gt;<i> how to display splash screen again. I tried chvt 2 and 16, but it results
+</I>&gt;<i> in switch to black console, shortly followed by switch back to first console,
+</I>&gt;<i> where I can see boot messages, until something from gentoo's init kicks in
+</I>&gt;<i> and I get splash screen back. So, how do I switch to silent splash from
+</I>&gt;<i> initramfs?
+</I>
+You need to directly call fbcondecor_helper from your initscript:
+
+/sbin/fbcondecor_helper 2 repaint
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+<A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000027.html">[fbsplash-users] switching to silent splash from init script
+</A></li>
+	<LI>Next message: <A HREF="000029.html">[fbsplash-users] switching to silent splash from init script
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#28">[ date ]</a>
+              <a href="thread.html#28">[ thread ]</a>
+              <a href="subject.html#28">[ subject ]</a>
+              <a href="author.html#28">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

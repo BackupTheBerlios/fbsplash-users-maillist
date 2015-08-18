@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] fbsplash hard lockups
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplash%20hard%20lockups&In-Reply-To=%3C20090807153357.6e126c06%40czap.spectr.lan%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000067.html">
+   <LINK REL="Next"  HREF="000056.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] fbsplash hard lockups</H1>
+    <B>Andrew Zabolotny</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplash%20hard%20lockups&In-Reply-To=%3C20090807153357.6e126c06%40czap.spectr.lan%3E"
+       TITLE="[fbsplash-users] fbsplash hard lockups">zap at cobra.ru
+       </A><BR>
+    <I>Fri Aug  7 13:33:57 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000067.html">[fbsplash-users] Fbsplash on debian lenny
+</A></li>
+        <LI>Next message: <A HREF="000056.html">[fbsplash-users] fbsplash hard lockups
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#55">[ date ]</a>
+              <a href="thread.html#55">[ thread ]</a>
+              <a href="subject.html#55">[ subject ]</a>
+              <a href="author.html#55">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello!
+
+I'm trying to use fbcondecor &amp; fbsplash in a custom specialized linux
+environment here. Earlier we were using kernel 2.6.26 and it used to
+work okay. Now I'm trying to upgrade kernel to 2.6.30.4 and there are
+some serious problems.
+
+I'm applied the patch fbcondecor-0.9.6-2.6.29.2.patch and compiled the
+splashutils-lite-1.5.4.3.tar.bz2 tools. For debugging I'm using a small
+qemu linux image with a emulated serial console. Now at the start of
+initramfs I'm launching /bin/sh and have the opportunity to play with
+fbcon options. Here's one of the sequences that lead to a hard lockup:
+
+~ # fbsplashd.static -t main
+~ # splash_util -m s -c setmode # the screen switches to splash here
+~ # fbcondecor_ctl.static -t main -c setcfg
+~ # fbcondecor_ctl.static -t main -c setpic
+~ # fbcondecor_ctl.static -t main -c on # no visible changes, as
+expected
+~ # splash_util -m v -c setmode
+~ # 
+
+After last command the system locks up, but not instantly (note it
+even succeeded to display the next prompt), I don't get any kernel
+crashes but I can't enter anything in any console and I have to reset.
+
+If I rename /sbin/fbcondecor_helper to /sbin/fbcondecor_helper_ it
+switches to a black screen instead. After that if I run the helper
+manually:
+
+~ # /sbin/fbcondecor_helper_ 2 modechange 0 0 main
+
+the console gets the correct background. One thing to note here is that
+I linked the helper against glibc, not klibc (we have glibc anyway on
+initramfs, so there's little point in having yet another libc).
+
+What I can do to debug the problem further?
+
+-- 
+Greetings,
+   Andrew
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090807/8108bb7f/attachment.pgp">https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090807/8108bb7f/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000067.html">[fbsplash-users] Fbsplash on debian lenny
+</A></li>
+	<LI>Next message: <A HREF="000056.html">[fbsplash-users] fbsplash hard lockups
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#55">[ date ]</a>
+              <a href="thread.html#55">[ thread ]</a>
+              <a href="subject.html#55">[ subject ]</a>
+              <a href="author.html#55">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

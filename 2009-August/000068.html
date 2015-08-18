@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] fbsplash hard lockups
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplash%20hard%20lockups&In-Reply-To=%3C5d9b736f0908171637h63e33e2ag348353da41f8fdc8%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000060.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] fbsplash hard lockups</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplash%20hard%20lockups&In-Reply-To=%3C5d9b736f0908171637h63e33e2ag348353da41f8fdc8%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] fbsplash hard lockups">michalj at gmail.com
+       </A><BR>
+    <I>Tue Aug 18 01:37:08 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000060.html">[fbsplash-users] fbsplash hard lockups
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#68">[ date ]</a>
+              <a href="thread.html#68">[ thread ]</a>
+              <a href="subject.html#68">[ subject ]</a>
+              <a href="author.html#68">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>2009/8/10 Andrew Zabolotny &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">zap at cobra.ru</A>&gt;:
+
+&gt;<i> I've enabled networking and entered via telnetd. After console lockup
+</I>&gt;<i> I'm still able to use the telnet console, and in top I can see these
+</I>&gt;<i> two processes:
+</I>&gt;<i>
+</I>&gt;<i> 902 &#160; &#160; 1 administ S &#160; &#160;30840 &#160;49% &#160; 0% fbsplashd.static -t main
+</I>&gt;<i> 912 &#160; 911 administ D &#160; &#160; 2276 &#160; 4% &#160; 0% /sbin/fbcondecor_helper 2
+</I>&gt;<i> &#160;modechange 0 0 main
+</I>&gt;<i>
+</I>&gt;<i> Both are locked up, I can't even kill -9 them.
+</I>
+I released a new fbcondecor patch a few days ago.  It fixes a hang in
+the modechange event -- you might want to try it to see whether this
+changes anything.
+
+&gt;&gt;<i> - try it with klibc anyway. &#160;This is the most tested configuration and
+</I>&gt;&gt;<i> if it works with klibc and doesn't with glibc, then at least we know
+</I>&gt;&gt;<i> this bug is related to the C library used.
+</I>&gt;<i>
+</I>&gt;<i> Indeed, compiling with klibc fixes the hang. Very strange, will inspect
+</I>&gt;<i> this further. Wouldn't want to have two libjpegs, two libpngs, two
+</I>&gt;<i> libfreetypes and two libc's in my small filesystem.
+</I>
+Right.  Well, in that case the updated fbcondecor patch is probably
+irrelevant (but you might want to try it anyway..).  If you are able
+to a get a strace or some additional debugging info about the hanging
+fbcondecor_helper, that should be helpful.  For testing, you might
+want to try to activate fbcondecor after the system has finished
+booting instead of from the initramfs image.  That should give you
+more control over what's happening.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+<A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000060.html">[fbsplash-users] fbsplash hard lockups
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#68">[ date ]</a>
+              <a href="thread.html#68">[ thread ]</a>
+              <a href="subject.html#68">[ subject ]</a>
+              <a href="author.html#68">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] switching to silent inside initrd stopped working
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-September/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20switching%20to%20silent%20inside%20initrd%20stopped%0A%20working&In-Reply-To=%3C1254276025.16974.352.camel%40genx.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000073.html">
+   <LINK REL="Next"  HREF="000075.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] switching to silent inside initrd stopped working</H1>
+    <B>John Stile</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20switching%20to%20silent%20inside%20initrd%20stopped%0A%20working&In-Reply-To=%3C1254276025.16974.352.camel%40genx.localdomain%3E"
+       TITLE="[fbsplash-users] switching to silent inside initrd stopped working">john at stilen.com
+       </A><BR>
+    <I>Wed Sep 30 04:00:25 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000073.html">[fbsplash-users] switching to silent inside initrd stopped	working
+</A></li>
+        <LI>Next message: <A HREF="000075.html">[fbsplash-users] switching to silent inside initrd stopped	working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#74">[ date ]</a>
+              <a href="thread.html#74">[ thread ]</a>
+              <a href="subject.html#74">[ subject ]</a>
+              <a href="author.html#74">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I don't think I'm out of the woods yet.
+
+I still see text from linuxrc errors and the beginning of init, which
+used to be hidden by the silent splash.
+
+I had to change the splash commands in linuxrc to make splash work at
+all, leaving me unsure if I'm doing this correctly for
+media-gfx/splashutils-1.5.4.3
+
+Is there a good reference or script for what I need in my custom
+linuxrc, to smoothly get from grub though init without seeing any text?
+
+This is my /boot/grub/menu.lst:
+hiddenmenu
+default 0
+prompt  0
+timeout 0
+serial --unit=1 --speed=9600 --word=8 --parity=no --stop=1
+terminal serial
+title MyGentoo Kernel: linux-2.6.30-gentoo-r6
+root (hd0,0)
+kernel /boot/kernel-genkernel-x86-2.6.30-gentoo-r6 ramdisk_size=33000 root=/dev/ram0 rw init=/linuxrc cdroot CONSOLE=/dev/tty1 console=ttyS1,9600 quiet video=i810fb:vram:4,xres:1024,yres:768,bpp:24,hsync1:30,hsync2:81,vsync1:56,vsync2:76,accel splash=silent,kdgraphics,theme:my_splash block2mtd.block2mtd=/dev/hdc3
+initrd /boot/initrd
+
+
+This is what I now have in linuxrc now:
+. /sbin/splash-functions.sh
+splash_setup
+fbcondecor_supported
+fbcondecor_helper
+fbcondecor_set_theme my_splash
+splash_comm_send &quot;set mode silent&quot;
+
+
+This is what did work before my system upgrade, but doesn't work now:
+. /sbin/splash-functions.sh
+splash_setup
+BOOT_MSG=&quot;$(splash_get_boot_message)&quot; ${spl_daemon} --theme=&quot;${SPLASH_THEME}&quot; --pidfile=&quot;${spl_pidfile}&quot; --type=${ttype} ${options}
+splash_comm_send &quot;set tty silent ${SPLASH_TTY}&quot;
+splash_comm_send &quot;Initializing system...&quot;
+splash_comm_send &quot;repaint&quot;
+
+
+On Sat, 2009-09-26 at 12:33 +0200, Michal Januszewski wrote:
+&gt;<i> Actually, I had a look at the code and it looks like the thing you're
+</I>&gt;<i> missing is /dev/tty0.
+</I>&gt;<i> 
+</I>&gt;<i> Best regards,
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000073.html">[fbsplash-users] switching to silent inside initrd stopped	working
+</A></li>
+	<LI>Next message: <A HREF="000075.html">[fbsplash-users] switching to silent inside initrd stopped	working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#74">[ date ]</a>
+              <a href="thread.html#74">[ thread ]</a>
+              <a href="subject.html#74">[ subject ]</a>
+              <a href="author.html#74">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

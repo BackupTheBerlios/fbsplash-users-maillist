@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] start-from-initrd and start-from-kernel
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20start-from-initrd%20and%20start-from-kernel&In-Reply-To=%3C5d9b736f0905090135m1c817f32n29d2a3306382ebfe%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000040.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] start-from-initrd and start-from-kernel</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20start-from-initrd%20and%20start-from-kernel&In-Reply-To=%3C5d9b736f0905090135m1c817f32n29d2a3306382ebfe%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] start-from-initrd and start-from-kernel">michalj at gmail.com
+       </A><BR>
+    <I>Sat May  9 10:35:36 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000040.html">[fbsplash-users] start-from-initrd and start-from-kernel
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#42">[ date ]</a>
+              <a href="thread.html#42">[ thread ]</a>
+              <a href="subject.html#42">[ subject ]</a>
+              <a href="author.html#42">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, May 8, 2009 at 13:55, Antonio L&#243;pez &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">alopez at fotonicalaser.com</A>&gt; wrote:
+
+Hi,
+
+&gt;<i> But start-from-initrd and start-from-kernel are not documented. Is there a
+</I>&gt;<i> place where I can find how to enable start-from-initrd or, even better,
+</I>&gt;<i> start-from-kernel?
+</I>&gt;<i>
+</I>&gt;<i> Could you tell me how to do it or how to find the information to do it?
+</I>
+You will probably want to use what is referred to as 'start-from-kernel'
+in the document you cited.  You will need to patch your kernel with
+the fbcondecor patch, use an initramfs generated with the
+splash_geninitramfs script and provide the correct splash settings
+on the kernel command line (e.g. splash=silent,fadein,theme:foobar
+quiet console=tty1).
+
+More details about this can be found in docs/early_bootup in the
+splashutils tarball.  The distro-specific documentation on the
+fbsplash website could also prove to be helpful
+(<A HREF="http://fbsplash.berlios.de/wiki/doku.php?id=docs:distros">http://fbsplash.berlios.de/wiki/doku.php?id=docs:distros</A>).
+
+Hope that helps,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+<A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000040.html">[fbsplash-users] start-from-initrd and start-from-kernel
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#42">[ date ]</a>
+              <a href="thread.html#42">[ thread ]</a>
+              <a href="subject.html#42">[ subject ]</a>
+              <a href="author.html#42">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

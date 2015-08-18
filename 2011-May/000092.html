@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] How can I get fbsplash to work on my embedded	device
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2011-May/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20How%20can%20I%20get%20fbsplash%20to%20work%20on%20my%20embedded%0A%09device&In-Reply-To=%3C3C994065816E2244A1939B249B35E8AD01725AD0%40mail.somaneticscorp.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000090.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] How can I get fbsplash to work on my embedded	device</H1>
+    <B>Steve Saputo</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20How%20can%20I%20get%20fbsplash%20to%20work%20on%20my%20embedded%0A%09device&In-Reply-To=%3C3C994065816E2244A1939B249B35E8AD01725AD0%40mail.somaneticscorp.local%3E"
+       TITLE="[fbsplash-users] How can I get fbsplash to work on my embedded	device">ssaputo at somanetics.com
+       </A><BR>
+    <I>Fri May 13 16:39:12 CEST 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000090.html">[fbsplash-users] How can I get fbsplash to work on my embedded	device
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#92">[ date ]</a>
+              <a href="thread.html#92">[ thread ]</a>
+              <a href="subject.html#92">[ subject ]</a>
+              <a href="author.html#92">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+ 
+
+I am working on a project to get our company logo to display on the
+screen during boot-up before our application starts up.  Our platform is
+an embedded Medical device running a custom configured version of Linux
+called X-Linux using the kernel 2.6.38.2.  It has a 128 MB DOM as well.
+Our development platform is running Ubuntu 10.04 on a Virtual Box that
+is run on Windows XP.
+
+ 
+
+I have compiled splashutils-1.5.4.3 on our Ubuntu platform and have
+copied some of the utilities to the right locations in the device's
+filesystem as well as created a theme.  I have also updated our
+bootloader (syslinux) configuration file to append the proper kernel
+parameters needed for fbsplash (e.g. splash=silent, theme:THEME,etc).  I
+am able to start the fbslash daemon from our /etc/init.d/rcS script and
+want to stop the daemon right before our application starts up.  It
+seems like the daemon is using 98% of the CPU cycles when it is running.
+How can this be?
+
+ 
+
+What is the command to stop the daemon from running?  Also, I'm not
+getting our logo to be displayed either-just a black screen.  What needs
+to be called in the initscript(s) to make this happen?
+
+ 
+
+Thank you for your time.
+
+ 
+
+----
+
+Stephen Saputo
+
+Software Engineer
+
+Somanetics Corporation
+
+2600 Troy Center Drive
+
+Troy, MI 48084
+
+desk: 248-244-1958
+
+cell: 586-838-0452
+
+main: 248-244-1400
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110513/5407fd41/attachment.html">https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110513/5407fd41/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000090.html">[fbsplash-users] How can I get fbsplash to work on my embedded	device
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#92">[ date ]</a>
+              <a href="thread.html#92">[ thread ]</a>
+              <a href="subject.html#92">[ subject ]</a>
+              <a href="author.html#92">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,57 @@
+From realnc at googlemail.com  Wed Dec 24 21:12:19 2008
+From: realnc at googlemail.com (Nikos Chantziaras)
+Date: Wed, 24 Dec 2008 22:12:19 +0200
+Subject: [fbsplash-users] Compilation failure on Gentoo
+Message-ID: <495297A3.5030004@gmail.com>
+
+I'm on Gentoo AMD64.  sys-apps/baselayout-2.0.0, sys-apps/openrc-0.4.1, 
+sys-fs/udev-135-r2.  Trying to emerge media-gfx/splashutils-1.5.4.3 
+results in:
+
+x86_64-pc-linux-gnu-gcc -march=core2 -O2 -fomit-frame-pointer -pipe -g 
+-Wall -I../core/objs -I../core -I../core/src -I../core/objs/src -fPIC -c 
+-o splash.o splash.c
+
+splash.c: In function ?splash_start?:
+splash.c:596: error: ?RC_LEVEL_REBOOT? undeclared (first use in this 
+function)
+splash.c:596: error: (Each undeclared identifier is reported only once
+splash.c:596: error: for each function it appears in.)
+splash.c: In function ?rc_plugin_hook?:
+splash.c:693: error: ?RC_LEVEL_REBOOT? undeclared (first use in this 
+function)
+splash.c:719: error: ?RC_SERVICE_COLDPLUGGED? undeclared (first use in 
+this function)
+
+I had splash working correctly with baselayout-1.12.11.1 but after 
+updating to baselayout 2, the splash stopped working (it appears, but 
+there's no progress indicator).  I think a recompile against baselayout 
+2 is necessary?  If I get it to actually build, that is :P
+
+
+From michalj at gmail.com  Mon Dec 29 00:53:04 2008
+From: michalj at gmail.com (Michal Januszewski)
+Date: Mon, 29 Dec 2008 00:53:04 +0100
+Subject: [fbsplash-users] Compilation failure on Gentoo
+In-Reply-To: <495297A3.5030004@gmail.com>
+References: <495297A3.5030004@gmail.com>
+Message-ID: <5d9b736f0812281553j5fd71ec2j7a69e5d332830737@mail.gmail.com>
+
+On Wed, Dec 24, 2008 at 21:12, Nikos Chantziaras <realnc at googlemail.com> wrote:
+
+Hi,
+
+> I'm on Gentoo AMD64.  sys-apps/baselayout-2.0.0, sys-apps/openrc-0.4.1,
+> sys-fs/udev-135-r2.  Trying to emerge media-gfx/splashutils-1.5.4.3
+> results in:
+> [..]
+
+Thanks for reporting the problem.  It is now fixed in Gentoo CVS
+and the fbsplash git repo.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+

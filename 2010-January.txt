@@ -1,0 +1,55 @@
+From john at stilen.com  Thu Jan 28 20:31:02 2010
+From: john at stilen.com (John Stile)
+Date: Thu, 28 Jan 2010 11:31:02 -0800
+Subject: [fbsplash-users] error from  splash-functions-bl1.sh on livecd
+Message-ID: <1264707062.26454.927.camel@genx.localdomain>
+
+In my home made gentoo livecd 
+(REF: http://forums.gentoo.org/viewtopic.php?t=244837 ),
+splash works fine for most of the boot, however, near the end, when it
+switches to verbose mode, I see this error: 
+/sbin/splash-functions-bl1.sh: line 200: /lib/splash/cache/levels: Read-only file system
+/sbin/splash-functions-bl1.sh: line 201: /lib/splash/cache/levels: Read-only file system
+And the screen goes black (no lcd backlight).
+
+Any ideas what causes this?
+
+mount -l shows
+cachedir on /mnt/livecd/lib/splash/tmp type tmpfs (rw,relatime,size-4096k,mode=644)
+
+If I press ctrl-alt-F1, the verbose console is displayed.
+If I press F2 during the boot, I remain in verbose mode, but still see
+the script error.
+'chvrt 1' can also switch to the verbose terminal.
+
+I am using media-gfx/splashutils-1.5.4.3
+
+
+
+From michalj at gmail.com  Sat Jan 30 13:44:08 2010
+From: michalj at gmail.com (Michal Januszewski)
+Date: Sat, 30 Jan 2010 13:44:08 +0100
+Subject: [fbsplash-users] error from splash-functions-bl1.sh on livecd
+In-Reply-To: <1264707062.26454.927.camel@genx.localdomain>
+References: <1264707062.26454.927.camel@genx.localdomain>
+Message-ID: <5d9b736f1001300444r6d7afed1lf12edc44475472da@mail.gmail.com>
+
+On Thu, Jan 28, 2010 at 20:31, John Stile <john at stilen.com> wrote:
+
+> [..]
+> switches to verbose mode, I see this error:
+> /sbin/splash-functions-bl1.sh: line 200: /lib/splash/cache/levels: Read-only file system
+> /sbin/splash-functions-bl1.sh: line 201: /lib/splash/cache/levels: Read-only file system
+>
+> [..]
+>
+> I am using media-gfx/splashutils-1.5.4.3
+
+Any chance you could switch to openrc and baselayout2?
+
+Best regards,
+-- 
+Michal Januszewski
+http://people.gentoo.org/spock
+
+

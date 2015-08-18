@@ -1,0 +1,63 @@
+From stian_moltubakk at hotmail.com  Fri Jul 31 17:22:04 2009
+From: stian_moltubakk at hotmail.com (stian moltubakk)
+Date: Fri, 31 Jul 2009 17:22:04 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+Message-ID: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+
+
+Hi there.
+
+I got fbsplash running on debian, but not quite as smoth as I would like.
+After booting from grub I get a few kernel mesages befour the framebuffer is enabled so some kernel mesages are shown.
+During boot some flashing ocour.
+There seam also to be some bleed trough on the splash image.
+Is there anything I can do to improve this?
+uswsusp?
+
+_________________________________________________________________
+Drag n? drop?Get easy photo sharing with Windows Live? Photos.
+
+http://www.microsoft.com/windows/windowslive/products/photos.aspx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090731/04b50a90/attachment.html>
+
+From jeandamiendurand at free.fr  Fri Jul 31 21:45:32 2009
+From: jeandamiendurand at free.fr (Jean-Damien Durand)
+Date: Fri, 31 Jul 2009 21:45:32 +0200
+Subject: [fbsplash-users] Fbsplash on debian lenny
+In-Reply-To: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+References: <BAY141-W102D95D6A1956A66944CC59D100@phx.gbl>
+Message-ID: <4A7349DC.5020400@free.fr>
+
+Hi,
+
+stian moltubakk a ?crit :
+> Hi there.
+>
+> I got fbsplash running on debian, but not quite as smoth as I would like.
+> After booting from grub I get a few kernel mesages befour the 
+> framebuffer is enabled so some kernel mesages are shown.
+A very few messages, so do I - but does the progress bar start near the 
+beginning or jumps suddenly to something e.g. 20% ?
+
+> During boot some flashing ocour.
+
+This has do to with the *console* debian packages: it redefines the 
+fonts on every tty - on the fbsplash wiki there is a solution with one 
+of the console package (don't remember its name), and on sid this has 
+been superseeded by another package, for which I did not had time to 
+investigate yet, and that makes the flashing back again - anyway this 
+has to do with tty font config.
+> There seam also to be some bleed trough on the splash image.
+> Is there anything I can do to improve this?
+Which theme are you using ?
+> uswsusp?
+See the archives of this list - I built an fbsplash-aware uswsusp some 
+time ago - dunno if the current uswsusp in debian lenny official repos 
+is now fbsplash-aware
+
+Cheers, JD.
+
+
+

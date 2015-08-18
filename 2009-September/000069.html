@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] switching to silent inside initrd stopped working
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-September/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20switching%20to%20silent%20inside%20initrd%20stopped%20working&In-Reply-To=%3C1253919458.22282.38.camel%40genx.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000070.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] switching to silent inside initrd stopped working</H1>
+    <B>John Stile</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20switching%20to%20silent%20inside%20initrd%20stopped%20working&In-Reply-To=%3C1253919458.22282.38.camel%40genx.localdomain%3E"
+       TITLE="[fbsplash-users] switching to silent inside initrd stopped working">john at stilen.com
+       </A><BR>
+    <I>Sat Sep 26 00:57:38 CEST 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000070.html">[fbsplash-users] switching to silent inside initrd stopped	working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#69">[ date ]</a>
+              <a href="thread.html#69">[ thread ]</a>
+              <a href="subject.html#69">[ subject ]</a>
+              <a href="author.html#69">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In my linuxrc, I get a new error when using:
+  splash_comm_send &quot;set mode silent&quot;
+Error:
+  Switch to tty16 failed with: 9 'Bad File descriptor'
+
+These are the steps in the linuxrc that lead up to the error.
+
+#!/bin/bash
+export PATH=&quot;/bin:/sbin:/usr/bin:/usr/sbin&quot;
+Debug=0
+CONSOLE=/dev/console
+exec &gt;${CONSOLE} &lt;${CONSOLE} 2&gt;&amp;1
+mount -t proc none /proc  &amp;&gt; /dev/null
+mount -t sysfs /sys /sys &gt;/dev/null 2&gt;&amp;1
+echo '0' &gt; /proc/sys/kernel/printk
+CMDLINE=`cat /proc/cmdline`
+. /sbin/splash-functions.sh
+splash_setup
+BOOT_MSG=&quot;$(splash_get_boot_message)&quot; ${spl_daemon} --theme=&quot;${SPLASH_THEME}&quot; --pidfile=&quot;${spl_pidfile}&quot; --type=${ttype} ${options}
+splash_comm_send &quot;set tty silent ${SPLASH_TTY}&quot;
+splash_comm_send &quot;Initializing system...&quot;
+splash_comm_send &quot;repaint&quot;
+splash_comm_send &quot;set mode silent&quot; 
+
+My kernel: 2.6.30-gentoo-r6
+
+My /proc/cmdline:
+  ramdisk_size=33000 root=/dev/ram0 rw init=/linuxrc cdroot console=tty1 video=i810fb:vram:4,xres:1023,yres:74,hsync1:30,hsync2:81,vsync1:56,vsync2:76,accel splash=silent,kdraphics,theme:simsplash block2mtd.block2mtd=/dev/hdc3
+
+I have never had a /dev/tty16, so I'm not sure why it is using that.
+In /dev/ I do have
+
+console     5, 1
+tty         4, 0
+tty1        4, 1
+fb0        29, 0
+fbcondecor 10, 26
+
+Not sure what else might be relevant.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000070.html">[fbsplash-users] switching to silent inside initrd stopped	working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#69">[ date ]</a>
+              <a href="thread.html#69">[ thread ]</a>
+              <a href="subject.html#69">[ subject ]</a>
+              <a href="author.html#69">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

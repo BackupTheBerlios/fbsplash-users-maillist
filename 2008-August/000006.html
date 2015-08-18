@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] fbsplashd.static segfaults on hardened system
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplashd.static%20segfaults%20on%20hardened%20system&In-Reply-To=%3C48B727F6.5060609%40lavabit.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] fbsplashd.static segfaults on hardened system</H1>
+    <B>lurker</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplashd.static%20segfaults%20on%20hardened%20system&In-Reply-To=%3C48B727F6.5060609%40lavabit.com%3E"
+       TITLE="[fbsplash-users] fbsplashd.static segfaults on hardened system">lurker at lavabit.com
+       </A><BR>
+    <I>Fri Aug 29 00:34:30 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">[fbsplash-users] fbcondecor required for early userspace?
+</A></li>
+        <LI>Next message: <A HREF="000007.html">[fbsplash-users] fbsplashd.static segfaults on hardened system
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I'm having trouble with splashutils on one of my catalyst projects (x86
+arch). fbsplashd.static segfaults right after the splash image is shown
+on the screen, preventing the loaders to progress, pressing F2 for
+verbose mode etc. This is what dmesg says when running &quot;splash_manager
+-c demo -t &lt;any theme&gt; -m s&quot;:
+
+	Aug 28 20:20:04 livecd fbsplashd.stati[22764]: segfault at 9 ip
+	0811ac2e sp 4ac7bc60 error 4 in
+	fbsplashd.static[8048000+186000]Aug 28 20:20:04 livecd grsec:
+	signal 11 sent to
+	/mnt/livecd/sbin/fbsplashd.static[fbsplashd.stati:22764]
+	uid/euid:0/0 gid/egid:0/0, parent /mnt/livecd/sbin/init[init:1]
+	uid/euid:0/0 gid/egid:0/0
+	Aug 28 20:20:04 livecd grsec: denied resource overstep by
+	requesting 4096 for RLIMIT_CORE against limit 0 for
+	/mnt/livecd/sbin/fbsplashd.static[fbsplashd.stati:22764]
+	uid/euid:0/0 gid/egid:0/0, parent /mnt/livecd/sbin/init[init:1]
+	uid/euid:0/0 gid/egid:0/0
+
+Now, this only happens on my hardened branch of the project. I'm using a
+hardened toolchain (gcc 3.4.6), PaX, grsec (no RBAC yet though) and all
+that, but other than that the only differences between the hardened and
+non-hardened branches are, essentially, the portage profiles
+(hardened/linux/x86/2008.0 vs. default/linux/x86/2008.0) and the CFLAGS:
+
+hardened:
+	-mtune=i486 -Os -pipe -fomit-frame-pointer -fforce-addr
+
+non-hardened:
+	-march=i686 -Os -pipe -fomit-frame-pointer
+
+This affects both splashutils 1.5.3.4 (currently stable in portage) and
+1.5.4.2 current latest release), using stock portage ebuilds. I've
+looked in the ebuilds, and seen that there is stuff for hardened (adding
+-fnostack-protector) so I assume splashutils generally should work on
+hardened systems.
+
+I've done some simple debugging and found what causes the segfault,
+namely this part:
+
+	if [[ -n &quot;${t}&quot; ]]; then
+		spl_comm &quot;set event dev /dev/input/${t}&quot;
+	fi
+
+in the function demo_theme_silent() of splash_manager. Commenting it out
+gets splash working. At the time of the crash, t is set to &quot;event0&quot;, and
+doing a:
+
+	cat /dev/input/event0
+
+seems to indicate it is in fact the keyboard we're dealing with. I have
+no idea why fbsplashd.static segfaults when trying to do its thing with
+it though.
+
+Any thoughts on what could be wrong?
+
+Cheers!
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">[fbsplash-users] fbcondecor required for early userspace?
+</A></li>
+	<LI>Next message: <A HREF="000007.html">[fbsplash-users] fbsplashd.static segfaults on hardened system
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] How kernel selects theme?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2010-April/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20How%20kernel%20selects%20theme%3F&In-Reply-To=%3Cl2qe20994341004190731t32df829cv8745b505c7ccb02e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] How kernel selects theme?</H1>
+    <B>&#1041;&#1072;&#1090;&#1072;&#1083;&#1086;&#1074; &#1043;&#1088;&#1080;&#1075;&#1086;&#1088;&#1080;&#1081;</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20How%20kernel%20selects%20theme%3F&In-Reply-To=%3Cl2qe20994341004190731t32df829cv8745b505c7ccb02e%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] How kernel selects theme?">gbatalov at crystals.ru
+       </A><BR>
+    <I>Mon Apr 19 16:31:14 CEST 2010</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#82">[ date ]</a>
+              <a href="thread.html#82">[ thread ]</a>
+              <a href="subject.html#82">[ subject ]</a>
+              <a href="author.html#82">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello!
+I'm wondering how kernel with fbcondecor patch selects splash theme on boot,
+because it seems it doesn't :)
+
+When I set &quot;splash=silent,theme:suspend2&quot; nothing happens. Several extra
+printk commands show me
+that fbcondecor_helper is called without theme parameter:
+...
+fbcondecor: argv /usr/local/sbin/fbcondecor_helper 2 init 0 0 &lt;NULL&gt;
+...
+
+Actually, vc_cons[i].d-&gt;vc_decor.theme is set to NULL in fbcon_decor_reset()
+(see drivers/video/console/fbcondecor.c), and I can't find where it is set
+to
+correct theme specified.
+
+I even made little patch that sets &quot;default&quot; theme on reset, and it works!
+
+--- a/drivers/video/console/fbcondecor.c
++++ b/drivers/video/console/fbcondecor.c
+@@ -526,7 +526,8 @@ void fbcon_decor_reset(void)
+        for (i = 0; i &lt; MAX_NR_CONSOLES &amp;&amp; vc_cons[i].d; i++) {
+                vc_cons[i].d-&gt;vc_decor.state = vc_cons[i].d-&gt;vc_decor.twidth
+=
+
+vc_cons[i].d-&gt;vc_decor.theight = 0;
+-               vc_cons[i].d-&gt;vc_decor.theme = NULL;
++//             vc_cons[i].d-&gt;vc_decor.theme = NULL;
++               vc_cons[i].d-&gt;vc_decor.theme = &quot;default&quot;;
+        }
+
+        return;
+
+Thus I use kernel 2.6.29 with fbcondecor-0.9.6 and splash in &quot;default&quot;
+folder.
+But I feel I've missed something. Could somebody point me?
+
+--
+Grigory Batalov
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/fbsplash-users/attachments/20100419/ac968fda/attachment.html">https://lists.berlios.de/pipermail/fbsplash-users/attachments/20100419/ac968fda/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#82">[ date ]</a>
+              <a href="thread.html#82">[ thread ]</a>
+              <a href="subject.html#82">[ subject ]</a>
+              <a href="author.html#82">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

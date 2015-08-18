@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] fbsplash hard lockups
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplash%20hard%20lockups&In-Reply-To=%3C5d9b736f0908070947ia1a6ddq3c9e61cbf832b587%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000055.html">
+   <LINK REL="Next"  HREF="000060.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] fbsplash hard lockups</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplash%20hard%20lockups&In-Reply-To=%3C5d9b736f0908070947ia1a6ddq3c9e61cbf832b587%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] fbsplash hard lockups">michalj at gmail.com
+       </A><BR>
+    <I>Fri Aug  7 18:47:02 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000055.html">[fbsplash-users] fbsplash hard lockups
+</A></li>
+        <LI>Next message: <A HREF="000060.html">[fbsplash-users] fbsplash hard lockups
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Aug 7, 2009 at 13:33, Andrew Zabolotny&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">zap at cobra.ru</A>&gt; wrote:
+
+Hi,
+
+&gt;<i> ~ # fbsplashd.static -t main
+</I>&gt;<i> ~ # splash_util -m s -c setmode # the screen switches to splash here
+</I>&gt;<i> ~ # fbcondecor_ctl.static -t main -c setcfg
+</I>&gt;<i> ~ # fbcondecor_ctl.static -t main -c setpic
+</I>&gt;<i> ~ # fbcondecor_ctl.static -t main -c on # no visible changes, as
+</I>&gt;<i> expected
+</I>&gt;<i> ~ # splash_util -m v -c setmode
+</I>&gt;<i> ~ #
+</I>&gt;<i>
+</I>&gt;<i> After last command the system locks up, but not instantly (note it
+</I>&gt;<i> even succeeded to display the next prompt), I don't get any kernel
+</I>&gt;<i> crashes but I can't enter anything in any console and I have to reset.
+</I>
+Is the virtual machine responsive on the network? (can you ping it,
+ssh to it?)  Knowing that would help us to determine whether this is a
+total system lockup, or just a breakdown of the console system.
+
+&gt;<i> the console gets the correct background. One thing to note here is that
+</I>&gt;<i> I linked the helper against glibc, not klibc (we have glibc anyway on
+</I>&gt;<i> initramfs, so there's little point in having yet another libc).
+</I>&gt;<i>
+</I>&gt;<i> What I can do to debug the problem further?
+</I>
+I would suggest doing the following two things:
+
+- try the following patch:
+<A HREF="http://dev.gentoo.org/~spock/projects/fbcondecor//archive/fbcondecor-0.9.6-2.6.29.patch">http://dev.gentoo.org/~spock/projects/fbcondecor//archive/fbcondecor-0.9.6-2.6.29.patch</A>
+The one you are currently using has been created to follow some mutex
+changes in the fbdev subsystem.  I think they might have been reverted
+in one of the later versions, so using the older fbcondecor patch
+might helper
+
+- try it with klibc anyway.  This is the most tested configuration and
+if it works with klibc and doesn't with glibc, then at least we know
+this bug is related to the C library used.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+<A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000055.html">[fbsplash-users] fbsplash hard lockups
+</A></li>
+	<LI>Next message: <A HREF="000060.html">[fbsplash-users] fbsplash hard lockups
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

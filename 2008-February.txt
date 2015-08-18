@@ -1,0 +1,26 @@
+From spock at gentoo.org  Tue Feb 26 00:11:29 2008
+From: spock at gentoo.org (Michal Januszewski)
+Date: Tue, 26 Feb 2008 00:11:29 +0100
+Subject: [fbsplash-users] splashutils-1.5.4 released
+Message-ID: <20080225231128.GA27325@spock.one.pl>
+
+Hi,
+
+splashutils-1.5.4 has just been released.  This release includes a bunch
+of new features, summarized below by an excerpt from the ChangeLog:
+
+ - Provide a single static binary that perfoms the functions of
+   fbsplashd, splash_util and, optionally, fbcondecor_ctl.
+ - Add support for the blendin() and blendout() special effect modifiers.
+ - Add support for the <textbox> section in config files.
+ - Add support for the fbsplash message log.
+ - Add support for the autoverbose feature.
+ - Add the splashy2fbsplash theme converter.
+
+Best regards.
+-- 
+Michal Januszewski                              JID: spock at im.gentoo.org
+Gentoo Linux Developer                    http://people.gentoo.org/spock
+
+
+

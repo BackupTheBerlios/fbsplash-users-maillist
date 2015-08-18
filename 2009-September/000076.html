@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] switching to silent inside initrd stopped working
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-September/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20switching%20to%20silent%20inside%20initrd%20stopped%0A%20working&In-Reply-To=%3C1254331733.17091.68.camel%40genx.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000075.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] switching to silent inside initrd stopped working</H1>
+    <B>John Stile</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20switching%20to%20silent%20inside%20initrd%20stopped%0A%20working&In-Reply-To=%3C1254331733.17091.68.camel%40genx.localdomain%3E"
+       TITLE="[fbsplash-users] switching to silent inside initrd stopped working">john at stilen.com
+       </A><BR>
+    <I>Wed Sep 30 19:28:53 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000075.html">[fbsplash-users] switching to silent inside initrd stopped	working
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#76">[ date ]</a>
+              <a href="thread.html#76">[ thread ]</a>
+              <a href="subject.html#76">[ subject ]</a>
+              <a href="author.html#76">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 2009-09-30 at 09:59 +0200, Michal Januszewski wrote:
+&gt;<i> &gt; This is what did work before my system upgrade, but doesn't work
+</I>&gt;<i> now:
+</I>&gt;<i> &gt; . /sbin/splash-functions.sh
+</I>&gt;<i> &gt; splash_setup
+</I>&gt;<i> &gt; BOOT_MSG=&quot;$(splash_get_boot_message)&quot; ${spl_daemon}
+</I>&gt;<i> --theme=&quot;${SPLASH_THEME}&quot; --pidfile=&quot;${spl_pidfile}&quot; --type=${ttype}
+</I>&gt;<i> ${options}
+</I>&gt;<i> &gt; splash_comm_send &quot;set tty silent ${SPLASH_TTY}&quot;
+</I>&gt;<i> &gt; splash_comm_send &quot;Initializing system...&quot;
+</I>&gt;<i> &gt; splash_comm_send &quot;repaint&quot;
+</I>&gt;<i> 
+</I>&gt;<i> That looks like a more correct way of doing things, since you're
+</I>&gt;<i> starting the splash daemon, which guarantees that any error messages
+</I>&gt;<i> will be hidden, and the screen will be properly repainted if
+</I>&gt;<i> necessary.  What happens if you try to use this old script after the
+</I>&gt;<i> system upgrade?  Is the splash picture displayed at all?  Do you see
+</I>&gt;<i> any error messages?
+</I>
+I booted and executed the commands that look more correct, followed by
+starting a shell.
+
+The console background is black (no frame buffer), so it's not switching
+to the silent splash tty.
+
+The process list shows, on tty16, with process id 439, the command:
+//sbin/fbsplashd.static --theme=simsplash --pidfile=//lib/splash/cache/daemon.pid --type= silent,kdgraphics,theme:my_splash
+
+I successfully switched to the silent tty with:
+. /sbin/splash-functions.sh
+splash_setup
+splash_comm_send &quot;set mode silent&quot;
+
+This is very good! Yay!
+I changed the splash lines in my linuxrc to:
+
+. /sbin/splash-functions.sh
+splash_setup
+BOOT_MSG=&quot;$(splash_get_boot_message)&quot; ${spl_daemon} --theme=&quot;${SPLASH_THEME}&quot; --pidfile=&quot;${spl_pidfile}&quot; --type=${ttype} ${options}
+splash_comm_send &quot;set tty silent ${SPLASH_TTY}&quot;
+splash_comm_send &quot;set mode silent&quot;
+
+Now I see the silent splash, but the progress bar doesn't seem to work.
+Near the end of init, splash does quickly drop out to verbose tty to display an rc init error I can't capture (goes by quickly).
+
+The progress bar might be because I loose the state info as I do a pivot_root and chroot later in the linuxrc.
+To compensate, I unsuccessfully added this before the pivot_root:
+mount -o bind /sys /new/sys
+mount -o bind /pro /new/proc
+mount -o bind /lib/splash /new/lib/splash
+
+So it looks like we have solved the problem of talking to the daemon to display the silent splash is working. 
+Thank you!
+
+Now the problem seems to be updating the boot progress bar....
+
+
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000075.html">[fbsplash-users] switching to silent inside initrd stopped	working
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#76">[ date ]</a>
+              <a href="thread.html#76">[ thread ]</a>
+              <a href="subject.html#76">[ subject ]</a>
+              <a href="author.html#76">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

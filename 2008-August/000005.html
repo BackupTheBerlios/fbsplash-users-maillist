@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] fbcondecor required for early userspace?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbcondecor%20required%20for%20early%20userspace%3F&In-Reply-To=%3C5d9b736f0808181612v4bb4a0f0vbf9bd56d717d1a0b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000004.html">
+   <LINK REL="Next"  HREF="000006.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] fbcondecor required for early userspace?</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbcondecor%20required%20for%20early%20userspace%3F&In-Reply-To=%3C5d9b736f0808181612v4bb4a0f0vbf9bd56d717d1a0b%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] fbcondecor required for early userspace?">michalj at gmail.com
+       </A><BR>
+    <I>Tue Aug 19 01:12:08 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000004.html">[fbsplash-users] fbcondecor required for early userspace?
+</A></li>
+        <LI>Next message: <A HREF="000006.html">[fbsplash-users] fbsplashd.static segfaults on hardened system
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5">[ date ]</a>
+              <a href="thread.html#5">[ thread ]</a>
+              <a href="subject.html#5">[ subject ]</a>
+              <a href="author.html#5">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Aug 16, 2008 at 14:12, Seb James &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">sjames at wmltd.co.uk</A>&gt; wrote:
+
+Hi,
+
+&gt;<i> Is the fbcondecor patch required for an early userspace splash image?
+</I>&gt;<i> I ask because in the docs (for release 1.5.4.1) it states that
+</I>&gt;<i> fbcondecor_helper is needed in the initramfs.
+</I>
+The short answer is: yes, if you want to see a splash screen at the early
+boot stage, then you need a kernel patched with fbcondecor.  The
+fbcondecor patch causes the kernel to make a call to the userspace
+fbcondecor_helper app right after the framebuffer is initialized, which
+makes it possible to display the splash image at a very early stage.
+
+However, if you're fine with displaying the image somewhat later, after
+the kernel has finished booting, but before the root filesystem is
+mounted -- i.e. when the userspace code from an initrd/initramfs is
+executed, then the fbcondecor patch is not needed.  You'd still
+probably want to include fbcondecor_helper in the initramfs and use
+it from there, as it's much smaller than the main fbsplash daemon
+binary and can be used to display a static splash image (which is
+usually enough at the early boot stage).
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+<A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000004.html">[fbsplash-users] fbcondecor required for early userspace?
+</A></li>
+	<LI>Next message: <A HREF="000006.html">[fbsplash-users] fbsplashd.static segfaults on hardened system
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5">[ date ]</a>
+              <a href="thread.html#5">[ thread ]</a>
+              <a href="subject.html#5">[ subject ]</a>
+              <a href="author.html#5">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

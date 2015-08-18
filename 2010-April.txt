@@ -1,0 +1,49 @@
+From gbatalov at crystals.ru  Mon Apr 19 16:31:14 2010
+From: gbatalov at crystals.ru (=?KOI8-R?B?4sHUwczP1yDn0snHz9LJyg==?=)
+Date: Mon, 19 Apr 2010 18:31:14 +0400
+Subject: [fbsplash-users] How kernel selects theme?
+Message-ID: <l2qe20994341004190731t32df829cv8745b505c7ccb02e@mail.gmail.com>
+
+Hello!
+I'm wondering how kernel with fbcondecor patch selects splash theme on boot,
+because it seems it doesn't :)
+
+When I set "splash=silent,theme:suspend2" nothing happens. Several extra
+printk commands show me
+that fbcondecor_helper is called without theme parameter:
+...
+fbcondecor: argv /usr/local/sbin/fbcondecor_helper 2 init 0 0 <NULL>
+...
+
+Actually, vc_cons[i].d->vc_decor.theme is set to NULL in fbcon_decor_reset()
+(see drivers/video/console/fbcondecor.c), and I can't find where it is set
+to
+correct theme specified.
+
+I even made little patch that sets "default" theme on reset, and it works!
+
+--- a/drivers/video/console/fbcondecor.c
++++ b/drivers/video/console/fbcondecor.c
+@@ -526,7 +526,8 @@ void fbcon_decor_reset(void)
+        for (i = 0; i < MAX_NR_CONSOLES && vc_cons[i].d; i++) {
+                vc_cons[i].d->vc_decor.state = vc_cons[i].d->vc_decor.twidth
+=
+
+vc_cons[i].d->vc_decor.theight = 0;
+-               vc_cons[i].d->vc_decor.theme = NULL;
++//             vc_cons[i].d->vc_decor.theme = NULL;
++               vc_cons[i].d->vc_decor.theme = "default";
+        }
+
+        return;
+
+Thus I use kernel 2.6.29 with fbcondecor-0.9.6 and splash in "default"
+folder.
+But I feel I've missed something. Could somebody point me?
+
+--
+Grigory Batalov
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20100419/ac968fda/attachment.html>
+

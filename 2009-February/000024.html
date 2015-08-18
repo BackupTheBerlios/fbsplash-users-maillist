@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] Fwd: splash
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-February/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20Fwd%3A%20splash&In-Reply-To=%3C499B9C54.4070303%40free.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000023.html">
+   <LINK REL="Next"  HREF="000025.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] Fwd: splash</H1>
+    <B>Jean-Damien Durand</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20Fwd%3A%20splash&In-Reply-To=%3C499B9C54.4070303%40free.fr%3E"
+       TITLE="[fbsplash-users] Fwd: splash">jeandamiendurand at free.fr
+       </A><BR>
+    <I>Wed Feb 18 06:27:48 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000023.html">[fbsplash-users] Fwd: splash
+</A></li>
+        <LI>Next message: <A HREF="000025.html">[fbsplash-users] Fwd: splash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#24">[ date ]</a>
+              <a href="thread.html#24">[ thread ]</a>
+              <a href="subject.html#24">[ subject ]</a>
+              <a href="author.html#24">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a difference of gentoo v.s. the other distribs, on Gentoo there 
+are service-related events.
+On Debian, there is no more splash action but the ones their systemv rc 
+supports, i.e. progress() or stop() (yes, nothing else).
+
+That's why the automatic between verbose and silent is not working: this 
+is a triggered on an event that is not propagated to splash.
+
+You can send a wishlist to the author of sysv-rc about service-related 
+events -;
+
+The 'rm /lib/splash/cache' error message is a known thing that you do 
+not have to worry about - this is harmless - will be fixed OOTD.
+
+Thanks, Cheers, JD.
+
+Pent0z a &#233;crit :
+&gt;<i> i've added vga=791 splash=silent,fadein,theme:kopspa quiet console=tty1
+</I>&gt;<i> using vesafb (i think)
+</I>&gt;<i> 
+</I>&gt;<i> tried also with CONSOLE=/dev/tty1, no changes
+</I>&gt;<i> 
+</I>&gt;<i> the theme does this:
+</I>&gt;<i> 
+</I>&gt;<i> fadein at boot (it is embedded in initramfs)
+</I>&gt;<i> silent
+</I>&gt;<i> fadeout at boot complete but not switching to verbose until i press alt+f1
+</I>&gt;<i> 
+</I>&gt;<i> i see in startup scripts some
+</I>&gt;<i> rm can't rm /lib/splash/cache (i don't remember exactly and i haven't 
+</I>&gt;<i> the machine right now)
+</I>&gt;<i> if needs, i'll post the relevant logs tomorrow
+</I>&gt;<i> 
+</I>&gt;<i> Jean-Damien Durand wrote:
+</I>&gt;&gt;<i> Michal Januszewski a &#233;crit :
+</I>&gt;&gt;&gt;<i> [+fbsplash-users]
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> ---------- Forwarded message ----------
+</I>&gt;&gt;&gt;<i> From: Pent0z &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">pentoz at gmail.com</A>&gt;
+</I>&gt;&gt;&gt;<i> Date: Tue, Feb 17, 2009 at 18:50
+</I>&gt;&gt;&gt;<i> Subject: splash
+</I>&gt;&gt;&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">spock at gentoo.org</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> hi spock,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> i'm using a debian lenny 2.6.26 kernel with your patch
+</I>&gt;&gt;&gt;<i> and splashutils 1.5.4.2
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> it is all ok, but when the system boots (silent), it doesn't go
+</I>&gt;&gt;&gt;<i> automatically to verbose after boots (i remember that with gentoo it
+</I>&gt;&gt;&gt;<i> does it automatically)
+</I>&gt;&gt;&gt;<i> i have to hit alt+f1 to enter in verbose mode (and to log-in)
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> can you help me? what i have to modify to go automatically to verbose
+</I>&gt;&gt;&gt;<i> after boots? is there a command to do it? in that case i can put it in
+</I>&gt;&gt;&gt;<i> rc.local
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> many thanks
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Hello,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> What is your grub line for this kernel, and is there something 
+</I>&gt;&gt;<i> relevant to splash and/or fbcondecor in /var/log/[syslog,messages] ?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Thanks, Cheers, Jean-Damien.
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000023.html">[fbsplash-users] Fwd: splash
+</A></li>
+	<LI>Next message: <A HREF="000025.html">[fbsplash-users] Fwd: splash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#24">[ date ]</a>
+              <a href="thread.html#24">[ thread ]</a>
+              <a href="subject.html#24">[ subject ]</a>
+              <a href="author.html#24">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

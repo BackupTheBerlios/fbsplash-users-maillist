@@ -1,0 +1,29 @@
+From ebmail00 at gmail.com  Thu Apr 30 04:48:35 2009
+From: ebmail00 at gmail.com (Kassi Bell)
+Date: Thu, 30 Apr 2009 03:48:35 +0100
+Subject: [fbsplash-users] fbsplash built on T2 Linux, but no splash
+Message-ID: <de7991c50904291948h64c175d4kb3356b0b6be0f733@mail.gmail.com>
+
+Hello everybody,
+I built fbsplash on my T2 linux, I followed the LFS guide on the fbsplash
+website to install it, I updated my grub conf, now, the problem is that
+there's no boot splash, just a black screen with some random colors, and
+after that, the boot process starts, with the fbsplash logo at the top left,
+the resolution changed fine (1024*768), I'm running Linux on a virtual
+machine in VMware. Why there's no splash screen? I have the emergence theme
+installed though, and I generated the initrd as indicated on the
+documentation:
+splash_geninitramfs -g /boot/initrd-fbsplash -r 1024x768 -v emergence
+And here's the fbsplash grub entry:
+title fbsplash
+kernel (hd0,0)/boot/vmlinuz_2.6.29-dist root=/dev/sda1 vga=791
+splash=verbose,fadein,theme:emergence quiet CONSOLE=tty1
+initrd (hd0,0)/boot/initrd-fbsplash
+
+I have also another question, how can I change the default fbsplash logo
+that appears in the top left of the screen?
+Any hints would be appreciated.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20090430/479e9a7f/attachment.html>
+

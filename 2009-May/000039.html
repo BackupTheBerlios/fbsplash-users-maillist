@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] fbsplash built on T2 Linux, but no splash
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplash%20built%20on%20T2%20Linux%2C%20but%20no%20splash&In-Reply-To=%3C5d9b736f0905050332l3550e2eah76f18aed5a41a3de%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000040.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] fbsplash built on T2 Linux, but no splash</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20fbsplash%20built%20on%20T2%20Linux%2C%20but%20no%20splash&In-Reply-To=%3C5d9b736f0905050332l3550e2eah76f18aed5a41a3de%40mail.gmail.com%3E"
+       TITLE="[fbsplash-users] fbsplash built on T2 Linux, but no splash">michalj at gmail.com
+       </A><BR>
+    <I>Tue May  5 12:32:29 CEST 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000040.html">[fbsplash-users] start-from-initrd and start-from-kernel
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#39">[ date ]</a>
+              <a href="thread.html#39">[ thread ]</a>
+              <a href="subject.html#39">[ subject ]</a>
+              <a href="author.html#39">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Apr 30, 2009 at 04:48, Kassi Bell &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">ebmail00 at gmail.com</A>&gt; wrote:
+
+Hi,
+
+&gt;<i> I built fbsplash on my T2 linux, I followed the LFS guide on the fbsplash
+</I>&gt;<i> website to install it, I updated my grub conf, now, the problem is that
+</I>&gt;<i> there's no boot splash, just a black screen with some random colors, and
+</I>&gt;<i> after that, the boot process starts, with the fbsplash logo at the top left,
+</I>&gt;<i> the resolution changed fine (1024*768), I'm running Linux on a virtual
+</I>
+Could you please provide a screenshot of the screen of the random colors
+and the output of `fbset -i`?
+
+&gt;<i> machine in VMware. Why there's no splash screen?&#160;I have the emergence theme
+</I>&gt;<i> installed though, and I generated the initrd as indicated on the
+</I>&gt;<i> documentation:
+</I>&gt;<i> splash_geninitramfs -g /boot/initrd-fbsplash -r 1024x768 -v emergence
+</I>&gt;<i> And here's the fbsplash grub entry:
+</I>&gt;<i> title fbsplash
+</I>&gt;<i> kernel (hd0,0)/boot/vmlinuz_2.6.29-dist root=/dev/sda1 vga=791
+</I>&gt;<i> splash=verbose,fadein,theme:emergence quiet CONSOLE=tty1
+</I>
+Which version of the fbcondecor patch are you using?
+
+Are you able to activate fbcondecor after boot using fbcondecor_ctl?
+
+&gt;<i> I have also another question, how can I change the default fbsplash logo
+</I>&gt;<i> that appears in the top left of the screen?
+</I>
+You might want to have a look at the fblogo app (e.g.
+<A HREF="http://packages.debian.org/etch/fblogo">http://packages.debian.org/etch/fblogo</A>).
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+<A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000040.html">[fbsplash-users] start-from-initrd and start-from-kernel
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#39">[ date ]</a>
+              <a href="thread.html#39">[ thread ]</a>
+              <a href="subject.html#39">[ subject ]</a>
+              <a href="author.html#39">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

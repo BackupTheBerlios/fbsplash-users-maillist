@@ -1,0 +1,374 @@
+From ccs_dba at hotmail.com  Tue Dec  7 01:12:15 2010
+From: ccs_dba at hotmail.com (C J)
+Date: Mon, 6 Dec 2010 17:12:15 -0700
+Subject: [fbsplash-users] Progress bar stuck
+Message-ID: <SNT132-w52B0E54C2FD875D088C7F5842C0@phx.gbl>
+
+
+I am using a standard gentoo install as a base to extract files from to create a custom small Linux distro.  I think I am copying just about everything from the baselayout, sysvinit, important libraries, and splashutils packages (no man pages or pkg detail files)...  The startup splash, with progress bar, appears to work ok, although I don't see it get to 100% before it goes to verbose mode..  However, when shutting down or rebooting, the splash screen (with progress bar) displays the startup progress bar at 95% and does not change.  The last step in the init startup process is to launch X via startx for a default user.  If I comment this line I see the startup and shutdown progress bar work properly, but if I allow to go directly to X then the progress bar doesn't work..
+
+Is there anything I can do to force the shutdown progress bar to begin and progress normally, or is there a way to progress the startup to 100% (thinking that this will help) at the end of the init loading?
+
+What have I done wrong??
+
+Suggestions?
+
+-CJ 
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20101206/7f7083ee/attachment.html>
+
+From michalj at gmail.com  Mon Dec 13 20:44:59 2010
+From: michalj at gmail.com (Michal Januszewski)
+Date: Mon, 13 Dec 2010 20:44:59 +0100
+Subject: [fbsplash-users] Progress bar stuck
+In-Reply-To: <SNT132-w52B0E54C2FD875D088C7F5842C0@phx.gbl>
+References: <SNT132-w52B0E54C2FD875D088C7F5842C0@phx.gbl>
+Message-ID: <AANLkTinqHyx6XYONqKBMWRVjVf-NJBEda0iK0AJDGKPq@mail.gmail.com>
+
+Hi,
+
+On Tue, Dec 7, 2010 at 01:12, C J <ccs_dba at hotmail.com> wrote:
+> I am using a standard gentoo install as a base to extract files from to
+> create a custom small Linux distro.? I think I am copying just about
+> everything from the baselayout, sysvinit, important libraries, and
+> splashutils packages (no man pages or pkg detail files)...? The startup
+> splash, with progress bar, appears to work ok, although I don't see it get
+> to 100% before it goes to verbose mode..? However, when shutting down or
+> rebooting, the splash screen (with progress bar) displays the startup
+> progress bar at 95% and does not change.? The last step in the init startup
+> process is to launch X via startx for a default user.? If I comment this
+> line I see the startup and shutdown progress bar work properly, but if I
+> allow to go directly to X then the progress bar doesn't work..
+
+Are you launching this using a custom-made initscript?  If this is a
+custom initscript, have you set the SPLASH_XSERVICE variable in
+/etc/conf.d/splash?
+
+Best regards,
+-- 
+Michal Januszewski
+http://people.gentoo.org/spock
+
+
+From michalj at gmail.com  Mon Dec 13 23:03:36 2010
+From: michalj at gmail.com (Michal Januszewski)
+Date: Mon, 13 Dec 2010 23:03:36 +0100
+Subject: [fbsplash-users] Progress bar stuck
+In-Reply-To: <SNT132-w35852B17C29DD6CCBAC84284120@phx.gbl>
+References: <SNT132-w52B0E54C2FD875D088C7F5842C0@phx.gbl>
+	<AANLkTinqHyx6XYONqKBMWRVjVf-NJBEda0iK0AJDGKPq@mail.gmail.com>
+	<SNT132-w35852B17C29DD6CCBAC84284120@phx.gbl>
+Message-ID: <AANLkTikM_hORgSQwPMzRpsTgiRTOAfK2=dp38mkWHaci@mail.gmail.com>
+
+Yes, please do.  It shouldn't break anything and might actually fix
+some of the problems you are experiencing.  The fbsplash subsystem is
+designed around the assumption that it "knows" which initscript starts
+X.
+
+Michal
+
+On Mon, Dec 13, 2010 at 23:00, C J <ccs_dba at hotmail.com> wrote:
+> No I have not done this...? X is starting, should I still do this?? I am
+> currently starting X with an initscript at the end of default (just before
+> local).? My initscripts are pretty standard, I haven't altered the sysvinit
+> package or baselayout (1).
+>
+> -CJ
+>
+>> Date: Mon, 13 Dec 2010 20:44:59 +0100
+>> Subject: Re: [fbsplash-users] Progress bar stuck
+>> From: michalj at gmail.com
+>> To: ccs_dba at hotmail.com
+>> CC: fbsplash-users at lists.berlios.de
+>>
+>> Hi,
+>>
+>> On Tue, Dec 7, 2010 at 01:12, C J <ccs_dba at hotmail.com> wrote:
+>> > I am using a standard gentoo install as a base to extract files from to
+>> > create a custom small Linux distro.? I think I am copying just about
+>> > everything from the baselayout, sysvinit, important libraries, and
+>> > splashutils packages (no man pages or pkg detail files)...? The startup
+>> > splash, with progress bar, appears to work ok, although I don't see it
+>> > get
+>> > to 100% before it goes to verbose mode..? However, when shutting down or
+>> > rebooting, the splash screen (with progress bar) displays the startup
+>> > progress bar at 95% and does not change.? The last step in the init
+>> > startup
+>> > process is to launch X via startx for a default user.? If I comment this
+>> > line I see the startup and shutdown progress bar work properly, but if I
+>> > allow to go directly to X then the progress bar doesn't work..
+>>
+>> Are you launching this using a custom-made initscript? If this is a
+>> custom initscript, have you set the SPLASH_XSERVICE variable in
+>> /etc/conf.d/splash?
+>>
+>> Best regards,
+>> --
+>> Michal Januszewski
+>> http://people.gentoo.org/spock
+>
+
+
+
+-- 
+Michal Januszewski
+http://people.gentoo.org/spock
+
+
+From ccs_dba at hotmail.com  Mon Dec 13 23:00:39 2010
+From: ccs_dba at hotmail.com (C J)
+Date: Mon, 13 Dec 2010 15:00:39 -0700
+Subject: [fbsplash-users] Progress bar stuck
+In-Reply-To: <AANLkTinqHyx6XYONqKBMWRVjVf-NJBEda0iK0AJDGKPq@mail.gmail.com>
+References: <SNT132-w52B0E54C2FD875D088C7F5842C0@phx.gbl>,
+	<AANLkTinqHyx6XYONqKBMWRVjVf-NJBEda0iK0AJDGKPq@mail.gmail.com>
+Message-ID: <SNT132-w35852B17C29DD6CCBAC84284120@phx.gbl>
+
+
+No I have not done this...  X is starting, should I still do this?  I am currently starting X with an initscript at the end of default (just before local).  My initscripts are pretty standard, I haven't altered the sysvinit package or baselayout (1). 
+
+-CJ
+
+> Date: Mon, 13 Dec 2010 20:44:59 +0100
+> Subject: Re: [fbsplash-users] Progress bar stuck
+> From: michalj at gmail.com
+> To: ccs_dba at hotmail.com
+> CC: fbsplash-users at lists.berlios.de
+> 
+> Hi,
+> 
+> On Tue, Dec 7, 2010 at 01:12, C J <ccs_dba at hotmail.com> wrote:
+> > I am using a standard gentoo install as a base to extract files from to
+> > create a custom small Linux distro.  I think I am copying just about
+> > everything from the baselayout, sysvinit, important libraries, and
+> > splashutils packages (no man pages or pkg detail files)...  The startup
+> > splash, with progress bar, appears to work ok, although I don't see it get
+> > to 100% before it goes to verbose mode..  However, when shutting down or
+> > rebooting, the splash screen (with progress bar) displays the startup
+> > progress bar at 95% and does not change.  The last step in the init startup
+> > process is to launch X via startx for a default user.  If I comment this
+> > line I see the startup and shutdown progress bar work properly, but if I
+> > allow to go directly to X then the progress bar doesn't work..
+> 
+> Are you launching this using a custom-made initscript?  If this is a
+> custom initscript, have you set the SPLASH_XSERVICE variable in
+> /etc/conf.d/splash?
+> 
+> Best regards,
+> -- 
+> Michal Januszewski
+> http://people.gentoo.org/spock
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20101213/419f6f2f/attachment.html>
+
+From ccs_dba at hotmail.com  Tue Dec 14 13:57:50 2010
+From: ccs_dba at hotmail.com (C J)
+Date: Tue, 14 Dec 2010 05:57:50 -0700
+Subject: [fbsplash-users] Progress bar stuck
+In-Reply-To: <AANLkTikM_hORgSQwPMzRpsTgiRTOAfK2=dp38mkWHaci@mail.gmail.com>
+References: <SNT132-w52B0E54C2FD875D088C7F5842C0@phx.gbl>,
+	<AANLkTinqHyx6XYONqKBMWRVjVf-NJBEda0iK0AJDGKPq@mail.gmail.com>,
+	<SNT132-w35852B17C29DD6CCBAC84284120@phx.gbl>,
+	<AANLkTikM_hORgSQwPMzRpsTgiRTOAfK2=dp38mkWHaci@mail.gmail.com>
+Message-ID: <SNT132-w3853CA57FD389F11C93C1784130@phx.gbl>
+
+
+During my debugging I noticed that the list of services to start (/lib/splash/cache/svcs_start) was different that the progress shown after boot had completed and X had started (/lib/splash/cache/progress).  I found that in my local (/etc/conf.d/local.start) script the last item was returning a bad status.  I fixed this and things started working.  I also added the SPLASH_XSERVICE variable to /etc/conf.d/splash, but I didn't see any difference after it started to work.
+
+Another question however, is there a variable I can use to show what is currently in progress during startup?  I am currently displaying the boot percentage (Booting the system $progress%) but would like to show the script that is current also.
+
+Thanks for the help,
+
+-CJ
+
+> Date: Mon, 13 Dec 2010 23:03:36 +0100
+> Subject: Re: [fbsplash-users] Progress bar stuck
+> From: michalj at gmail.com
+> To: ccs_dba at hotmail.com
+> CC: fbsplash-users at lists.berlios.de
+> 
+> Yes, please do.  It shouldn't break anything and might actually fix
+> some of the problems you are experiencing.  The fbsplash subsystem is
+> designed around the assumption that it "knows" which initscript starts
+> X.
+> 
+> Michal
+> 
+> On Mon, Dec 13, 2010 at 23:00, C J <ccs_dba at hotmail.com> wrote:
+> > No I have not done this...  X is starting, should I still do this?  I am
+> > currently starting X with an initscript at the end of default (just before
+> > local).  My initscripts are pretty standard, I haven't altered the sysvinit
+> > package or baselayout (1).
+> >
+> > -CJ
+> >
+> >> Date: Mon, 13 Dec 2010 20:44:59 +0100
+> >> Subject: Re: [fbsplash-users] Progress bar stuck
+> >> From: michalj at gmail.com
+> >> To: ccs_dba at hotmail.com
+> >> CC: fbsplash-users at lists.berlios.de
+> >>
+> >> Hi,
+> >>
+> >> On Tue, Dec 7, 2010 at 01:12, C J <ccs_dba at hotmail.com> wrote:
+> >> > I am using a standard gentoo install as a base to extract files from to
+> >> > create a custom small Linux distro.  I think I am copying just about
+> >> > everything from the baselayout, sysvinit, important libraries, and
+> >> > splashutils packages (no man pages or pkg detail files)...  The startup
+> >> > splash, with progress bar, appears to work ok, although I don't see it
+> >> > get
+> >> > to 100% before it goes to verbose mode..  However, when shutting down or
+> >> > rebooting, the splash screen (with progress bar) displays the startup
+> >> > progress bar at 95% and does not change.  The last step in the init
+> >> > startup
+> >> > process is to launch X via startx for a default user.  If I comment this
+> >> > line I see the startup and shutdown progress bar work properly, but if I
+> >> > allow to go directly to X then the progress bar doesn't work..
+> >>
+> >> Are you launching this using a custom-made initscript? If this is a
+> >> custom initscript, have you set the SPLASH_XSERVICE variable in
+> >> /etc/conf.d/splash?
+> >>
+> >> Best regards,
+> >> --
+> >> Michal Januszewski
+> >> http://people.gentoo.org/spock
+> >
+> 
+> 
+> 
+> -- 
+> Michal Januszewski
+> http://people.gentoo.org/spock
+ 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20101214/4c6c0e27/attachment.html>
+
+From michalj at gmail.com  Wed Dec 15 01:13:57 2010
+From: michalj at gmail.com (Michal Januszewski)
+Date: Wed, 15 Dec 2010 01:13:57 +0100
+Subject: [fbsplash-users] Progress bar stuck
+In-Reply-To: <SNT132-w3853CA57FD389F11C93C1784130@phx.gbl>
+References: <SNT132-w52B0E54C2FD875D088C7F5842C0@phx.gbl>
+	<AANLkTinqHyx6XYONqKBMWRVjVf-NJBEda0iK0AJDGKPq@mail.gmail.com>
+	<SNT132-w35852B17C29DD6CCBAC84284120@phx.gbl>
+	<AANLkTikM_hORgSQwPMzRpsTgiRTOAfK2=dp38mkWHaci@mail.gmail.com>
+	<SNT132-w3853CA57FD389F11C93C1784130@phx.gbl>
+Message-ID: <AANLkTikOhsX7BtKjkmwhjFDrGmfcDCZeHa3Qv0zsz1QC@mail.gmail.com>
+
+You can use the 'msglog' option of the 'text' directive in the config
+file to display a simple message log containing names of the
+initscripts being stated, for example:
+
+  <textbox>
+     text silent dejavu.ttf 12 100 100 #ffffff "System messages:"
+     text silent courier.ttf 10 100 120 #eeeeee msglog
+  </textbox>
+
+You can find the full documentation in docs/theme_format in the
+splashutils tarball.  Please note that if you decide to place the text
+msglog directive inside a textbox, you might need to press F3 to
+actually see it during boot.
+
+Michal
+
+On Tue, Dec 14, 2010 at 13:57, C J <ccs_dba at hotmail.com> wrote:
+
+> During my debugging I noticed that the list of services to start
+> (/lib/splash/cache/svcs_start) was different that the progress shown after
+> boot had completed and X had started (/lib/splash/cache/progress).? I found
+> that in my local (/etc/conf.d/local.start) script the last item was
+> returning a bad status.? I fixed this and things started working.? I also
+> added the SPLASH_XSERVICE variable to /etc/conf.d/splash, but I didn't see
+> any difference after it started to work.
+>
+> Another question however, is there a variable I can use to show what is
+> currently in progress during startup?? I am currently displaying the boot
+> percentage (Booting the system $progress%) but would like to show the script
+> that is current also.
+>
+> Thanks for the help,
+>
+> -CJ
+>
+>> Date: Mon, 13 Dec 2010 23:03:36 +0100
+>> Subject: Re: [fbsplash-users] Progress bar stuck
+>> From: michalj at gmail.com
+>> To: ccs_dba at hotmail.com
+>> CC: fbsplash-users at lists.berlios.de
+>>
+>> Yes, please do. It shouldn't break anything and might actually fix
+>> some of the problems you are experiencing. The fbsplash subsystem is
+>> designed around the assumption that it "knows" which initscript starts
+>> X.
+>>
+>> Michal
+>>
+>> On Mon, Dec 13, 2010 at 23:00, C J <ccs_dba at hotmail.com> wrote:
+>> > No I have not done this...? X is starting, should I still do this?? I am
+>> > currently starting X with an initscript at the end of default (just
+>> > before
+>> > local).? My initscripts are pretty standard, I haven't altered the
+>> > sysvinit
+>> > package or baselayout (1).
+>> >
+>> > -CJ
+>> >
+>> >> Date: Mon, 13 Dec 2010 20:44:59 +0100
+>> >> Subject: Re: [fbsplash-users] Progress bar stuck
+>> >> From: michalj at gmail.com
+>> >> To: ccs_dba at hotmail.com
+>> >> CC: fbsplash-users at lists.berlios.de
+>> >>
+>> >> Hi,
+>> >>
+>> >> On Tue, Dec 7, 2010 at 01:12, C J <ccs_dba at hotmail.com> wrote:
+>> >> > I am using a standard gentoo install as a base to extract files from
+>> >> > to
+>> >> > create a custom small Linux distro.? I think I am copying just about
+>> >> > everything from the baselayout, sysvinit, important libraries, and
+>> >> > splashutils packages (no man pages or pkg detail files)...? The
+>> >> > startup
+>> >> > splash, with progress bar, appears to work ok, although I don't see
+>> >> > it
+>> >> > get
+>> >> > to 100% before it goes to verbose mode..? However, when shutting down
+>> >> > or
+>> >> > rebooting, the splash screen (with progress bar) displays the startup
+>> >> > progress bar at 95% and does not change.? The last step in the init
+>> >> > startup
+>> >> > process is to launch X via startx for a default user.? If I comment
+>> >> > this
+>> >> > line I see the startup and shutdown progress bar work properly, but
+>> >> > if I
+>> >> > allow to go directly to X then the progress bar doesn't work..
+>> >>
+>> >> Are you launching this using a custom-made initscript? If this is a
+>> >> custom initscript, have you set the SPLASH_XSERVICE variable in
+>> >> /etc/conf.d/splash?
+>> >>
+>> >> Best regards,
+>> >> --
+>> >> Michal Januszewski
+>> >> http://people.gentoo.org/spock
+>> >
+>>
+>>
+>>
+>> --
+>> Michal Januszewski
+>> http://people.gentoo.org/spock
+>
+
+
+
+-- 
+Michal Januszewski
+http://people.gentoo.org/spock
+
+

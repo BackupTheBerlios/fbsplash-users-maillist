@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] splashutils-1.5.4 compile error
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20splashutils-1.5.4%20compile%20error&In-Reply-To=%3C201102181007537031689%40toyou.com.cn%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] splashutils-1.5.4 compile error</H1>
+    <B>wangdb at toyou.com.cn</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20splashutils-1.5.4%20compile%20error&In-Reply-To=%3C201102181007537031689%40toyou.com.cn%3E"
+       TITLE="[fbsplash-users] splashutils-1.5.4 compile error">wangdb at toyou.com.cn
+       </A><BR>
+    <I>Fri Feb 18 03:07:54 CET 2011</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#89">[ date ]</a>
+              <a href="thread.html#89">[ thread ]</a>
+              <a href="subject.html#89">[ subject ]</a>
+              <a href="author.html#89">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi All,
+
+I googled and replace the &quot;extern int errno&quot; with &quot;include &lt;errno.h&gt;&quot;, the error was still there, any body would like to help me? thank you very much!
+
+Best Wishes,
+Daobang Wang
+
+
+
+&#21457;&#20214;&#20154;&#65306; <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">wangdb at toyou.com.cn</A> 
+&#21457;&#36865;&#26102;&#38388;&#65306; 2011-02-18  09:17:14 
+&#25910;&#20214;&#20154;&#65306; <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">fbsplash-users at lists.berlios.de</A> 
+&#25220;&#36865;&#65306; 
+&#20027;&#39064;&#65306; splashutils-1.5.4 compile error 
+ 
+Hi All
+
+I met a compile problem, please do me a favor, thanks!
+
+I met the problem at the step 11 following the steps as <A HREF="http://fbsplash.berlios.de/wiki/doku.php?id=docs:distros:lfs">http://fbsplash.berlios.de/wiki/doku.php?id=docs:distros:lfs</A>
+
+I compiled the splashutils-1.5.4 on RHEL5.3 32bit, Please see the details:
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">root at RHEL5</A> splashutils-1.5.4]# make
+make --silent all-recursive
+Making all in libs
+  CONF    libjpeg.a
+  MAKE    libjpeg.a
+  CONF    libz.a
+  MAKE    zlib.a
+  CONF    libpng.a
+  MAKE    libpng.a
+  CONF    libfreetype.a
+  MAKE    libfreetype.a
+Making all in src
+  CREATE  fbsplash.h
+Making all in .
+daemon_cmd.c: In function &#8216;cmd_log&#8217;:
+daemon_cmd.c:346: warning: incompatible implicit declaration of built-in function &#8216;strndup&#8217;
+daemon_cmd.c:348: warning: incompatible implicit declaration of built-in function &#8216;strndup&#8217;
+/usr/bin/ld: errno: TLS reference in /usr/lib/gcc/i386-redhat-linux/4.1.2/../../../libpthread.a(pthread_create.o) mismatches non-TLS reference in /usr/lib/gcc/i386-redhat-linux/4.1.2/../../../libfreetype.a(ftsystem.o)
+/usr/lib/gcc/i386-redhat-linux/4.1.2/../../../libpthread.a: could not read symbols: Bad value
+collect2: ld returned 1 exit status
+make[4]: *** [fbsplashctl] Error 1
+make[3]: *** [all-recursive] Error 1
+make[2]: *** [all] Error 2
+make[1]: *** [all-recursive] Error 1
+make: *** [all] Error 2
+[<A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">root at RHEL5</A> splashutils-1.5.4]# 
+
+Best Wishes,
+Daobang Wang
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110218/1d8b5e5e/attachment.html">https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110218/1d8b5e5e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#89">[ date ]</a>
+              <a href="thread.html#89">[ thread ]</a>
+              <a href="subject.html#89">[ subject ]</a>
+              <a href="author.html#89">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

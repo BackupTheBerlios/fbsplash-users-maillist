@@ -1,0 +1,426 @@
+From john at stilen.com  Sat Sep 26 00:57:38 2009
+From: john at stilen.com (John Stile)
+Date: Fri, 25 Sep 2009 15:57:38 -0700
+Subject: [fbsplash-users] switching to silent inside initrd stopped working
+Message-ID: <1253919458.22282.38.camel@genx.localdomain>
+
+In my linuxrc, I get a new error when using:
+  splash_comm_send "set mode silent"
+Error:
+  Switch to tty16 failed with: 9 'Bad File descriptor'
+
+These are the steps in the linuxrc that lead up to the error.
+
+#!/bin/bash
+export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
+Debug=0
+CONSOLE=/dev/console
+exec >${CONSOLE} <${CONSOLE} 2>&1
+mount -t proc none /proc  &> /dev/null
+mount -t sysfs /sys /sys >/dev/null 2>&1
+echo '0' > /proc/sys/kernel/printk
+CMDLINE=`cat /proc/cmdline`
+. /sbin/splash-functions.sh
+splash_setup
+BOOT_MSG="$(splash_get_boot_message)" ${spl_daemon} --theme="${SPLASH_THEME}" --pidfile="${spl_pidfile}" --type=${ttype} ${options}
+splash_comm_send "set tty silent ${SPLASH_TTY}"
+splash_comm_send "Initializing system..."
+splash_comm_send "repaint"
+splash_comm_send "set mode silent" 
+
+My kernel: 2.6.30-gentoo-r6
+
+My /proc/cmdline:
+  ramdisk_size=33000 root=/dev/ram0 rw init=/linuxrc cdroot console=tty1 video=i810fb:vram:4,xres:1023,yres:74,hsync1:30,hsync2:81,vsync1:56,vsync2:76,accel splash=silent,kdraphics,theme:simsplash block2mtd.block2mtd=/dev/hdc3
+
+I have never had a /dev/tty16, so I'm not sure why it is using that.
+In /dev/ I do have
+
+console     5, 1
+tty         4, 0
+tty1        4, 1
+fb0        29, 0
+fbcondecor 10, 26
+
+Not sure what else might be relevant.
+
+
+
+From michalj at gmail.com  Sat Sep 26 01:19:41 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Sat, 26 Sep 2009 01:19:41 +0200
+Subject: [fbsplash-users] switching to silent inside initrd stopped
+	working
+In-Reply-To: <1253919458.22282.38.camel@genx.localdomain>
+References: <1253919458.22282.38.camel@genx.localdomain>
+Message-ID: <5d9b736f0909251619h3daaee8bufbbfa1736d9415b4@mail.gmail.com>
+
+On Sat, Sep 26, 2009 at 00:57, John Stile <john at stilen.com> wrote:
+
+> In my linuxrc, I get a new error when using:
+> ?splash_comm_send "set mode silent"
+> Error:
+> ?Switch to tty16 failed with: 9 'Bad File descriptor'
+> [..]
+> . /sbin/splash-functions.sh
+> splash_setup
+> BOOT_MSG="$(splash_get_boot_message)" ${spl_daemon} --theme="${SPLASH_THEME}" --pidfile="${spl_pidfile}" --type=${ttype} ${options}
+> splash_comm_send "set tty silent ${SPLASH_TTY}"
+
+Look at the definition of the splash_setup() function in
+/sbin/splash-functions.sh -- this is where SPLASH_TTY acquires the
+default value of 16.
+
+You might want to create a tty16 device node in your /dev, or use a
+different tty for the silent splash screen.
+
+Also, you mentioned that this is a new error.  What has changed since
+the last time it worked for you?
+
+Best regards,
+Michal
+
+
+From john at stilen.com  Sat Sep 26 02:23:00 2009
+From: john at stilen.com (John Stile)
+Date: Fri, 25 Sep 2009 17:23:00 -0700
+Subject: [fbsplash-users] switching to silent inside initrd stopped
+ working
+In-Reply-To: <5d9b736f0909251619h3daaee8bufbbfa1736d9415b4@mail.gmail.com>
+References: <1253919458.22282.38.camel@genx.localdomain>
+	<5d9b736f0909251619h3daaee8bufbbfa1736d9415b4@mail.gmail.com>
+Message-ID: <1253924580.22282.82.camel@genx.localdomain>
+
+I wonder what SPLASH_TTY was set to before?
+
+I create /dev/tty16, with no improvement.
+The device file is there, but the error remains the same.
+
+What is different:
+* I updated all my packages; among them,
+  kernel upgraded from 2.6.27-gentoo-r8 to 2.6.30-gentoo-r6
+  media-gfx/splashutils upgrade from 1.5.4.2 to 1.5.4.3
+
+* The minor number for /dev/fbcondecor changed from 63 to 62, and the
+old minor number no longer works.
+
+* /bin/pidof is now a soft link to /sbin/killall5, so I have to also
+include killall5 in my initrd.
+
+* In my old script to prepare the initrd, 
+  if [ ! -d ./dev/fb ]; then mkdir ./dev/fb; fi
+  mknod ./dev/fb/0 c 29 0
+  mknod ./dev/fb/1 c 29 1
+  ln -s fb/0 ./dev/fb0
+  ln -s fb/1 ./dev/fb1
+But now I have:
+  mknod ./dev/fbcondecor c 10 62
+  mknod ./dev/fb0 c 29 0
+
+* As a bad-developer I probably made some un-tracked change.
+
+
+On Sat, 2009-09-26 at 01:19 +0200, Michal Januszewski wrote:
+> On Sat, Sep 26, 2009 at 00:57, John Stile <john at stilen.com> wrote:
+> 
+> > In my linuxrc, I get a new error when using:
+> >  splash_comm_send "set mode silent"
+> > Error:
+> >  Switch to tty16 failed with: 9 'Bad File descriptor'
+> > [..]
+> > . /sbin/splash-functions.sh
+> > splash_setup
+> > BOOT_MSG="$(splash_get_boot_message)" ${spl_daemon} --theme="${SPLASH_THEME}" --pidfile="${spl_pidfile}" --type=${ttype} ${options}
+> > splash_comm_send "set tty silent ${SPLASH_TTY}"
+> 
+> Look at the definition of the splash_setup() function in
+> /sbin/splash-functions.sh -- this is where SPLASH_TTY acquires the
+> default value of 16.
+> 
+> You might want to create a tty16 device node in your /dev, or use a
+> different tty for the silent splash screen.
+> 
+> Also, you mentioned that this is a new error.  What has changed since
+> the last time it worked for you?
+> 
+> Best regards,
+> Michal
+
+
+
+From michalj at gmail.com  Sat Sep 26 12:30:00 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Sat, 26 Sep 2009 12:30:00 +0200
+Subject: [fbsplash-users] switching to silent inside initrd stopped
+	working
+In-Reply-To: <1253924580.22282.82.camel@genx.localdomain>
+References: <1253919458.22282.38.camel@genx.localdomain>
+	<5d9b736f0909251619h3daaee8bufbbfa1736d9415b4@mail.gmail.com>
+	<1253924580.22282.82.camel@genx.localdomain>
+Message-ID: <5d9b736f0909260330w27f077dcp51663eaaa76d51b7@mail.gmail.com>
+
+On Sat, Sep 26, 2009 at 02:23, John Stile <john at stilen.com> wrote:
+
+> I wonder what SPLASH_TTY was set to before?
+
+I think it has been set to 16 for quite a while.
+
+> I create /dev/tty16, with no improvement.
+> The device file is there, but the error remains the same.
+
+Please keep it there, though -- that device node is required for the
+splash daemon to work properly.
+
+> What is different:
+> * I updated all my packages; among them,
+> ?kernel upgraded from 2.6.27-gentoo-r8 to 2.6.30-gentoo-r6
+> ?media-gfx/splashutils upgrade from 1.5.4.2 to 1.5.4.3
+
+Could you please try downgrading splashutils to the previous version?
+
+> * The minor number for /dev/fbcondecor changed from 63 to 62, and the
+> old minor number no longer works.
+
+That's to be expected, there are no guarantees about the minor number,
+as it's assigned dynamically by the kernel.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From michalj at gmail.com  Sat Sep 26 12:33:26 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Sat, 26 Sep 2009 12:33:26 +0200
+Subject: [fbsplash-users] switching to silent inside initrd stopped
+	working
+In-Reply-To: <5d9b736f0909260330w27f077dcp51663eaaa76d51b7@mail.gmail.com>
+References: <1253919458.22282.38.camel@genx.localdomain>
+	<5d9b736f0909251619h3daaee8bufbbfa1736d9415b4@mail.gmail.com>
+	<1253924580.22282.82.camel@genx.localdomain>
+	<5d9b736f0909260330w27f077dcp51663eaaa76d51b7@mail.gmail.com>
+Message-ID: <5d9b736f0909260333k45a774eeo472cdbd455768aa1@mail.gmail.com>
+
+Actually, I had a look at the code and it looks like the thing you're
+missing is /dev/tty0.
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From john at stilen.com  Wed Sep 30 04:00:25 2009
+From: john at stilen.com (John Stile)
+Date: Tue, 29 Sep 2009 19:00:25 -0700
+Subject: [fbsplash-users] switching to silent inside initrd stopped
+ working
+In-Reply-To: <5d9b736f0909260333k45a774eeo472cdbd455768aa1@mail.gmail.com>
+References: <1253919458.22282.38.camel@genx.localdomain>
+	<5d9b736f0909251619h3daaee8bufbbfa1736d9415b4@mail.gmail.com>
+	<1253924580.22282.82.camel@genx.localdomain>
+	<5d9b736f0909260330w27f077dcp51663eaaa76d51b7@mail.gmail.com>
+	<5d9b736f0909260333k45a774eeo472cdbd455768aa1@mail.gmail.com>
+Message-ID: <1254276025.16974.352.camel@genx.localdomain>
+
+I don't think I'm out of the woods yet.
+
+I still see text from linuxrc errors and the beginning of init, which
+used to be hidden by the silent splash.
+
+I had to change the splash commands in linuxrc to make splash work at
+all, leaving me unsure if I'm doing this correctly for
+media-gfx/splashutils-1.5.4.3
+
+Is there a good reference or script for what I need in my custom
+linuxrc, to smoothly get from grub though init without seeing any text?
+
+This is my /boot/grub/menu.lst:
+hiddenmenu
+default 0
+prompt  0
+timeout 0
+serial --unit=1 --speed=9600 --word=8 --parity=no --stop=1
+terminal serial
+title MyGentoo Kernel: linux-2.6.30-gentoo-r6
+root (hd0,0)
+kernel /boot/kernel-genkernel-x86-2.6.30-gentoo-r6 ramdisk_size=33000 root=/dev/ram0 rw init=/linuxrc cdroot CONSOLE=/dev/tty1 console=ttyS1,9600 quiet video=i810fb:vram:4,xres:1024,yres:768,bpp:24,hsync1:30,hsync2:81,vsync1:56,vsync2:76,accel splash=silent,kdgraphics,theme:my_splash block2mtd.block2mtd=/dev/hdc3
+initrd /boot/initrd
+
+
+This is what I now have in linuxrc now:
+. /sbin/splash-functions.sh
+splash_setup
+fbcondecor_supported
+fbcondecor_helper
+fbcondecor_set_theme my_splash
+splash_comm_send "set mode silent"
+
+
+This is what did work before my system upgrade, but doesn't work now:
+. /sbin/splash-functions.sh
+splash_setup
+BOOT_MSG="$(splash_get_boot_message)" ${spl_daemon} --theme="${SPLASH_THEME}" --pidfile="${spl_pidfile}" --type=${ttype} ${options}
+splash_comm_send "set tty silent ${SPLASH_TTY}"
+splash_comm_send "Initializing system..."
+splash_comm_send "repaint"
+
+
+On Sat, 2009-09-26 at 12:33 +0200, Michal Januszewski wrote:
+> Actually, I had a look at the code and it looks like the thing you're
+> missing is /dev/tty0.
+> 
+> Best regards,
+
+
+
+From michalj at gmail.com  Wed Sep 30 09:59:01 2009
+From: michalj at gmail.com (Michal Januszewski)
+Date: Wed, 30 Sep 2009 09:59:01 +0200
+Subject: [fbsplash-users] switching to silent inside initrd stopped
+	working
+In-Reply-To: <1254276025.16974.352.camel@genx.localdomain>
+References: <1253919458.22282.38.camel@genx.localdomain>
+	<5d9b736f0909251619h3daaee8bufbbfa1736d9415b4@mail.gmail.com>
+	<1253924580.22282.82.camel@genx.localdomain>
+	<5d9b736f0909260330w27f077dcp51663eaaa76d51b7@mail.gmail.com>
+	<5d9b736f0909260333k45a774eeo472cdbd455768aa1@mail.gmail.com>
+	<1254276025.16974.352.camel@genx.localdomain>
+Message-ID: <5d9b736f0909300059w601c3df1ha9a4caa7aaa1fe97@mail.gmail.com>
+
+On Wed, Sep 30, 2009 at 04:00, John Stile <john at stilen.com> wrote:
+
+> Is there a good reference or script for what I need in my custom
+> linuxrc, to smoothly get from grub though init without seeing any text?
+
+If there is, it's someone's custom script as well.  The officially
+supported distros (Gentoo, Debian) use a slightly different setup than
+what you had, so they probably won't be very useful.
+
+
+> This is what I now have in linuxrc now:
+> . /sbin/splash-functions.sh
+> splash_setup
+
+OK.
+
+> fbcondecor_supported
+
+This doesn't do anything.
+
+> fbcondecor_helper
+
+Since you are calling the splash helper here, it will only paint the
+silent splash image.  If it doesn't even do that, try
+'fbcondecor_heleper 2 init' instead.  Since this only paints the image
+and exits, any further error messages will not be properly hidden.
+
+> fbcondecor_set_theme my_splash
+
+OK.
+
+> splash_comm_send "set mode silent"
+
+This doesn't do anything since the splash daemon is not running at
+this point (you didn't start it).
+
+> This is what did work before my system upgrade, but doesn't work now:
+> . /sbin/splash-functions.sh
+> splash_setup
+> BOOT_MSG="$(splash_get_boot_message)" ${spl_daemon} --theme="${SPLASH_THEME}" --pidfile="${spl_pidfile}" --type=${ttype} ${options}
+> splash_comm_send "set tty silent ${SPLASH_TTY}"
+> splash_comm_send "Initializing system..."
+> splash_comm_send "repaint"
+
+That looks like a more correct way of doing things, since you're
+starting the splash daemon, which guarantees that any error messages
+will be hidden, and the screen will be properly repainted if
+necessary.  What happens if you try to use this old script after the
+system upgrade?  Is the splash picture displayed at all?  Do you see
+any error messages?
+
+Best regards,
+-- 
+Michal Januszewski, Gentoo Linux Developer
+http://people.gentoo.org/spock
+
+
+From john at stilen.com  Wed Sep 30 19:28:53 2009
+From: john at stilen.com (John Stile)
+Date: Wed, 30 Sep 2009 10:28:53 -0700
+Subject: [fbsplash-users] switching to silent inside initrd stopped
+ working
+In-Reply-To: <5d9b736f0909300059w601c3df1ha9a4caa7aaa1fe97@mail.gmail.com>
+References: <1253919458.22282.38.camel@genx.localdomain>
+	<5d9b736f0909251619h3daaee8bufbbfa1736d9415b4@mail.gmail.com>
+	<1253924580.22282.82.camel@genx.localdomain>
+	<5d9b736f0909260330w27f077dcp51663eaaa76d51b7@mail.gmail.com>
+	<5d9b736f0909260333k45a774eeo472cdbd455768aa1@mail.gmail.com>
+	<1254276025.16974.352.camel@genx.localdomain>
+	<5d9b736f0909300059w601c3df1ha9a4caa7aaa1fe97@mail.gmail.com>
+Message-ID: <1254331733.17091.68.camel@genx.localdomain>
+
+On Wed, 2009-09-30 at 09:59 +0200, Michal Januszewski wrote:
+> > This is what did work before my system upgrade, but doesn't work
+> now:
+> > . /sbin/splash-functions.sh
+> > splash_setup
+> > BOOT_MSG="$(splash_get_boot_message)" ${spl_daemon}
+> --theme="${SPLASH_THEME}" --pidfile="${spl_pidfile}" --type=${ttype}
+> ${options}
+> > splash_comm_send "set tty silent ${SPLASH_TTY}"
+> > splash_comm_send "Initializing system..."
+> > splash_comm_send "repaint"
+> 
+> That looks like a more correct way of doing things, since you're
+> starting the splash daemon, which guarantees that any error messages
+> will be hidden, and the screen will be properly repainted if
+> necessary.  What happens if you try to use this old script after the
+> system upgrade?  Is the splash picture displayed at all?  Do you see
+> any error messages?
+
+I booted and executed the commands that look more correct, followed by
+starting a shell.
+
+The console background is black (no frame buffer), so it's not switching
+to the silent splash tty.
+
+The process list shows, on tty16, with process id 439, the command:
+//sbin/fbsplashd.static --theme=simsplash --pidfile=//lib/splash/cache/daemon.pid --type= silent,kdgraphics,theme:my_splash
+
+I successfully switched to the silent tty with:
+. /sbin/splash-functions.sh
+splash_setup
+splash_comm_send "set mode silent"
+
+This is very good! Yay!
+I changed the splash lines in my linuxrc to:
+
+. /sbin/splash-functions.sh
+splash_setup
+BOOT_MSG="$(splash_get_boot_message)" ${spl_daemon} --theme="${SPLASH_THEME}" --pidfile="${spl_pidfile}" --type=${ttype} ${options}
+splash_comm_send "set tty silent ${SPLASH_TTY}"
+splash_comm_send "set mode silent"
+
+Now I see the silent splash, but the progress bar doesn't seem to work.
+Near the end of init, splash does quickly drop out to verbose tty to display an rc init error I can't capture (goes by quickly).
+
+The progress bar might be because I loose the state info as I do a pivot_root and chroot later in the linuxrc.
+To compensate, I unsuccessfully added this before the pivot_root:
+mount -o bind /sys /new/sys
+mount -o bind /pro /new/proc
+mount -o bind /lib/splash /new/lib/splash
+
+So it looks like we have solved the problem of talking to the daemon to display the silent splash is working. 
+Thank you!
+
+Now the problem seems to be updating the boot progress bar....
+
+
+
+
+
+
+
+

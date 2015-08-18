@@ -1,0 +1,63 @@
+From wangdb at toyou.com.cn  Fri Feb 18 03:07:54 2011
+From: wangdb at toyou.com.cn (wangdb at toyou.com.cn)
+Date: Fri, 18 Feb 2011 10:07:54 +0800
+Subject: [fbsplash-users] splashutils-1.5.4 compile error
+References: <201102180917141872490@toyou.com.cn>
+Message-ID: <201102181007537031689@toyou.com.cn>
+
+Hi All,
+
+I googled and replace the "extern int errno" with "include <errno.h>", the error was still there, any body would like to help me? thank you very much!
+
+Best Wishes,
+Daobang Wang
+
+
+
+???? wangdb at toyou.com.cn 
+????? 2011-02-18  09:17:14 
+???? fbsplash-users at lists.berlios.de 
+??? 
+??? splashutils-1.5.4 compile error 
+ 
+Hi All
+
+I met a compile problem, please do me a favor, thanks!
+
+I met the problem at the step 11 following the steps as http://fbsplash.berlios.de/wiki/doku.php?id=docs:distros:lfs
+
+I compiled the splashutils-1.5.4 on RHEL5.3 32bit, Please see the details:
+
+[root at RHEL5 splashutils-1.5.4]# make
+make --silent all-recursive
+Making all in libs
+  CONF    libjpeg.a
+  MAKE    libjpeg.a
+  CONF    libz.a
+  MAKE    zlib.a
+  CONF    libpng.a
+  MAKE    libpng.a
+  CONF    libfreetype.a
+  MAKE    libfreetype.a
+Making all in src
+  CREATE  fbsplash.h
+Making all in .
+daemon_cmd.c: In function ?cmd_log?:
+daemon_cmd.c:346: warning: incompatible implicit declaration of built-in function ?strndup?
+daemon_cmd.c:348: warning: incompatible implicit declaration of built-in function ?strndup?
+/usr/bin/ld: errno: TLS reference in /usr/lib/gcc/i386-redhat-linux/4.1.2/../../../libpthread.a(pthread_create.o) mismatches non-TLS reference in /usr/lib/gcc/i386-redhat-linux/4.1.2/../../../libfreetype.a(ftsystem.o)
+/usr/lib/gcc/i386-redhat-linux/4.1.2/../../../libpthread.a: could not read symbols: Bad value
+collect2: ld returned 1 exit status
+make[4]: *** [fbsplashctl] Error 1
+make[3]: *** [all-recursive] Error 1
+make[2]: *** [all] Error 2
+make[1]: *** [all-recursive] Error 1
+make: *** [all] Error 2
+[root at RHEL5 splashutils-1.5.4]# 
+
+Best Wishes,
+Daobang Wang
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/fbsplash-users/attachments/20110218/1d8b5e5e/attachment.html>
+

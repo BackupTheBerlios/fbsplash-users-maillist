@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] splashutils 1.5.3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2007-December/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20splashutils%201.5.3&In-Reply-To=%3C20071217160754.GA7206%40spock.one.pl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000000.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] splashutils 1.5.3</H1>
+    <B>Michal Januszewski</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20splashutils%201.5.3&In-Reply-To=%3C20071217160754.GA7206%40spock.one.pl%3E"
+       TITLE="[fbsplash-users] splashutils 1.5.3">spock at gentoo.org
+       </A><BR>
+    <I>Mon Dec 17 17:07:54 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000000.html">[fbsplash-users] splashutils 1.5.3
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Dec 17, 2007 at 10:16:13AM +0100, Giuseppe Condorelli wrote:
+
+Hi,
+
+&gt;<i> Because Makefile.in isn't regenerated at build time, which is the gain
+</I>&gt;<i> modifying Makefile.am? At last, Makefile is created starting from the .in
+</I>&gt;<i> file.
+</I>
+Makefile.am is the only thing that is actually tracked in the fbsplash
+git repo.  Makefile.in, configure, etc are all regenerated at packaging
+time.  If you patch Makefile.in, not only will it not be tracked, it
+will also over overwritten next time Makefile.in is rebuilt.
+ 
+&gt;<i> &gt; 2) shouldn't something similar be done for libjpeg, zlib and libpng?
+</I>&gt;<i> Done, new patch is attached.
+</I>
+Great, thanks :)
+ 
+&gt;<i> &gt; Could you please try to upgrade to 1.5.3.2?
+</I>&gt;<i> Is it available on site? I found 1.5.3.1 but 1.5.3.2.
+</I>
+Have you checked fbsplash.berlios.de?  This is when the new releases are
+put now :)  In any case, my website is fully synchronized now so you can
+download it from whichever place suits you best.
+
+&gt;<i> &gt; Are you enabling fbcondecor for tty16?  What are your RC_TTY_NUMBER
+</I>&gt;<i> &gt; FBCONDECOR_TTYS settings?
+</I>&gt;<i> Where can I found these two defines? They aren't nor into package nor into
+</I>&gt;<i> kernel.
+</I>
+These are shell variables, defined in /etc/conf.d/fbcondecor and
+/etc/conf.d/rc on Gentoo systems.  If you are activating fbcondecor in a
+different way, how are you doing it?  For which ttys is fbconcecor
+enabled?
+
+Best regards.
+-- 
+Michal Januszewski                              JID: <A HREF="https://lists.berlios.de/mailman/listinfo/fbsplash-users">spock at im.gentoo.org</A>
+Gentoo Linux Developer                    <A HREF="http://people.gentoo.org/spock">http://people.gentoo.org/spock</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000000.html">[fbsplash-users] splashutils 1.5.3
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>

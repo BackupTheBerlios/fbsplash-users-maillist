@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [fbsplash-users] Compilation failure on Gentoo
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/fbsplash-users/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20Compilation%20failure%20on%20Gentoo&In-Reply-To=%3C495297A3.5030004%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000020.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[fbsplash-users] Compilation failure on Gentoo</H1>
+    <B>Nikos Chantziaras</B> 
+    <A HREF="mailto:fbsplash-users%40lists.berlios.de?Subject=Re%3A%20%5Bfbsplash-users%5D%20Compilation%20failure%20on%20Gentoo&In-Reply-To=%3C495297A3.5030004%40gmail.com%3E"
+       TITLE="[fbsplash-users] Compilation failure on Gentoo">realnc at googlemail.com
+       </A><BR>
+    <I>Wed Dec 24 21:12:19 CET 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000020.html">[fbsplash-users] Compilation failure on Gentoo
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#19">[ date ]</a>
+              <a href="thread.html#19">[ thread ]</a>
+              <a href="subject.html#19">[ subject ]</a>
+              <a href="author.html#19">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm on Gentoo AMD64.  sys-apps/baselayout-2.0.0, sys-apps/openrc-0.4.1, 
+sys-fs/udev-135-r2.  Trying to emerge media-gfx/splashutils-1.5.4.3 
+results in:
+
+x86_64-pc-linux-gnu-gcc -march=core2 -O2 -fomit-frame-pointer -pipe -g 
+-Wall -I../core/objs -I../core -I../core/src -I../core/objs/src -fPIC -c 
+-o splash.o splash.c
+
+splash.c: In function &#8216;splash_start&#8217;:
+splash.c:596: error: &#8216;RC_LEVEL_REBOOT&#8217; undeclared (first use in this 
+function)
+splash.c:596: error: (Each undeclared identifier is reported only once
+splash.c:596: error: for each function it appears in.)
+splash.c: In function &#8216;rc_plugin_hook&#8217;:
+splash.c:693: error: &#8216;RC_LEVEL_REBOOT&#8217; undeclared (first use in this 
+function)
+splash.c:719: error: &#8216;RC_SERVICE_COLDPLUGGED&#8217; undeclared (first use in 
+this function)
+
+I had splash working correctly with baselayout-1.12.11.1 but after 
+updating to baselayout 2, the splash stopped working (it appears, but 
+there's no progress indicator).  I think a recompile against baselayout 
+2 is necessary?  If I get it to actually build, that is :P
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000020.html">[fbsplash-users] Compilation failure on Gentoo
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#19">[ date ]</a>
+              <a href="thread.html#19">[ thread ]</a>
+              <a href="subject.html#19">[ subject ]</a>
+              <a href="author.html#19">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/fbsplash-users">More information about the fbsplash-users
+mailing list</a><br>
+</body></html>
